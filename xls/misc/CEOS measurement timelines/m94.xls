@@ -1,0 +1,151 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Landsat-5</td><td>01-Mar-1984</td><td>31-Dec-2012</td><td>Currently being flown</td><td>TM</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>ERS-2</td><td>21-Apr-1995</td><td>30-Jun-2011</td><td>Currently being flown</td><td>AMI/SAR/Image, ATSR-2</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>RADARSAT-1</td><td>04-Nov-1995</td><td>31-Mar-2012</td><td>Currently being flown</td><td>SAR (RADARSAT)</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>TRMM</td><td>27-Nov-1997</td><td>30-Sep-2011</td><td>Currently being flown</td><td>VIRS</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>SPOT-4</td><td>24-Mar-1998</td><td>01-Jun-2013</td><td>Currently being flown</td><td>HRVIR, VEGETATION</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Landsat-7</td><td>15-Apr-1999</td><td>31-Dec-2012</td><td>Currently being flown</td><td>ETM+</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Terra</td><td>18-Dec-1999</td><td>30-Sep-2011</td><td>Currently being flown</td><td>MODIS</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>GOES-11</td><td>03-May-2000</td><td>15-Dec-2011</td><td>Currently being flown</td><td>Imager</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>NOAA-16</td><td>21-Sep-2000</td><td>31-Dec-2012</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>SAC-C</td><td>21-Nov-2000</td><td>01-Jan-2012</td><td>Currently being flown</td><td>HRTC, MMRS</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>GOES-12</td><td>23-Jul-2001</td><td>15-Jan-2011</td><td>Currently being flown</td><td>Imager</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Envisat</td><td>01-Mar-2002</td><td>31-Dec-2013</td><td>Currently being flown</td><td>AATSR, ASAR, ASAR (image mode), MERIS</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Aqua</td><td>04-May-2002</td><td>30-Sep-2011</td><td>Currently being flown</td><td>MODIS</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>SPOT-5</td><td>04-May-2002</td><td>01-Jun-2014</td><td>Currently being flown</td><td>HRG, VEGETATION</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>NOAA-17</td><td>24-Jun-2002</td><td>31-Dec-2014</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>NOAA-18</td><td>20-May-2005</td><td>31-Dec-2015</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>ALOS</td><td>24-Jan-2006</td><td>01-Sep-2013</td><td>Currently being flown</td><td>PALSAR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>GOES-13</td><td>24-May-2006</td><td>01-Jun-2015</td><td>Currently being flown</td><td>Imager</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Metop-A</td><td>19-Oct-2006</td><td>30-Apr-2012</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>TerraSAR-X</td><td>15-Jun-2007</td><td>31-Dec-2012</td><td>Currently being flown</td><td>X-Band SAR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>RADARSAT-2</td><td>14-Dec-2007</td><td>17-Apr-2015</td><td>Currently being flown</td><td>SAR (RADARSAT-2)</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>HJ-1A</td><td>06-Sep-2008</td><td>01-Sep-2011</td><td>Currently being flown</td><td>HSI (HJ-1A)</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>FY-2E</td><td>26-Dec-2008</td><td>31-Dec-2011</td><td>Currently being flown</td><td>IVISSR (FY-2)</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>NOAA-19</td><td>04-Feb-2009</td><td>01-Mar-2016</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>GOES-14</td><td>27-Jun-2009</td><td>31-Dec-2016</td><td>Currently being flown</td><td>Imager</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Meteor-M N1</td><td>18-Sep-2009</td><td>18-Sep-2014</td><td>Currently being flown</td><td>MSU-MR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>SumbandilaSat</td><td>18-Sep-2009</td><td>18-Sep-2014</td><td>Currently being flown</td><td>SumbandilaSat Imager</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>GOES-15</td><td>04-Mar-2010</td><td>01-Apr-2020</td><td>Currently being flown</td><td>Imager</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>TanDEM-X</td><td>21-Jun-2010</td><td>31-Dec-2015</td><td>Currently being flown</td><td>X-Band SAR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>COMS</td><td>26-Jun-2010</td><td>01-Dec-2017</td><td>Currently being flown</td><td>MI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Sich-2</td><td>01-Oct-2010</td><td>01-Apr-2014</td><td>Approved</td><td>MBEI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Meteor-M N2</td><td>01-Jul-2011</td><td>01-Jul-2016</td><td>Approved</td><td>MSU-MR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>NPP</td><td>23-Sep-2011</td><td>23-Sep-2016</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>FY-2F</td><td>31-Dec-2011</td><td>31-Dec-2016</td><td>Approved</td><td>IVISSR (FY-2)</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>HY-3A</td><td>06-Jan-2012</td><td>06-Jan-2017</td><td>Planned</td><td>WSAR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Metop-B</td><td>02-Apr-2012</td><td>01-May-2017</td><td>Approved</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>SAOCOM 1A</td><td>01-Dec-2012</td><td>01-Dec-2017</td><td>Approved</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Sentinel-1 A</td><td>15-Dec-2012</td><td>15-Mar-2020</td><td>Approved</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>LDCM</td><td>19-Dec-2012</td><td>19-Dec-2017</td><td>Approved</td><td>OLI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Meteor-M N3</td><td>31-Dec-2012</td><td>31-Dec-2017</td><td>Approved</td><td>OCS, SZS</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>FY-4 O/A</td><td>31-Dec-2012</td><td>31-Dec-2017</td><td>Planned</td><td>MCSI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>ALOS-2</td><td>01-Jan-2013</td><td>01-Jan-2017</td><td>Approved</td><td>L-Band SAR (ALOS-2)</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>TerraSAR-X2</td><td>01-Jan-2013</td><td>01-Jan-2018</td><td>Planned</td><td>X-Band SAR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Sentinel-3 A</td><td>15-Apr-2013</td><td>15-Aug-2020</td><td>Approved</td><td>OLCI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>SAOCOM 1B</td><td>01-Jun-2013</td><td>01-Jun-2018</td><td>Approved</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Arkon-2M</td><td>31-Dec-2013</td><td>31-Dec-2018</td><td>Planned</td><td>Arkon-2M SAR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>SAC-E/SABIA/mar</td><td>01-Jan-2014</td><td>01-Jan-2019</td><td>Approved</td><td>MOC</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>RADARSAT C-1</td><td>01-Aug-2014</td><td>01-Aug-2021</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Sentinel-1 B</td><td>15-Dec-2014</td><td>15-Mar-2022</td><td>Approved</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Sentinel-3 B</td><td>31-Dec-2014</td><td>30-Apr-2022</td><td>Approved</td><td>OLCI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Meteor-MP N1</td><td>31-Dec-2014</td><td>31-Dec-2019</td><td>Planned</td><td>Advanced MSU-MR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>JPSS-1</td><td>01-Jan-2015</td><td>01-Jun-2023</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>SAOCOM-2A</td><td>01-Jan-2015</td><td>01-Jan-2020</td><td>Planned</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>RADARSAT C-2</td><td>01-Apr-2015</td><td>01-Apr-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>RADARSAT C-3</td><td>01-Jun-2015</td><td>01-Jun-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>GOES-R</td><td>01-Oct-2015</td><td>01-Mar-2025</td><td>Approved</td><td>ABI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>MAPSAR</td><td>03-Dec-2015</td><td>03-Dec-2019</td><td>Planned</td><td>SAR (MAPSAR)</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>FY-4 O/B</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>MCSI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>FY-4 O/C</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>MCSI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Meteor-MP N2</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>Advanced MSU-MR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>SAOCOM-2B</td><td>01-Jan-2016</td><td>01-Jan-2021</td><td>Planned</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Metop-C</td><td>02-Apr-2016</td><td>01-Dec-2021</td><td>Approved</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Meteor-MP N3</td><td>31-Dec-2016</td><td>31-Dec-2021</td><td>Planned</td><td>Advanced MSU-MR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>COMS-2A</td><td>01-Jan-2017</td><td>01-Jan-2024</td><td>Considered</td><td>Advanced MI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>HY-3B</td><td>06-Jan-2017</td><td>06-Jan-2022</td><td>Planned</td><td>WSAR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>GOES-S</td><td>01-Feb-2017</td><td>01-Oct-2028</td><td>Approved</td><td>ABI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>JPSS-2</td><td>01-Jan-2018</td><td>01-Oct-2026</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Sentinel-1 C</td><td>31-Mar-2019</td><td>30-Jun-2026</td><td>Considered</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>FY-4 O/D</td><td>31-Dec-2019</td><td>31-Dec-2024</td><td>Planned</td><td>MCSI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>FY-4 O/E</td><td>31-Dec-2019</td><td>31-Dec-2024</td><td>Planned</td><td>MCSI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>Sentinel-3 C</td><td>01-Jan-2020</td><td>01-May-2027</td><td>Considered</td><td>OLCI</td>
+		</tr><tr>
+			<td>Ocean imagery</td><td>HY-3C</td><td>06-Jan-2022</td><td>06-Jan-2027</td><td>Planned</td><td>WSAR</td>
+		</tr>
+	</table>
+</div>

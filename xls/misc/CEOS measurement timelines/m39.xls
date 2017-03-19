@@ -1,0 +1,137 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>DMSP F-15</td><td>12-Dec-1999</td><td>01-May-2013</td><td>Currently being flown</td><td>SSM/T-1</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Terra</td><td>18-Dec-1999</td><td>30-Sep-2011</td><td>Currently being flown</td><td>MODIS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>GOES-11</td><td>03-May-2000</td><td>15-Dec-2011</td><td>Currently being flown</td><td>Sounder</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>NOAA-16</td><td>21-Sep-2000</td><td>31-Dec-2012</td><td>Currently being flown</td><td>AMSU-A, ATOVS (HIRS/3 + AMSU + AVHRR/3), HIRS/3</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>SAC-C</td><td>21-Nov-2000</td><td>01-Jan-2012</td><td>Currently being flown</td><td>GOLPE</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Odin</td><td>20-Feb-2001</td><td>31-Dec-2012</td><td>Currently being flown</td><td>OSIRIS, SMR</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>GOES-12</td><td>23-Jul-2001</td><td>15-Jan-2011</td><td>Currently being flown</td><td>Sounder</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>PROBA</td><td>22-Oct-2001</td><td>31-Dec-2012</td><td>Currently being flown</td><td>CHRIS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Envisat</td><td>01-Mar-2002</td><td>31-Dec-2013</td><td>Currently being flown</td><td>GOMOS, MIPAS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Aqua</td><td>04-May-2002</td><td>30-Sep-2011</td><td>Currently being flown</td><td>AIRS, AMSU-A, MODIS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>NOAA-17</td><td>24-Jun-2002</td><td>31-Dec-2014</td><td>Currently being flown</td><td>AMSU-A, HIRS/3</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>SCISAT-1</td><td>12-Aug-2003</td><td>01-Apr-2013</td><td>Currently being flown</td><td>ACE-FTS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>DMSP F-16</td><td>18-Oct-2003</td><td>01-Oct-2011</td><td>Currently being flown</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Aura</td><td>15-Jul-2004</td><td>30-Sep-2011</td><td>Currently being flown</td><td>HiRDLS, MLS (EOS-Aura), TES</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>NOAA-18</td><td>20-May-2005</td><td>31-Dec-2015</td><td>Currently being flown</td><td>AMSU-A, HIRS/4</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>COSMIC-1/FORMOSAT-3 FM1</td><td>14-Apr-2006</td><td>15-Mar-2011</td><td>Currently being flown</td><td>GOX</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>COSMIC-2/FORMOSAT-3 FM2</td><td>14-Apr-2006</td><td>15-Mar-2011</td><td>Currently being flown</td><td>GOX</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>COSMIC-3/FORMOSAT-3 FM3</td><td>14-Apr-2006</td><td>15-Mar-2011</td><td>Currently being flown</td><td>GOX</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>COSMIC-4/FORMOSAT-3 FM4</td><td>14-Apr-2006</td><td>15-Mar-2011</td><td>Currently being flown</td><td>GOX</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>COSMIC-5/FORMOSAT-3 FM5</td><td>14-Apr-2006</td><td>15-Mar-2011</td><td>Currently being flown</td><td>GOX</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>COSMIC-6/FORMOSAT-3 FM6</td><td>14-Apr-2006</td><td>15-Mar-2011</td><td>Currently being flown</td><td>GOX</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>GOES-13</td><td>24-May-2006</td><td>01-Jun-2015</td><td>Currently being flown</td><td>Sounder</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Metop-A</td><td>19-Oct-2006</td><td>30-Apr-2012</td><td>Currently being flown</td><td>AMSU-A, GRAS, HIRS/4, IASI</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>DMSP F-17</td><td>04-Nov-2006</td><td>01-Jun-2013</td><td>Currently being flown</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>TerraSAR-X</td><td>15-Jun-2007</td><td>31-Dec-2012</td><td>Currently being flown</td><td>GPSRO (Terra-SAR)</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>FY-3A</td><td>27-May-2008</td><td>31-May-2011</td><td>Currently being flown</td><td>IRAS, MWRI, MWTS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>FY-2E</td><td>26-Dec-2008</td><td>31-Dec-2011</td><td>Currently being flown</td><td>IVISSR (FY-2)</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>NOAA-19</td><td>04-Feb-2009</td><td>01-Mar-2016</td><td>Currently being flown</td><td>HIRS/4</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>GOES-14</td><td>27-Jun-2009</td><td>31-Dec-2016</td><td>Currently being flown</td><td>Sounder</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Meteor-M N1</td><td>18-Sep-2009</td><td>18-Sep-2014</td><td>Currently being flown</td><td>MTVZA</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>SumbandilaSat</td><td>18-Sep-2009</td><td>18-Sep-2014</td><td>Currently being flown</td><td>SumbandilaSat Imager</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>OCEANSAT-2</td><td>24-Sep-2009</td><td>24-Sep-2014</td><td>Currently being flown</td><td>ROSA</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>DMSP F-18</td><td>18-Oct-2009</td><td>01-Apr-2014</td><td>Currently being flown</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>GOES-15</td><td>04-Mar-2010</td><td>01-Apr-2020</td><td>Currently being flown</td><td>Sounder</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>FY-3B</td><td>31-Dec-2010</td><td>31-Dec-2012</td><td>Approved</td><td>IRAS, MWRI, MWTS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>SAC-D/Aquarius</td><td>01-Apr-2011</td><td>01-Apr-2017</td><td>Approved</td><td>ROSA</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Meteor-M N2</td><td>01-Jul-2011</td><td>01-Jul-2016</td><td>Approved</td><td>IKFS-2, MTVZA</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>INSAT-3D</td><td>01-Aug-2011</td><td>01-Aug-2018</td><td>Approved</td><td>Sounder (INSAT)</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>NPP</td><td>23-Sep-2011</td><td>23-Sep-2016</td><td>Approved</td><td>ATMS, CrIS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>FY-2F</td><td>31-Dec-2011</td><td>31-Dec-2016</td><td>Approved</td><td>IVISSR (FY-2)</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Metop-B</td><td>02-Apr-2012</td><td>01-May-2017</td><td>Approved</td><td>AMSU-A, GRAS, HIRS/4, IASI</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>DMSP F-19</td><td>01-Oct-2012</td><td>01-Oct-2017</td><td>Approved</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>FY-3C</td><td>31-Dec-2012</td><td>31-Dec-2016</td><td>Approved</td><td>IMWAS, IRAS, MWRI, MWTS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Meteor-M N3</td><td>31-Dec-2012</td><td>31-Dec-2017</td><td>Approved</td><td>Radiomet</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>DMSP F-20</td><td>05-Jun-2014</td><td>01-Jun-2019</td><td>Approved</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>FY-3D</td><td>31-Dec-2014</td><td>31-Dec-2018</td><td>Approved</td><td>IMWAS, IRAS, MWRI, MWTS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Meteor-MP N1</td><td>31-Dec-2014</td><td>31-Dec-2019</td><td>Planned</td><td>Advanced IKFS-2, Advanced MTVZA, Advanced Radiomet</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>JPSS-1</td><td>01-Jan-2015</td><td>01-Jun-2023</td><td>Approved</td><td>ATMS, CrIS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Meteor-MP N2</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>Advanced IKFS-2, Advanced MTVZA, Advanced Radiomet</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Metop-C</td><td>02-Apr-2016</td><td>01-Dec-2021</td><td>Approved</td><td>AMSU-A, GRAS, IASI</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>FY-3E</td><td>31-Dec-2016</td><td>31-Dec-2020</td><td>Planned</td><td>IMWAS, IRAS, MWRI, MWTS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Meteor-MP N3</td><td>31-Dec-2016</td><td>31-Dec-2021</td><td>Planned</td><td>Advanced IKFS-2, Advanced MTVZA, Advanced Radiomet</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>CLARREO-1</td><td>30-Oct-2017</td><td>30-Oct-2020</td><td>Considered</td><td>Occultation GNSS Receiver (CLARREO)</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>JPSS-2</td><td>01-Jan-2018</td><td>01-Oct-2026</td><td>Approved</td><td>ATMS, CrIS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Meteosat Third Generation-S1 (sounding)</td><td>15-Dec-2018</td><td>15-Jun-2027</td><td>Planned</td><td>IRS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Sentinel-4 A</td><td>15-Dec-2018</td><td>15-Jun-2027</td><td>Planned</td><td>IRS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>FY-3F</td><td>31-Dec-2018</td><td>31-Dec-2022</td><td>Planned</td><td>IMWAS, IRAS, MWRI, MWTS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>CLARREO-2</td><td>30-Oct-2019</td><td>30-Oct-2022</td><td>Considered</td><td>Occultation GNSS Receiver (CLARREO)</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Sentinel-5</td><td>01-Dec-2019</td><td>01-Dec-2026</td><td>Planned</td><td>IRS, METimage</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>ASCENDS</td><td>01-Jan-2020</td><td>01-Jan-2023</td><td>Considered</td><td>CO2 LIDAR (ASCENDS)</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>CLARREO-3</td><td>30-Oct-2020</td><td>30-Oct-2023</td><td>Considered</td><td>Occultation GNSS Receiver (CLARREO)</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>CLARREO-4</td><td>30-Oct-2020</td><td>30-Oct-2023</td><td>Considered</td><td>Occultation GNSS Receiver (CLARREO)</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>FY-3G</td><td>31-Dec-2020</td><td>31-Dec-2024</td><td>Planned</td><td>IMWAS, IRAS, MWRI, MWTS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Meteosat Third Generation-S2 (sounding)</td><td>15-Dec-2026</td><td>15-Jun-2035</td><td>Planned</td><td>IRS</td>
+		</tr><tr>
+			<td>Atmospheric temperature (column/profile)</td><td>Sentinel-4 B</td><td>15-Dec-2026</td><td>15-Jun-2035</td><td>Planned</td><td>IRS</td>
+		</tr>
+	</table>
+</div>

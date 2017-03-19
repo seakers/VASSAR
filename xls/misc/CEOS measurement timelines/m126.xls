@@ -1,0 +1,103 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>ERS-2</td><td>21-Apr-1995</td><td>30-Jun-2011</td><td>Currently being flown</td><td>AMI/SAR/Image, AMI/Scatterometer</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>RADARSAT-1</td><td>04-Nov-1995</td><td>31-Mar-2012</td><td>Currently being flown</td><td>SAR (RADARSAT)</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>DMSP F-15</td><td>12-Dec-1999</td><td>01-May-2013</td><td>Currently being flown</td><td>SSM/I</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>NOAA-16</td><td>21-Sep-2000</td><td>31-Dec-2012</td><td>Currently being flown</td><td>AMSU-A</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>Envisat</td><td>01-Mar-2002</td><td>31-Dec-2013</td><td>Currently being flown</td><td>ASAR, ASAR (image mode)</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>Aqua</td><td>04-May-2002</td><td>30-Sep-2011</td><td>Currently being flown</td><td>AMSR-E, AMSU-A</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>NOAA-17</td><td>24-Jun-2002</td><td>31-Dec-2014</td><td>Currently being flown</td><td>AMSU-A</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>DMSP F-16</td><td>18-Oct-2003</td><td>01-Oct-2011</td><td>Currently being flown</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>NOAA-18</td><td>20-May-2005</td><td>31-Dec-2015</td><td>Currently being flown</td><td>AMSU-A</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>ALOS</td><td>24-Jan-2006</td><td>01-Sep-2013</td><td>Currently being flown</td><td>PALSAR</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>Metop-A</td><td>19-Oct-2006</td><td>30-Apr-2012</td><td>Currently being flown</td><td>AMSU-A, ASCAT</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>DMSP F-17</td><td>04-Nov-2006</td><td>01-Jun-2013</td><td>Currently being flown</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>RADARSAT-2</td><td>14-Dec-2007</td><td>17-Apr-2015</td><td>Currently being flown</td><td>SAR (RADARSAT-2)</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>FY-3A</td><td>27-May-2008</td><td>31-May-2011</td><td>Currently being flown</td><td>MWRI</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>RISAT-2</td><td>20-Apr-2009</td><td>20-Apr-2013</td><td>Currently being flown</td><td>SAR-X</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>DMSP F-18</td><td>18-Oct-2009</td><td>01-Apr-2014</td><td>Currently being flown</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>SMOS</td><td>02-Nov-2009</td><td>02-Nov-2012</td><td>Currently being flown</td><td>MIRAS (SMOS)</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>FY-3B</td><td>31-Dec-2010</td><td>31-Dec-2012</td><td>Approved</td><td>MWRI</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>RISAT-1</td><td>25-Mar-2011</td><td>25-Mar-2015</td><td>Approved</td><td>SAR (RISAT)</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>NPP</td><td>23-Sep-2011</td><td>23-Sep-2016</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>GCOM-W1</td><td>01-Feb-2012</td><td>01-Feb-2017</td><td>Approved</td><td>AMSR-2</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>Metop-B</td><td>02-Apr-2012</td><td>01-May-2017</td><td>Approved</td><td>AMSU-A, ASCAT</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>DMSP F-19</td><td>01-Oct-2012</td><td>01-Oct-2017</td><td>Approved</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>SAOCOM 1A</td><td>01-Dec-2012</td><td>01-Dec-2017</td><td>Approved</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>Sentinel-1 A</td><td>15-Dec-2012</td><td>15-Mar-2020</td><td>Approved</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>FY-3C</td><td>31-Dec-2012</td><td>31-Dec-2016</td><td>Approved</td><td>MWRI</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>ALOS-2</td><td>01-Jan-2013</td><td>01-Jan-2017</td><td>Approved</td><td>L-Band SAR (ALOS-2)</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>RISAT-2F</td><td>01-Jan-2013</td><td>01-Jan-2017</td><td>Approved</td><td>SAR-X</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>SAOCOM 1B</td><td>01-Jun-2013</td><td>01-Jun-2018</td><td>Approved</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>Arkon-2M</td><td>31-Dec-2013</td><td>31-Dec-2018</td><td>Planned</td><td>Arkon-2M SAR</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>CSG-1</td><td>30-Apr-2014</td><td>30-Oct-2021</td><td>Approved</td><td>SAR-2000 S.G.</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>DMSP F-20</td><td>05-Jun-2014</td><td>01-Jun-2019</td><td>Approved</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>SMAP</td><td>30-Nov-2014</td><td>30-Nov-2017</td><td>Planned</td><td>L-band Radar (SMAP)</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>Sentinel-1 B</td><td>15-Dec-2014</td><td>15-Mar-2022</td><td>Approved</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>FY-3D</td><td>31-Dec-2014</td><td>31-Dec-2018</td><td>Approved</td><td>MWRI</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>JPSS-1</td><td>01-Jan-2015</td><td>01-Jun-2023</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>SAOCOM-2A</td><td>01-Jan-2015</td><td>01-Jan-2020</td><td>Planned</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>CSG-2</td><td>30-Apr-2015</td><td>30-Oct-2022</td><td>Approved</td><td>SAR-2000 S.G.</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>SAOCOM-2B</td><td>01-Jan-2016</td><td>01-Jan-2021</td><td>Planned</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>GCOM-W2</td><td>01-Feb-2016</td><td>01-Feb-2021</td><td>Planned</td><td>AMSR-2</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>Metop-C</td><td>02-Apr-2016</td><td>01-Dec-2021</td><td>Approved</td><td>AMSU-A, ASCAT</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>FY-3E</td><td>31-Dec-2016</td><td>31-Dec-2020</td><td>Planned</td><td>MWRI</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>JPSS-2</td><td>01-Jan-2018</td><td>01-Oct-2026</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>FY-3F</td><td>31-Dec-2018</td><td>31-Dec-2022</td><td>Planned</td><td>MWRI</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>Sentinel-1 C</td><td>31-Mar-2019</td><td>30-Jun-2026</td><td>Considered</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>Sentinel-5</td><td>01-Dec-2019</td><td>01-Dec-2026</td><td>Planned</td><td>METimage</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>GCOM-W3</td><td>01-Feb-2020</td><td>01-Feb-2025</td><td>Planned</td><td>AMSR-2</td>
+		</tr><tr>
+			<td>Soil moisture at the surface</td><td>FY-3G</td><td>31-Dec-2020</td><td>31-Dec-2024</td><td>Planned</td><td>MWRI</td>
+		</tr>
+	</table>
+</div>

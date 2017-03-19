@@ -1,0 +1,243 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Landsat-5</td><td>01-Mar-1984</td><td>31-Dec-2012</td><td>Currently being flown</td><td>TM</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>ERS-2</td><td>21-Apr-1995</td><td>30-Jun-2011</td><td>Currently being flown</td><td>ATSR-2</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>RADARSAT-1</td><td>04-Nov-1995</td><td>31-Mar-2012</td><td>Currently being flown</td><td>SAR (RADARSAT)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>SPOT-4</td><td>24-Mar-1998</td><td>01-Jun-2013</td><td>Currently being flown</td><td>VEGETATION</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>INSAT-2E</td><td>03-Apr-1999</td><td>04-Mar-2011</td><td>Currently being flown</td><td>CCD camera</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Landsat-7</td><td>15-Apr-1999</td><td>31-Dec-2012</td><td>Currently being flown</td><td>ETM+</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Ikonos-2</td><td>24-Sep-1999</td><td>31-Dec-2011</td><td>Currently being flown</td><td>MS, PAN</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Terra</td><td>18-Dec-1999</td><td>30-Sep-2011</td><td>Currently being flown</td><td>ASTER, MODIS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>NOAA-16</td><td>21-Sep-2000</td><td>31-Dec-2012</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>NMP EO-1</td><td>21-Nov-2000</td><td>30-Sep-2011</td><td>Currently being flown</td><td>ALI, Hyperion</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>SAC-C</td><td>21-Nov-2000</td><td>01-Jan-2012</td><td>Currently being flown</td><td>HRTC, MMRS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>PROBA</td><td>22-Oct-2001</td><td>31-Dec-2012</td><td>Currently being flown</td><td>CHRIS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Envisat</td><td>01-Mar-2002</td><td>31-Dec-2013</td><td>Currently being flown</td><td>AATSR, MERIS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Aqua</td><td>04-May-2002</td><td>30-Sep-2011</td><td>Currently being flown</td><td>MODIS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>SPOT-5</td><td>04-May-2002</td><td>01-Jun-2014</td><td>Currently being flown</td><td>VEGETATION</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>NOAA-17</td><td>24-Jun-2002</td><td>31-Dec-2014</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>INSAT-3A</td><td>04-Apr-2003</td><td>10-Apr-2013</td><td>Currently being flown</td><td>CCD camera</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>PARASOL</td><td>01-Dec-2004</td><td>30-Jun-2011</td><td>Currently being flown</td><td>POLDER-P</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>CARTOSAT-1</td><td>05-May-2005</td><td>31-Dec-2011</td><td>Currently being flown</td><td>PAN (Cartosat-1)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>NOAA-18</td><td>20-May-2005</td><td>31-Dec-2015</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>ALOS</td><td>24-Jan-2006</td><td>01-Sep-2013</td><td>Currently being flown</td><td>AVNIR-2, PALSAR, PRISM</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Resurs DK 1</td><td>15-Jun-2006</td><td>30-Jun-2011</td><td>Currently being flown</td><td>Geoton-L1</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>KOMPSAT-2</td><td>27-Jul-2006</td><td>27-Jun-2011</td><td>Currently being flown</td><td>MSC</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Metop-A</td><td>19-Oct-2006</td><td>30-Apr-2012</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>CARTOSAT-2</td><td>10-Jan-2007</td><td>01-Jan-2011</td><td>Currently being flown</td><td>PAN (Cartosat-2)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>TerraSAR-X</td><td>15-Jun-2007</td><td>31-Dec-2012</td><td>Currently being flown</td><td>X-Band SAR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>RADARSAT-2</td><td>14-Dec-2007</td><td>17-Apr-2015</td><td>Currently being flown</td><td>SAR (RADARSAT-2)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>IMS-1</td><td>28-Apr-2008</td><td>28-Apr-2011</td><td>Currently being flown</td><td>MxT</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-3A</td><td>27-May-2008</td><td>31-May-2011</td><td>Currently being flown</td><td>VIRR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>RapidEye</td><td>29-Aug-2008</td><td>30-Aug-2015</td><td>Currently being flown</td><td>MSI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>HJ-1A</td><td>06-Sep-2008</td><td>01-Sep-2011</td><td>Currently being flown</td><td>CCD (HJ), HSI (HJ-1A)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>HJ-1B</td><td>06-Sep-2008</td><td>01-Sep-2011</td><td>Currently being flown</td><td>CCD (HJ), IR (HJ-1B)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>THEOS</td><td>01-Oct-2008</td><td>01-Oct-2013</td><td>Currently being flown</td><td>MS (GISTDA), PAN (GISTDA)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-2E</td><td>26-Dec-2008</td><td>31-Dec-2011</td><td>Currently being flown</td><td>IVISSR (FY-2)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>NOAA-19</td><td>04-Feb-2009</td><td>01-Mar-2016</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>UK-DMC2</td><td>29-Jul-2009</td><td>29-Jul-2014</td><td>Currently being flown</td><td>SLIM-6-22</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Deimos-1</td><td>29-Jul-2009</td><td>29-Jul-2014</td><td>Currently being flown</td><td>MS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Meteor-M N1</td><td>18-Sep-2009</td><td>18-Sep-2014</td><td>Currently being flown</td><td>KMSS, MSU-MR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>SumbandilaSat</td><td>18-Sep-2009</td><td>18-Sep-2014</td><td>Currently being flown</td><td>SumbandilaSat Imager</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>TanDEM-X</td><td>21-Jun-2010</td><td>31-Dec-2015</td><td>Currently being flown</td><td>X-Band SAR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>COMS</td><td>26-Jun-2010</td><td>01-Dec-2017</td><td>Currently being flown</td><td>MI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>CARTOSAT-2B</td><td>12-Jul-2010</td><td>01-Jul-2015</td><td>Currently being flown</td><td>PAN (Cartosat-2B)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Sich-2</td><td>01-Oct-2010</td><td>01-Apr-2014</td><td>Approved</td><td>MBEI, MIREI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>NigeriaSat-2</td><td>29-Oct-2010</td><td>29-Oct-2017</td><td>Approved</td><td>NigeriaSat Medium and High Resolution</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>NigeriaSat-X</td><td>29-Oct-2010</td><td>29-Oct-2017</td><td>Planned</td><td>NigeriaSat Medium Resolution</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>RASAT</td><td>30-Oct-2010</td><td>15-Oct-2013</td><td>Approved</td><td>RASAT VIS Multispectral, RASAT VIS Panchromatic</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>HY-1D</td><td>01-Dec-2010</td><td>01-Jan-2013</td><td>Planned</td><td>CZI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>RESOURCESAT-2</td><td>12-Dec-2010</td><td>12-Dec-2014</td><td>Approved</td><td>AWiFS, LISS-III (RESOURCESAT), LISS-IV</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-3B</td><td>31-Dec-2010</td><td>31-Dec-2012</td><td>Approved</td><td>VIRR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Kanopus-V N1</td><td>31-Dec-2010</td><td>31-Dec-2015</td><td>Approved</td><td>MSS, MSU-200, PSS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>RISAT-1</td><td>25-Mar-2011</td><td>25-Mar-2015</td><td>Approved</td><td>SAR (RISAT)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>HY-1C</td><td>01-Jun-2011</td><td>01-Jan-2013</td><td>Planned</td><td>CZI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Meteor-M N2</td><td>01-Jul-2011</td><td>01-Jul-2016</td><td>Approved</td><td>KMSS, MSU-MR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>NPP</td><td>23-Sep-2011</td><td>23-Sep-2016</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>CBERS-3</td><td>20-Oct-2011</td><td>21-Oct-2014</td><td>Approved</td><td>IRS, PAN, WFI-2</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>HJ-1C</td><td>31-Dec-2011</td><td>31-Dec-2014</td><td>Approved</td><td>S-Band SAR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-2F</td><td>31-Dec-2011</td><td>31-Dec-2016</td><td>Approved</td><td>IVISSR (FY-2)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Resurs P N1</td><td>31-Dec-2011</td><td>31-Dec-2016</td><td>Planned</td><td>Geoton-L1</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>PRISMA</td><td>01-Jan-2012</td><td>01-Jan-2017</td><td>Approved</td><td>HYC</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>RISAT-1F</td><td>01-Jan-2012</td><td>01-Jan-2018</td><td>Considered</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>AWiFSSAT</td><td>01-Jan-2012</td><td>01-Jan-2016</td><td>Considered</td><td>AWiFS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>SARE-1</td><td>01-Jan-2012</td><td>01-May-2014</td><td>Planned</td><td>High Resolution Panchromatic Camera, Panchromatic High Sensitivity Camera</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>HY-3A</td><td>06-Jan-2012</td><td>06-Jan-2017</td><td>Planned</td><td>WSAR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Metop-B</td><td>02-Apr-2012</td><td>01-May-2017</td><td>Approved</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Kanopus-V N2</td><td>31-Jul-2012</td><td>31-Jul-2017</td><td>Planned</td><td>MSS, MSU-200, PSS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>SAOCOM 1A</td><td>01-Dec-2012</td><td>01-Dec-2017</td><td>Approved</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>LDCM</td><td>19-Dec-2012</td><td>19-Dec-2017</td><td>Approved</td><td>OLI, TIRS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-3C</td><td>31-Dec-2012</td><td>31-Dec-2016</td><td>Approved</td><td>VIRR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-4 O/A</td><td>31-Dec-2012</td><td>31-Dec-2017</td><td>Planned</td><td>MCSI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>ALOS-2</td><td>01-Jan-2013</td><td>01-Jan-2017</td><td>Approved</td><td>L-Band SAR (ALOS-2)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>MIOSAT</td><td>01-Jan-2013</td><td>01-Jan-2016</td><td>Approved</td><td>ALISEO</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>CARTOSAT-3</td><td>01-Jan-2013</td><td>01-Jan-2017</td><td>Planned</td><td>ULTRAPAN (Cartosat-3)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>TerraSAR-X2</td><td>01-Jan-2013</td><td>01-Jan-2018</td><td>Planned</td><td>X-Band SAR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Sentinel-3 A</td><td>15-Apr-2013</td><td>15-Aug-2020</td><td>Approved</td><td>OLCI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Sentinel-2 A</td><td>01-May-2013</td><td>01-Aug-2020</td><td>Approved</td><td>MSI (Sentinel-2)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>SAOCOM 1B</td><td>01-Jun-2013</td><td>01-Jun-2018</td><td>Approved</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>AMAZ&#212;NIA-1</td><td>30-Jun-2013</td><td>30-Jun-2017</td><td>Approved</td><td>AWFI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Resurs P N2</td><td>31-Dec-2013</td><td>31-Dec-2018</td><td>Planned</td><td>Geoton-L1</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Arkon-2M</td><td>31-Dec-2013</td><td>31-Dec-2018</td><td>Planned</td><td>Arkon-2M SAR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>SAC-E/SABIA/mar</td><td>01-Jan-2014</td><td>01-Jan-2019</td><td>Approved</td><td>MOC</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>RISAT-3L</td><td>01-Jan-2014</td><td>01-Jan-2020</td><td>Considered</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>GCOM-C1</td><td>01-Feb-2014</td><td>01-Feb-2019</td><td>Approved</td><td>SGLI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>EnMAP</td><td>09-May-2014</td><td>09-May-2019</td><td>Planned</td><td>HSI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>RESOURCESAT-3</td><td>01-Jul-2014</td><td>01-Jul-2019</td><td>Considered</td><td>WS LISS III</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>RADARSAT C-1</td><td>01-Aug-2014</td><td>01-Aug-2021</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>CBERS-4</td><td>20-Oct-2014</td><td>20-Oct-2017</td><td>Approved</td><td>IRS, PAN, WFI-2</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-3D</td><td>31-Dec-2014</td><td>31-Dec-2018</td><td>Approved</td><td>VIRR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Sentinel-2 B</td><td>31-Dec-2014</td><td>31-Mar-2022</td><td>Approved</td><td>MSI (Sentinel-2)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Sentinel-3 B</td><td>31-Dec-2014</td><td>30-Apr-2022</td><td>Approved</td><td>OLCI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Meteor-MP N1</td><td>31-Dec-2014</td><td>31-Dec-2019</td><td>Planned</td><td>Advanced KMSS, Advanced MSU-MR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>JPSS-1</td><td>01-Jan-2015</td><td>01-Jun-2023</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>SAOCOM-2A</td><td>01-Jan-2015</td><td>01-Jan-2020</td><td>Planned</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>RADARSAT C-2</td><td>01-Apr-2015</td><td>01-Apr-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>RADARSAT C-3</td><td>01-Jun-2015</td><td>01-Jun-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>MAPSAR</td><td>03-Dec-2015</td><td>03-Dec-2019</td><td>Planned</td><td>SAR (MAPSAR)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-4 O/B</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>MCSI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-4 O/C</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>MCSI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Meteor-MP N2</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>Advanced KMSS, Advanced MSU-MR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>SAOCOM-2B</td><td>01-Jan-2016</td><td>01-Jan-2021</td><td>Planned</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Metop-C</td><td>02-Apr-2016</td><td>01-Dec-2021</td><td>Approved</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-3E</td><td>31-Dec-2016</td><td>31-Dec-2020</td><td>Planned</td><td>VIRR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Meteor-MP N3</td><td>31-Dec-2016</td><td>31-Dec-2021</td><td>Planned</td><td>Advanced KMSS, Advanced MSU-MR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>COMS-2A</td><td>01-Jan-2017</td><td>01-Jan-2024</td><td>Considered</td><td>Advanced MI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>HY-3B</td><td>06-Jan-2017</td><td>06-Jan-2022</td><td>Planned</td><td>WSAR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>CLARREO-1</td><td>30-Oct-2017</td><td>30-Oct-2020</td><td>Considered</td><td>Occultation GNSS Receiver (CLARREO)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>JPSS-2</td><td>01-Jan-2018</td><td>01-Oct-2026</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>GCOM-C2</td><td>01-Feb-2018</td><td>01-Feb-2023</td><td>Planned</td><td>SGLI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-3F</td><td>31-Dec-2018</td><td>31-Dec-2022</td><td>Planned</td><td>MVIRS, VIRR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>CLARREO-2</td><td>30-Oct-2019</td><td>30-Oct-2022</td><td>Considered</td><td>Occultation GNSS Receiver (CLARREO)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-4 O/D</td><td>31-Dec-2019</td><td>31-Dec-2024</td><td>Planned</td><td>MCSI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-4 O/E</td><td>31-Dec-2019</td><td>31-Dec-2024</td><td>Planned</td><td>MCSI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Sentinel-2 C</td><td>01-Jan-2020</td><td>01-Apr-2027</td><td>Considered</td><td>MSI (Sentinel-2)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>Sentinel-3 C</td><td>01-Jan-2020</td><td>01-May-2027</td><td>Considered</td><td>OLCI</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>CLARREO-3</td><td>30-Oct-2020</td><td>30-Oct-2023</td><td>Considered</td><td>Occultation GNSS Receiver (CLARREO)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>CLARREO-4</td><td>30-Oct-2020</td><td>30-Oct-2023</td><td>Considered</td><td>Occultation GNSS Receiver (CLARREO)</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>FY-3G</td><td>31-Dec-2020</td><td>31-Dec-2024</td><td>Planned</td><td>MVIRS, VIRR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>HY-3C</td><td>06-Jan-2022</td><td>06-Jan-2027</td><td>Planned</td><td>WSAR</td>
+		</tr><tr>
+			<td>Earth surface albedo</td><td>GCOM-C3</td><td>01-Feb-2022</td><td>01-Feb-2027</td><td>Planned</td><td>SGLI</td>
+		</tr>
+	</table>
+</div>

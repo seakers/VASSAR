@@ -1,0 +1,17 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Precipitation index (daily cumulative)</td><td>Aqua</td><td>04-May-2002</td><td>30-Sep-2011</td><td>Currently being flown</td><td>AIRS</td>
+		</tr><tr>
+			<td>Precipitation index (daily cumulative)</td><td>MTSAT-1R</td><td>26-Feb-2005</td><td>01-Jan-2015</td><td>Currently being flown</td><td>JAMI/MTSAT-1R</td>
+		</tr><tr>
+			<td>Precipitation index (daily cumulative)</td><td>MTSAT-2</td><td>18-Feb-2006</td><td>01-Jan-2017</td><td>Currently being flown</td><td>IMAGER/MTSAT-2</td>
+		</tr><tr>
+			<td>Precipitation index (daily cumulative)</td><td>GOES-R</td><td>01-Oct-2015</td><td>01-Mar-2025</td><td>Approved</td><td>ABI</td>
+		</tr><tr>
+			<td>Precipitation index (daily cumulative)</td><td>GOES-S</td><td>01-Feb-2017</td><td>01-Oct-2028</td><td>Approved</td><td>ABI</td>
+		</tr>
+	</table>
+</div>

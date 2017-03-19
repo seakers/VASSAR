@@ -1,0 +1,141 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Meteosat-6</td><td>20-Nov-1993</td><td>31-Dec-2013</td><td>Currently being flown</td><td>MVIRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Meteosat-7</td><td>03-Sep-1997</td><td>31-Dec-2013</td><td>Currently being flown</td><td>MVIRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>TRMM</td><td>27-Nov-1997</td><td>30-Sep-2011</td><td>Currently being flown</td><td>PR, TMI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>INSAT-2E</td><td>03-Apr-1999</td><td>04-Mar-2011</td><td>Currently being flown</td><td>VHRR</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>DMSP F-15</td><td>12-Dec-1999</td><td>01-May-2013</td><td>Currently being flown</td><td>SSM/I, SSM/T-2</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GOES-11</td><td>03-May-2000</td><td>15-Dec-2011</td><td>Currently being flown</td><td>Imager, Sounder</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>NOAA-16</td><td>21-Sep-2000</td><td>31-Dec-2012</td><td>Currently being flown</td><td>AMSU-A, AMSU-B, ATOVS (HIRS/3 + AMSU + AVHRR/3), AVHRR/3</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GOES-12</td><td>23-Jul-2001</td><td>15-Jan-2011</td><td>Currently being flown</td><td>Imager, Sounder</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Aqua</td><td>04-May-2002</td><td>30-Sep-2011</td><td>Currently being flown</td><td>AMSR-E, AMSU-A</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>NOAA-17</td><td>24-Jun-2002</td><td>31-Dec-2014</td><td>Currently being flown</td><td>AMSU-A, AMSU-B, AVHRR/3</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Meteosat-8</td><td>13-Aug-2002</td><td>30-Jun-2011</td><td>Currently being flown</td><td>SEVIRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>KALPANA-1</td><td>12-Sep-2002</td><td>09-Dec-2012</td><td>Currently being flown</td><td>VHRR</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>INSAT-3A</td><td>04-Apr-2003</td><td>10-Apr-2013</td><td>Currently being flown</td><td>VHRR</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>DMSP F-16</td><td>18-Oct-2003</td><td>01-Oct-2011</td><td>Currently being flown</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>NOAA-18</td><td>20-May-2005</td><td>31-Dec-2015</td><td>Currently being flown</td><td>AMSU-A, AVHRR/3, MHS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Meteosat-9</td><td>21-Dec-2005</td><td>30-Jun-2014</td><td>Currently being flown</td><td>SEVIRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>CloudSat</td><td>28-Apr-2006</td><td>30-Sep-2011</td><td>Currently being flown</td><td>CPR (CloudSat)</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GOES-13</td><td>24-May-2006</td><td>01-Jun-2015</td><td>Currently being flown</td><td>Imager, Sounder</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Metop-A</td><td>19-Oct-2006</td><td>30-Apr-2012</td><td>Currently being flown</td><td>AMSU-A, AVHRR/3, MHS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>DMSP F-17</td><td>04-Nov-2006</td><td>01-Jun-2013</td><td>Currently being flown</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>FY-3A</td><td>27-May-2008</td><td>31-May-2011</td><td>Currently being flown</td><td>MWRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>FY-2E</td><td>26-Dec-2008</td><td>31-Dec-2011</td><td>Currently being flown</td><td>IVISSR (FY-2)</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>NOAA-19</td><td>04-Feb-2009</td><td>01-Mar-2016</td><td>Currently being flown</td><td>AVHRR/3, MHS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GOES-14</td><td>27-Jun-2009</td><td>31-Dec-2016</td><td>Currently being flown</td><td>Imager, Sounder</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Meteor-M N1</td><td>18-Sep-2009</td><td>18-Sep-2014</td><td>Currently being flown</td><td>MSU-MR, MTVZA</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>DMSP F-18</td><td>18-Oct-2009</td><td>01-Apr-2014</td><td>Currently being flown</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GOES-15</td><td>04-Mar-2010</td><td>01-Apr-2020</td><td>Currently being flown</td><td>Imager, Sounder</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>COMS</td><td>26-Jun-2010</td><td>01-Dec-2017</td><td>Currently being flown</td><td>MI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>FY-3B</td><td>31-Dec-2010</td><td>31-Dec-2012</td><td>Approved</td><td>MWRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>MEGHA-TROPIQUES</td><td>01-Jan-2011</td><td>01-Apr-2015</td><td>Approved</td><td>MADRAS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>SAC-D/Aquarius</td><td>01-Apr-2011</td><td>01-Apr-2017</td><td>Approved</td><td>MWR</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Meteor-M N2</td><td>01-Jul-2011</td><td>01-Jul-2016</td><td>Approved</td><td>MSU-MR, MTVZA</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>NPP</td><td>23-Sep-2011</td><td>23-Sep-2016</td><td>Approved</td><td>ATMS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Elektro-L N1</td><td>01-Dec-2011</td><td>01-Dec-2018</td><td>Approved</td><td>MSU-GS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>FY-2F</td><td>31-Dec-2011</td><td>31-Dec-2016</td><td>Approved</td><td>IVISSR (FY-2)</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Meteosat-10</td><td>31-Jan-2012</td><td>31-Jan-2019</td><td>Approved</td><td>SEVIRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GCOM-W1</td><td>01-Feb-2012</td><td>01-Feb-2017</td><td>Approved</td><td>AMSR-2</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Metop-B</td><td>02-Apr-2012</td><td>01-May-2017</td><td>Approved</td><td>AMSU-A, AVHRR/3, MHS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>DMSP F-19</td><td>01-Oct-2012</td><td>01-Oct-2017</td><td>Approved</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>FY-3C</td><td>31-Dec-2012</td><td>31-Dec-2016</td><td>Approved</td><td>MWRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Elektro-L N2</td><td>31-Dec-2012</td><td>31-Dec-2018</td><td>Approved</td><td>MSU-GS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GPM Core</td><td>21-Jul-2013</td><td>21-Jul-2018</td><td>Approved</td><td>DPR, GMI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Meteosat-11</td><td>31-Jan-2014</td><td>31-Jan-2021</td><td>Approved</td><td>SEVIRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>DMSP F-20</td><td>05-Jun-2014</td><td>01-Jun-2019</td><td>Approved</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GPM Constellation</td><td>01-Nov-2014</td><td>01-Nov-2019</td><td>Planned</td><td>GMI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>FY-3D</td><td>31-Dec-2014</td><td>31-Dec-2018</td><td>Approved</td><td>MWRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Elektro-L N3</td><td>31-Dec-2014</td><td>31-Dec-2021</td><td>Planned</td><td>MSU-GS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Meteor-MP N1</td><td>31-Dec-2014</td><td>31-Dec-2019</td><td>Planned</td><td>Advanced MSU-MR, Advanced MTVZA</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>JPSS-1</td><td>01-Jan-2015</td><td>01-Jun-2023</td><td>Approved</td><td>ATMS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GOES-R</td><td>01-Oct-2015</td><td>01-Mar-2025</td><td>Approved</td><td>ABI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Meteor-MP N2</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>Advanced MSU-MR, Advanced MTVZA</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GCOM-W2</td><td>01-Feb-2016</td><td>01-Feb-2021</td><td>Planned</td><td>AMSR-2</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Metop-C</td><td>02-Apr-2016</td><td>01-Dec-2021</td><td>Approved</td><td>AMSU-A, AVHRR/3, MHS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GPM-Br</td><td>01-Dec-2016</td><td>01-Dec-2020</td><td>Planned</td><td>RADIOMETRO</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>MTG-I1 (imaging)</td><td>15-Dec-2016</td><td>15-Jun-2025</td><td>Approved</td><td>FCI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>FY-3E</td><td>31-Dec-2016</td><td>31-Dec-2020</td><td>Planned</td><td>MWRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Meteor-MP N3</td><td>31-Dec-2016</td><td>31-Dec-2021</td><td>Planned</td><td>Advanced MSU-MR, Advanced MTVZA</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>COMS-2A</td><td>01-Jan-2017</td><td>01-Jan-2024</td><td>Considered</td><td>Advanced MI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GOES-S</td><td>01-Feb-2017</td><td>01-Oct-2028</td><td>Approved</td><td>ABI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>JPSS-2</td><td>01-Jan-2018</td><td>01-Oct-2026</td><td>Approved</td><td>ATMS</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>FY-3F</td><td>31-Dec-2018</td><td>31-Dec-2022</td><td>Planned</td><td>MVIRS, MWRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>Sentinel-5</td><td>01-Dec-2019</td><td>01-Dec-2026</td><td>Planned</td><td>METimage</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>ACE</td><td>01-Jan-2020</td><td>01-Jan-2023</td><td>Considered</td><td>Cloud radar (ACE)</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>GCOM-W3</td><td>01-Feb-2020</td><td>01-Feb-2025</td><td>Planned</td><td>AMSR-2</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>FY-3G</td><td>31-Dec-2020</td><td>31-Dec-2024</td><td>Planned</td><td>MVIRS, MWRI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>MTG-I2 (imaging)</td><td>15-Jun-2021</td><td>15-Dec-2029</td><td>Approved</td><td>FCI</td>
+		</tr><tr>
+			<td>Precipitation rate (liquid) at the surface</td><td>MTG-I3 (imaging)</td><td>15-Jan-2025</td><td>15-Jul-2033</td><td>Approved</td><td>FCI</td>
+		</tr>
+	</table>
+</div>

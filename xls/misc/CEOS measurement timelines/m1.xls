@@ -1,0 +1,69 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>ERS-2</td><td>21-Apr-1995</td><td>30-Jun-2011</td><td>Currently being flown</td><td>ATSR-2</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>Terra</td><td>18-Dec-1999</td><td>30-Sep-2011</td><td>Currently being flown</td><td>MISR</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>GOES-11</td><td>03-May-2000</td><td>15-Dec-2011</td><td>Currently being flown</td><td>Sounder</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>NOAA-16</td><td>21-Sep-2000</td><td>31-Dec-2012</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>Odin</td><td>20-Feb-2001</td><td>31-Dec-2012</td><td>Currently being flown</td><td>OSIRIS</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>GOES-12</td><td>23-Jul-2001</td><td>15-Jan-2011</td><td>Currently being flown</td><td>Sounder</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>PROBA</td><td>22-Oct-2001</td><td>31-Dec-2012</td><td>Currently being flown</td><td>CHRIS</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>Envisat</td><td>01-Mar-2002</td><td>31-Dec-2013</td><td>Currently being flown</td><td>AATSR, SCIAMACHY</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>NOAA-17</td><td>24-Jun-2002</td><td>31-Dec-2014</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>SCISAT-1</td><td>12-Aug-2003</td><td>01-Apr-2013</td><td>Currently being flown</td><td>ACE-FTS</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>Aura</td><td>15-Jul-2004</td><td>30-Sep-2011</td><td>Currently being flown</td><td>HiRDLS, OMI</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>NOAA-18</td><td>20-May-2005</td><td>31-Dec-2015</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>GOES-13</td><td>24-May-2006</td><td>01-Jun-2015</td><td>Currently being flown</td><td>Sounder</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>Metop-A</td><td>19-Oct-2006</td><td>30-Apr-2012</td><td>Currently being flown</td><td>AVHRR/3, GOME-2</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>NOAA-19</td><td>04-Feb-2009</td><td>01-Mar-2016</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>GOES-14</td><td>27-Jun-2009</td><td>31-Dec-2016</td><td>Currently being flown</td><td>Sounder</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>GOES-15</td><td>04-Mar-2010</td><td>01-Apr-2020</td><td>Currently being flown</td><td>Sounder</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>NPP</td><td>23-Sep-2011</td><td>23-Sep-2016</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>Metop-B</td><td>02-Apr-2012</td><td>01-May-2017</td><td>Approved</td><td>AVHRR/3, GOME-2</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>Sentinel-5 precursor</td><td>01-Oct-2014</td><td>01-Jan-2020</td><td>Approved</td><td>UVNS (Sentinel-5 precursor)</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>JPSS-1</td><td>01-Jan-2015</td><td>01-Jun-2023</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>ISTAG</td><td>01-Jan-2015</td><td>01-Jan-2020</td><td>Considered</td><td>MAGIS</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>Metop-C</td><td>02-Apr-2016</td><td>01-Dec-2021</td><td>Approved</td><td>AVHRR/3, GOME-2</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>JPSS-2</td><td>01-Jan-2018</td><td>01-Oct-2026</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>PACE</td><td>01-Jan-2018</td><td>01-Jan-2021</td><td>Considered</td><td>Next Gen APS (ACE)</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>Sentinel-4 A</td><td>15-Dec-2018</td><td>15-Jun-2027</td><td>Planned</td><td>UVN (Sentinel-4)</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>CLARREO-2</td><td>30-Oct-2019</td><td>30-Oct-2022</td><td>Considered</td><td>Solar reflected spectrometer (CLARREO)</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>Sentinel-5</td><td>01-Dec-2019</td><td>01-Dec-2026</td><td>Planned</td><td>UVNS (post-EPS)</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>ACE</td><td>01-Jan-2020</td><td>01-Jan-2023</td><td>Considered</td><td>Next Gen APS (ACE)</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>CLARREO-4</td><td>30-Oct-2020</td><td>30-Oct-2023</td><td>Considered</td><td>Solar reflected spectrometer (CLARREO)</td>
+		</tr><tr>
+			<td>Aerosol absorption optical depth (column/profile)</td><td>Sentinel-4 B</td><td>15-Dec-2026</td><td>15-Jun-2035</td><td>Planned</td><td>UVN (Sentinel-4)</td>
+		</tr>
+	</table>
+</div>

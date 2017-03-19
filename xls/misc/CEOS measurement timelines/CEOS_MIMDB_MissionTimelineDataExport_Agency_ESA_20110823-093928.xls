@@ -1,0 +1,81 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Mission Name Full</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Meteosat-6</td><td>Meteosat-6</td><td>20-Nov-1993</td><td>31-Dec-2013</td><td>Currently being flown</td><td>Meteosat Comms, MVIRI</td>
+		</tr><tr>
+			<td>European Remote Sensing satellite - 2</td><td>ERS-2</td><td>21-Apr-1995</td><td>30-Jun-2011</td><td>Currently being flown</td><td>MWR, ERS Comms, GOME, RA, ATSR/M, ATSR-2, AMI/SAR/Image, AMI/SAR/Wave, AMI/Scatterometer</td>
+		</tr><tr>
+			<td>Meteosat-7</td><td>Meteosat-7</td><td>03-Sep-1997</td><td>31-Dec-2013</td><td>Currently being flown</td><td>Meteosat Comms, MVIRI</td>
+		</tr><tr>
+			<td>Project for On-Board Autonomy</td><td>PROBA</td><td>22-Oct-2001</td><td>31-Dec-2012</td><td>Currently being flown</td><td>CHRIS</td>
+		</tr><tr>
+			<td>Environmental Satellite</td><td>Envisat</td><td>01-Mar-2002</td><td>31-Dec-2013</td><td>Currently being flown</td><td>DORIS-NG, MWR, ASAR (image mode), ASAR (wave mode), ENVISAT Comms, MERIS, MIPAS, ASAR, GOMOS, SCIAMACHY, RA-2, AATSR</td>
+		</tr><tr>
+			<td>Meteosat Second Generation-1</td><td>Meteosat-8</td><td>13-Aug-2002</td><td>30-Jun-2011</td><td>Currently being flown</td><td>MSG Comms, SEVIRI, GERB</td>
+		</tr><tr>
+			<td>Meteosat Second Generation-2</td><td>Meteosat-9</td><td>21-Dec-2005</td><td>30-Jun-2014</td><td>Currently being flown</td><td>MSG Comms, SEVIRI, GERB</td>
+		</tr><tr>
+			<td>Meteorological Operational Polar Satellite - A</td><td>Metop-A</td><td>19-Oct-2006</td><td>30-Apr-2012</td><td>Currently being flown</td><td>SEM (POES), ARGOS, S&amp;R (NOAA), MHS, IASI, GRAS, GOME-2, ASCAT, AMSU-A, AVHRR/3, HIRS/4</td>
+		</tr><tr>
+			<td>Gravity Field and Steady-State Ocean Circulation Explorer</td><td>GOCE</td><td>17-Mar-2009</td><td>17-Apr-2011</td><td>Currently being flown</td><td>EGG, Laser Reflectors (ESA), GPS (ESA), SSTI, LRR</td>
+		</tr><tr>
+			<td>Soil Moisture and Ocean Salinity (Earth Explorer Opportunity Mission)</td><td>SMOS</td><td>02-Nov-2009</td><td>02-Nov-2012</td><td>Currently being flown</td><td>MIRAS (SMOS)</td>
+		</tr><tr>
+			<td>CryoSat-2 (Earth Explorer Opportunity Mission)</td><td>CryoSat-2</td><td>08-Apr-2010</td><td>08-Jul-2013</td><td>Currently being flown</td><td>DORIS-NG, SIRAL, Laser Reflectors (ESA)</td>
+		</tr><tr>
+			<td>Earth's Magnetic Field and Environment Explorers; </td><td>Swarm</td><td>17-Jan-2012</td><td>17-May-2016</td><td>Approved</td><td>Laser Reflectors (ESA), ASM, VFM, STR, EFI, ACC, GPS Receiver (Swarm)</td>
+		</tr><tr>
+			<td>Meteosat Second Generation-3</td><td>Meteosat-10</td><td>31-Jan-2012</td><td>31-Jan-2019</td><td>Approved</td><td>MSG Comms, SEVIRI, GERB</td>
+		</tr><tr>
+			<td>Atmospheric Dynamics Mission (Earth Explorer Core Mission)</td><td>ADM-Aeolus</td><td>28-Feb-2012</td><td>28-May-2015</td><td>Approved</td><td>ALADIN</td>
+		</tr><tr>
+			<td>Meteorological Operational Polar Satellite - B</td><td>Metop-B</td><td>02-Apr-2012</td><td>01-May-2017</td><td>Approved</td><td>SEM (POES), ARGOS, S&amp;R (NOAA), MHS, IASI, GRAS, GOME-2, ASCAT, AMSU-A, AVHRR/3, HIRS/4</td>
+		</tr><tr>
+			<td>Sentinel-1 A</td><td>Sentinel-1 A</td><td>15-Dec-2012</td><td>15-Mar-2020</td><td>Approved</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Sentinel-3 A</td><td>Sentinel-3 A</td><td>15-Apr-2013</td><td>15-Aug-2020</td><td>Approved</td><td>OLCI, SLSTR, SRAL</td>
+		</tr><tr>
+			<td>Sentinel-2 A</td><td>Sentinel-2 A</td><td>01-May-2013</td><td>01-Aug-2020</td><td>Approved</td><td>MSI (Sentinel-2)</td>
+		</tr><tr>
+			<td>EarthCARE</td><td>EarthCARE</td><td>25-Oct-2013</td><td>25-Oct-2016</td><td>Approved</td><td>CPR (EarthCARE), ATLID, BBR (EarthCARE), MSI (EarthCARE)</td>
+		</tr><tr>
+			<td>Ingenio</td><td>Ingenio</td><td>01-Jan-2014</td><td>01-Jan-2021</td><td>Approved</td><td>PAN+MS (RGB+NIR), UVAS</td>
+		</tr><tr>
+			<td>Meteosat Second Generation-4</td><td>Meteosat-11</td><td>31-Jan-2014</td><td>31-Jan-2021</td><td>Approved</td><td>SEVIRI, GERB</td>
+		</tr><tr>
+			<td>Sentinel-5 precursor</td><td>Sentinel-5 precursor</td><td>01-Oct-2014</td><td>01-Jan-2020</td><td>Approved</td><td>UVNS (Sentinel-5 precursor)</td>
+		</tr><tr>
+			<td>Sentinel-1 B</td><td>Sentinel-1 B</td><td>15-Dec-2014</td><td>15-Mar-2022</td><td>Approved</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Sentinel-2 B</td><td>Sentinel-2 B</td><td>31-Dec-2014</td><td>31-Mar-2022</td><td>Approved</td><td>MSI (Sentinel-2)</td>
+		</tr><tr>
+			<td>Sentinel-3 B</td><td>Sentinel-3 B</td><td>31-Dec-2014</td><td>30-Apr-2022</td><td>Approved</td><td>OLCI, SLSTR, SRAL</td>
+		</tr><tr>
+			<td>Meteorological Operational Polar Satellite - C</td><td>Metop-C</td><td>02-Apr-2016</td><td>01-Dec-2021</td><td>Approved</td><td>SEM (POES), ARGOS, MHS, IASI, GRAS, GOME-2, ASCAT, AMSU-A, AVHRR/3, A-DCS4</td>
+		</tr><tr>
+			<td>Meteosat Third Generation - Imaging Satellite 1</td><td>MTG-I1 (imaging)</td><td>15-Dec-2016</td><td>15-Jun-2025</td><td>Approved</td><td>FCI, LI</td>
+		</tr><tr>
+			<td>MTG S1 Sounding Satellite 1</td><td>Meteosat Third Generation-S1 (sounding)</td><td>15-Dec-2018</td><td>15-Jun-2027</td><td>Planned</td><td>IRS</td>
+		</tr><tr>
+			<td>Sentinel-4 A</td><td>Sentinel-4 A</td><td>15-Dec-2018</td><td>15-Jun-2027</td><td>Planned</td><td>UVN (Sentinel-4), IRS</td>
+		</tr><tr>
+			<td>Sentinel-1 C</td><td>Sentinel-1 C</td><td>31-Mar-2019</td><td>30-Jun-2026</td><td>Considered</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Sentinel-5</td><td>Sentinel-5</td><td>01-Dec-2019</td><td>01-Dec-2026</td><td>Planned</td><td>IRS, METimage, UVNS (post-EPS)</td>
+		</tr><tr>
+			<td>Sentinel-2 C</td><td>Sentinel-2 C</td><td>01-Jan-2020</td><td>01-Apr-2027</td><td>Considered</td><td>MSI (Sentinel-2)</td>
+		</tr><tr>
+			<td>Sentinel-3 C</td><td>Sentinel-3 C</td><td>01-Jan-2020</td><td>01-May-2027</td><td>Considered</td><td>OLCI, SLSTR, SRAL</td>
+		</tr><tr>
+			<td>Meteosat Third Generation - Imaging Satellite 2</td><td>MTG-I2 (imaging)</td><td>15-Jun-2021</td><td>15-Dec-2029</td><td>Approved</td><td>FCI, LI</td>
+		</tr><tr>
+			<td>Meteosat Third Generation - Imaging Satellite 3</td><td>MTG-I3 (imaging)</td><td>15-Jan-2025</td><td>15-Jul-2033</td><td>Approved</td><td>FCI, LI</td>
+		</tr><tr>
+			<td>MTG S2 Sounding Satellite 2</td><td>Meteosat Third Generation-S2 (sounding)</td><td>15-Dec-2026</td><td>15-Jun-2035</td><td>Planned</td><td>IRS</td>
+		</tr><tr>
+			<td>Sentinel-4 B</td><td>Sentinel-4 B</td><td>15-Dec-2026</td><td>15-Jun-2035</td><td>Planned</td><td>UVN (Sentinel-4), IRS</td>
+		</tr>
+	</table>
+</div>

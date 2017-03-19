@@ -1,0 +1,16 @@
+\begin{tabular}{ccccccc}
+\hline
+ Requirement & Measurement & Attribute & Type & Values & Scores & Justification \\
+\hline
+WEA1-1 &"2.3.2 soil moisture" &Horizontal-Spatial-Resolution# &SIB &4200.012000.030000.0 &1.00.70.30.0 &"Insufficient HSR to meet future NWP grid size (<12km achieved, <4km required)"\\
+WEA1-1 &"2.3.2 soil moisture" &Temporal-resolution# &SIB &24.0 72.0168.0 &1.00.70.30.0 &"Insufficient temporal resolution (2-3 days required 1 days ideal)"\\
+WEA1-1 &"2.3.2 soil moisture" &Accuracy# &SIB &0.00.1 &1.00.50.0 &"Insufficient accuracy (4-10% achieved, 4% required)"\\
+WEA1-1 &"2.3.2 soil moisture" &soil-penetration# &LIB &0.50.00.0 &1.00.70.30.0 &"Insufficient penetration (L-band required, P-band ideal)"\\
+WEA1-1 &"2.3.2 soil moisture" &Swath# &LIB &1000.0 600.0 &1.00.50.0 &"Insufficient swath (650km degraded, 1000km required)"\\
+WEA1-1 &"2.3.2 soil moisture" &sensitivity# &LIB &3.01.50.0 &1.00.70.30.0 &"Insufficient sensitivity to soil moisture in vegetation (L-band achieved, P-band ideal)"\\
+WEA1-1 &"2.3.2 soil moisture" &image-distortion# &LIB &0.8 &1.00.5 &"Too large image distortion"\\
+WEA1-1 &"2.3.2 soil moisture" &orbit-inclination &BOOL &[SSO] &1.00.5 &"Suboptimal illumination conditions (not SSO)"\\
+WEA1-1 &"2.3.2 soil moisture" &orbit-RAAN &OL &[DD,AM,PM] &1.00.70.70.0 &"AM/PM SSO (DD required) - degraded quality"\\
+WEA1-1 &"2.3.2 soil moisture" &All-weather &BOOL &[yes] &1.00.5 &"Missing all-weather capability."\\
+\hline
+\end{tabular}

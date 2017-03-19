@@ -1,0 +1,33 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Lightning detection</td><td>TRMM</td><td>27-Nov-1997</td><td>30-Sep-2011</td><td>Currently being flown</td><td>LIS</td>
+		</tr><tr>
+			<td>Lightning detection</td><td>SAC-D/Aquarius</td><td>01-Apr-2011</td><td>01-Apr-2017</td><td>Approved</td><td>HSC</td>
+		</tr><tr>
+			<td>Lightning detection</td><td>FY-4 O/A</td><td>31-Dec-2012</td><td>31-Dec-2017</td><td>Planned</td><td>LM</td>
+		</tr><tr>
+			<td>Lightning detection</td><td>GOES-R</td><td>01-Oct-2015</td><td>01-Mar-2025</td><td>Approved</td><td>GLM</td>
+		</tr><tr>
+			<td>Lightning detection</td><td>FY-4 O/B</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>LM</td>
+		</tr><tr>
+			<td>Lightning detection</td><td>FY-4 O/C</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>LM</td>
+		</tr><tr>
+			<td>Lightning detection</td><td>GPM-Br</td><td>01-Dec-2016</td><td>01-Dec-2020</td><td>Planned</td><td>LIS</td>
+		</tr><tr>
+			<td>Lightning detection</td><td>MTG-I1 (imaging)</td><td>15-Dec-2016</td><td>15-Jun-2025</td><td>Approved</td><td>LI</td>
+		</tr><tr>
+			<td>Lightning detection</td><td>GOES-S</td><td>01-Feb-2017</td><td>01-Oct-2028</td><td>Approved</td><td>GLM</td>
+		</tr><tr>
+			<td>Lightning detection</td><td>FY-4 O/D</td><td>31-Dec-2019</td><td>31-Dec-2024</td><td>Planned</td><td>LM</td>
+		</tr><tr>
+			<td>Lightning detection</td><td>FY-4 O/E</td><td>31-Dec-2019</td><td>31-Dec-2024</td><td>Planned</td><td>LM</td>
+		</tr><tr>
+			<td>Lightning detection</td><td>MTG-I2 (imaging)</td><td>15-Jun-2021</td><td>15-Dec-2029</td><td>Approved</td><td>LI</td>
+		</tr><tr>
+			<td>Lightning detection</td><td>MTG-I3 (imaging)</td><td>15-Jan-2025</td><td>15-Jul-2033</td><td>Approved</td><td>LI</td>
+		</tr>
+	</table>
+</div>

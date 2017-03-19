@@ -1,0 +1,29 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Ocean surface currents (vector)</td><td>Envisat</td><td>01-Mar-2002</td><td>31-Dec-2013</td><td>Currently being flown</td><td>ASAR, ASAR (image mode), ASAR (wave mode)</td>
+		</tr><tr>
+			<td>Ocean surface currents (vector)</td><td>TerraSAR-X</td><td>15-Jun-2007</td><td>31-Dec-2012</td><td>Currently being flown</td><td>X-Band SAR</td>
+		</tr><tr>
+			<td>Ocean surface currents (vector)</td><td>TanDEM-X</td><td>21-Jun-2010</td><td>31-Dec-2015</td><td>Currently being flown</td><td>X-Band SAR</td>
+		</tr><tr>
+			<td>Ocean surface currents (vector)</td><td>HY-3A</td><td>06-Jan-2012</td><td>06-Jan-2017</td><td>Planned</td><td>WSAR</td>
+		</tr><tr>
+			<td>Ocean surface currents (vector)</td><td>Sentinel-1 A</td><td>15-Dec-2012</td><td>15-Mar-2020</td><td>Approved</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Ocean surface currents (vector)</td><td>TerraSAR-X2</td><td>01-Jan-2013</td><td>01-Jan-2018</td><td>Planned</td><td>X-Band SAR</td>
+		</tr><tr>
+			<td>Ocean surface currents (vector)</td><td>Sentinel-1 B</td><td>15-Dec-2014</td><td>15-Mar-2022</td><td>Approved</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Ocean surface currents (vector)</td><td>MAPSAR</td><td>03-Dec-2015</td><td>03-Dec-2019</td><td>Planned</td><td>SAR (MAPSAR)</td>
+		</tr><tr>
+			<td>Ocean surface currents (vector)</td><td>HY-3B</td><td>06-Jan-2017</td><td>06-Jan-2022</td><td>Planned</td><td>WSAR</td>
+		</tr><tr>
+			<td>Ocean surface currents (vector)</td><td>Sentinel-1 C</td><td>31-Mar-2019</td><td>30-Jun-2026</td><td>Considered</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Ocean surface currents (vector)</td><td>HY-3C</td><td>06-Jan-2022</td><td>06-Jan-2027</td><td>Planned</td><td>WSAR</td>
+		</tr>
+	</table>
+</div>

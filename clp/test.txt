@@ -1,0 +1,14 @@
+(defrule REQUIREMENTS::TER16-1-attrib 
+   ?m <- (Measurement (Accuracy# ?val3&~nil) (Horizontal-Spatial-Resolution# ?val1&~nil) (Parameter "2.3.2 soil moisture") (taken-by ?whom) (Temporal-resolution# ?val2&~nil)) 
+   => 
+   (bind ?reason "") 
+   (bind ?new-reasons (create$ N-A N-A N-A)) 
+   (bind ?x1 (nth$ (find-bin-num ?val1 (create$ 50000 60000 100000)) (create$ 1.0 0.67 0.33 0.0))) 
+   (if (< ?x1 1.0) then (bind ?new-reasons (replace$ ?new-reasons 1 1 "WMO OSCAR req id 678 from WMO Climate-TOPC")) (bind ?reason (str-cat ?reason "WMO OSCAR req id 678 from WMO Climate-TOPC"))) 
+   (bind ?x2 (nth$ (find-bin-num ?val2 (create$ 168 264 720)) (create$ 1.0 0.5 0.0))) 
+   (if (< ?x2 1.0) then (bind ?new-reasons (replace$ ?new-reasons 2 2 "WMO OSCAR req id 678 from WMO Climate-TOPC")) (bind ?reason (str-cat ?reason "WMO OSCAR req id 678 from WMO Climate-TOPC"))) 
+   (bind ?x3 (nth$ (find-bin-num ?val3 (create$ 0.0050 0.0070 0.01)) (create$ 1.0 0.5 0.0))) 
+   (if (< ?x3 1.0) then (bind ?new-reasons (replace$ ?new-reasons 3 3 "WMO OSCAR req id 678 from WMO Climate-TOPC")) (bind ?reason (str-cat ?reason "WMO OSCAR req id 678 from WMO Climate-TOPC"))) 
+   (bind ?list (create$ ?x1 ?x2 ?x3)) 
+   (printout t ?list crlf)
+   (assert (AGGREGATION::SUBOBJECTIVE (id TER16-1) (fuzzy-value nil) (index 1) (satisfaction (*$ ?list)) (attributes Horizontal-Spatial-Resolution# Temporal-resolution# Accuracy#) (attrib-scores ?list) (reasons ?new-reasons) (reason ?reason) (satisfied-by ?whom) (parent TER16))))

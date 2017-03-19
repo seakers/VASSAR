@@ -1,0 +1,49 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>RADARSAT-1</td><td>04-Nov-1995</td><td>31-Mar-2012</td><td>Currently being flown</td><td>SAR (RADARSAT)</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>DMSP F-15</td><td>12-Dec-1999</td><td>01-May-2013</td><td>Currently being flown</td><td>SSM/I</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>NOAA-16</td><td>21-Sep-2000</td><td>31-Dec-2012</td><td>Currently being flown</td><td>AMSU-A, AMSU-B</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>Aqua</td><td>04-May-2002</td><td>30-Sep-2011</td><td>Currently being flown</td><td>AMSR-E, AMSU-A</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>NOAA-17</td><td>24-Jun-2002</td><td>31-Dec-2014</td><td>Currently being flown</td><td>AMSU-A, AMSU-B</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>DMSP F-16</td><td>18-Oct-2003</td><td>01-Oct-2011</td><td>Currently being flown</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>NOAA-18</td><td>20-May-2005</td><td>31-Dec-2015</td><td>Currently being flown</td><td>AMSU-A</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>Metop-A</td><td>19-Oct-2006</td><td>30-Apr-2012</td><td>Currently being flown</td><td>AMSU-A</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>DMSP F-17</td><td>04-Nov-2006</td><td>01-Jun-2013</td><td>Currently being flown</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>RADARSAT-2</td><td>14-Dec-2007</td><td>17-Apr-2015</td><td>Currently being flown</td><td>SAR (RADARSAT-2)</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>DMSP F-18</td><td>18-Oct-2009</td><td>01-Apr-2014</td><td>Currently being flown</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>Metop-B</td><td>02-Apr-2012</td><td>01-May-2017</td><td>Approved</td><td>AMSU-A</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>DMSP F-19</td><td>01-Oct-2012</td><td>01-Oct-2017</td><td>Approved</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>CSG-1</td><td>30-Apr-2014</td><td>30-Oct-2021</td><td>Approved</td><td>SAR-2000 S.G.</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>DMSP F-20</td><td>05-Jun-2014</td><td>01-Jun-2019</td><td>Approved</td><td>SSM/IS</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>RADARSAT C-1</td><td>01-Aug-2014</td><td>01-Aug-2021</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>RADARSAT C-2</td><td>01-Apr-2015</td><td>01-Apr-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>CSG-2</td><td>30-Apr-2015</td><td>30-Oct-2022</td><td>Approved</td><td>SAR-2000 S.G.</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>RADARSAT C-3</td><td>01-Jun-2015</td><td>01-Jun-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>Metop-C</td><td>02-Apr-2016</td><td>01-Dec-2021</td><td>Approved</td><td>AMSU-A</td>
+		</tr><tr>
+			<td>Snow water equivalent</td><td>Sentinel-5</td><td>01-Dec-2019</td><td>01-Dec-2026</td><td>Planned</td><td>METimage</td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,37 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Gravity field</td><td>Diademe 1&amp;2</td><td>15-Feb-1967</td><td>31-Dec-2050</td><td>Currently being flown</td><td>RRA</td>
+		</tr><tr>
+			<td>Gravity field</td><td>STARLETTE</td><td>06-Feb-1975</td><td>31-Dec-2050</td><td>Currently being flown</td><td>Laser Reflectors</td>
+		</tr><tr>
+			<td>Gravity field</td><td>LAGEOS-1</td><td>04-May-1976</td><td>04-May-2016</td><td>Currently being flown</td><td>LRA (LAGEOS)</td>
+		</tr><tr>
+			<td>Gravity field</td><td>LAGEOS-2</td><td>22-Oct-1992</td><td>22-Oct-2032</td><td>Currently being flown</td><td>LRA (LAGEOS)</td>
+		</tr><tr>
+			<td>Gravity field</td><td>STELLA</td><td>30-Sep-1993</td><td>31-Dec-2050</td><td>Currently being flown</td><td>Laser Reflectors</td>
+		</tr><tr>
+			<td>Gravity field</td><td>SAC-C</td><td>21-Nov-2000</td><td>01-Jan-2012</td><td>Currently being flown</td><td>GOLPE</td>
+		</tr><tr>
+			<td>Gravity field</td><td>Jason</td><td>07-Dec-2001</td><td>30-Sep-2011</td><td>Currently being flown</td><td>LRA, TRSR</td>
+		</tr><tr>
+			<td>Gravity field</td><td>GRACE</td><td>17-Mar-2002</td><td>30-Sep-2011</td><td>Currently being flown</td><td>GRACE instrument</td>
+		</tr><tr>
+			<td>Gravity field</td><td>OSTM (Jason-2)</td><td>20-Jun-2008</td><td>31-Dec-2013</td><td>Currently being flown</td><td>GPSP, LRA</td>
+		</tr><tr>
+			<td>Gravity field</td><td>GOCE</td><td>17-Mar-2009</td><td>17-Apr-2011</td><td>Currently being flown</td><td>EGG, GPS (ESA), Laser Reflectors (ESA)</td>
+		</tr><tr>
+			<td>Gravity field</td><td>CryoSat-2</td><td>08-Apr-2010</td><td>08-Jul-2013</td><td>Currently being flown</td><td>Laser Reflectors (ESA)</td>
+		</tr><tr>
+			<td>Gravity field</td><td>LARES</td><td>31-Mar-2011</td><td>01-Jan-2050</td><td>Approved</td><td>LCCRA</td>
+		</tr><tr>
+			<td>Gravity field</td><td>SAC-D/Aquarius</td><td>01-Apr-2011</td><td>01-Apr-2017</td><td>Approved</td><td>Lagrange</td>
+		</tr><tr>
+			<td>Gravity field</td><td>Swarm</td><td>17-Jan-2012</td><td>17-May-2016</td><td>Approved</td><td>ACC, GPS Receiver (Swarm), Laser Reflectors (ESA)</td>
+		</tr><tr>
+			<td>Gravity field</td><td>GRACE FO</td><td>31-Dec-2016</td><td>31-Dec-2021</td><td>Approved</td><td>GRACE instrument</td>
+		</tr>
+	</table>
+</div>

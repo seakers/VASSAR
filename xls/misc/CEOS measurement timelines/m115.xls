@@ -1,0 +1,69 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>ERS-2</td><td>21-Apr-1995</td><td>30-Jun-2011</td><td>Currently being flown</td><td>RA</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>RADARSAT-1</td><td>04-Nov-1995</td><td>31-Mar-2012</td><td>Currently being flown</td><td>SAR (RADARSAT)</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Terra</td><td>18-Dec-1999</td><td>30-Sep-2011</td><td>Currently being flown</td><td>ASTER</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>NOAA-16</td><td>21-Sep-2000</td><td>31-Dec-2012</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>NMP EO-1</td><td>21-Nov-2000</td><td>30-Sep-2011</td><td>Currently being flown</td><td>ALI, Hyperion</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Envisat</td><td>01-Mar-2002</td><td>31-Dec-2013</td><td>Currently being flown</td><td>RA-2</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>NOAA-17</td><td>24-Jun-2002</td><td>31-Dec-2014</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>NOAA-18</td><td>20-May-2005</td><td>31-Dec-2015</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Metop-A</td><td>19-Oct-2006</td><td>30-Apr-2012</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>RADARSAT-2</td><td>14-Dec-2007</td><td>17-Apr-2015</td><td>Currently being flown</td><td>SAR (RADARSAT-2)</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>HJ-1A</td><td>06-Sep-2008</td><td>01-Sep-2011</td><td>Currently being flown</td><td>HSI (HJ-1A)</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>NOAA-19</td><td>04-Feb-2009</td><td>01-Mar-2016</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Meteor-M N1</td><td>18-Sep-2009</td><td>18-Sep-2014</td><td>Currently being flown</td><td>MSU-MR</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>CryoSat-2</td><td>08-Apr-2010</td><td>08-Jul-2013</td><td>Currently being flown</td><td>SIRAL</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Meteor-M N2</td><td>01-Jul-2011</td><td>01-Jul-2016</td><td>Approved</td><td>MSU-MR</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Metop-B</td><td>02-Apr-2012</td><td>01-May-2017</td><td>Approved</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>SAOCOM 1A</td><td>01-Dec-2012</td><td>01-Dec-2017</td><td>Approved</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Sentinel-3 A</td><td>15-Apr-2013</td><td>15-Aug-2020</td><td>Approved</td><td>SRAL</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>SAOCOM 1B</td><td>01-Jun-2013</td><td>01-Jun-2018</td><td>Approved</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>RADARSAT C-1</td><td>01-Aug-2014</td><td>01-Aug-2021</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Sentinel-3 B</td><td>31-Dec-2014</td><td>30-Apr-2022</td><td>Approved</td><td>SRAL</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Meteor-MP N1</td><td>31-Dec-2014</td><td>31-Dec-2019</td><td>Planned</td><td>Advanced MSU-MR</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>SAOCOM-2A</td><td>01-Jan-2015</td><td>01-Jan-2020</td><td>Planned</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>RADARSAT C-2</td><td>01-Apr-2015</td><td>01-Apr-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>RADARSAT C-3</td><td>01-Jun-2015</td><td>01-Jun-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>ICESat-II</td><td>31-Oct-2015</td><td>31-Oct-2020</td><td>Planned</td><td>ATLAS</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Meteor-MP N2</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>Advanced MSU-MR</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>SAOCOM-2B</td><td>01-Jan-2016</td><td>01-Jan-2021</td><td>Planned</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Metop-C</td><td>02-Apr-2016</td><td>01-Dec-2021</td><td>Approved</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Meteor-MP N3</td><td>31-Dec-2016</td><td>31-Dec-2021</td><td>Planned</td><td>Advanced MSU-MR</td>
+		</tr><tr>
+			<td>Sea-ice thickness</td><td>Sentinel-3 C</td><td>01-Jan-2020</td><td>01-May-2027</td><td>Considered</td><td>SRAL</td>
+		</tr>
+	</table>
+</div>

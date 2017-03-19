@@ -1,0 +1,53 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>TRMM</td><td>27-Nov-1997</td><td>30-Sep-2011</td><td>Currently being flown</td><td>PR, TMI</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>NOAA-16</td><td>21-Sep-2000</td><td>31-Dec-2012</td><td>Currently being flown</td><td>HIRS/3</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>NOAA-17</td><td>24-Jun-2002</td><td>31-Dec-2014</td><td>Currently being flown</td><td>HIRS/3</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>NOAA-18</td><td>20-May-2005</td><td>31-Dec-2015</td><td>Currently being flown</td><td>MHS</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>CloudSat</td><td>28-Apr-2006</td><td>30-Sep-2011</td><td>Currently being flown</td><td>CPR (CloudSat)</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>Metop-A</td><td>19-Oct-2006</td><td>30-Apr-2012</td><td>Currently being flown</td><td>MHS</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>NOAA-19</td><td>04-Feb-2009</td><td>01-Mar-2016</td><td>Currently being flown</td><td>MHS</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>MEGHA-TROPIQUES</td><td>01-Jan-2011</td><td>01-Apr-2015</td><td>Approved</td><td>MADRAS</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>NPP</td><td>23-Sep-2011</td><td>23-Sep-2016</td><td>Approved</td><td>ATMS</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>GCOM-W1</td><td>01-Feb-2012</td><td>01-Feb-2017</td><td>Approved</td><td>AMSR-2</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>Metop-B</td><td>02-Apr-2012</td><td>01-May-2017</td><td>Approved</td><td>MHS</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>Sentinel-3 A</td><td>15-Apr-2013</td><td>15-Aug-2020</td><td>Approved</td><td>OLCI</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>EarthCARE</td><td>25-Oct-2013</td><td>25-Oct-2016</td><td>Approved</td><td>ATLID</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>Sentinel-3 B</td><td>31-Dec-2014</td><td>30-Apr-2022</td><td>Approved</td><td>OLCI</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>JPSS-1</td><td>01-Jan-2015</td><td>01-Jun-2023</td><td>Approved</td><td>ATMS</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>GOES-R</td><td>01-Oct-2015</td><td>01-Mar-2025</td><td>Approved</td><td>ABI</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>GCOM-W2</td><td>01-Feb-2016</td><td>01-Feb-2021</td><td>Planned</td><td>AMSR-2</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>Metop-C</td><td>02-Apr-2016</td><td>01-Dec-2021</td><td>Approved</td><td>MHS</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>GOES-S</td><td>01-Feb-2017</td><td>01-Oct-2028</td><td>Approved</td><td>ABI</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>JPSS-2</td><td>01-Jan-2018</td><td>01-Oct-2026</td><td>Approved</td><td>ATMS</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>Sentinel-3 C</td><td>01-Jan-2020</td><td>01-May-2027</td><td>Considered</td><td>OLCI</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>ACE</td><td>01-Jan-2020</td><td>01-Jan-2023</td><td>Considered</td><td>Cloud radar (ACE)</td>
+		</tr><tr>
+			<td>Precipitation Profile (liquid or solid)</td><td>GCOM-W3</td><td>01-Feb-2020</td><td>01-Feb-2025</td><td>Planned</td><td>AMSR-2</td>
+		</tr>
+	</table>
+</div>

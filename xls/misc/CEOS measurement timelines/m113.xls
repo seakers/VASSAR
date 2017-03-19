@@ -1,0 +1,69 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>ERS-2</td><td>21-Apr-1995</td><td>30-Jun-2011</td><td>Currently being flown</td><td>AMI/SAR/Image, RA</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>RADARSAT-1</td><td>04-Nov-1995</td><td>31-Mar-2012</td><td>Currently being flown</td><td>SAR (RADARSAT)</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>Terra</td><td>18-Dec-1999</td><td>30-Sep-2011</td><td>Currently being flown</td><td>ASTER</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>Envisat</td><td>01-Mar-2002</td><td>31-Dec-2013</td><td>Currently being flown</td><td>ASAR, RA-2</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>SPOT-5</td><td>04-May-2002</td><td>01-Jun-2014</td><td>Currently being flown</td><td>HRS</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>ALOS</td><td>24-Jan-2006</td><td>01-Sep-2013</td><td>Currently being flown</td><td>PALSAR</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>RADARSAT-2</td><td>14-Dec-2007</td><td>17-Apr-2015</td><td>Currently being flown</td><td>SAR (RADARSAT-2)</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>CryoSat-2</td><td>08-Apr-2010</td><td>08-Jul-2013</td><td>Currently being flown</td><td>SIRAL</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>RISAT-1</td><td>25-Mar-2011</td><td>25-Mar-2015</td><td>Approved</td><td>SAR (RISAT)</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>Pleiades 1</td><td>31-Mar-2011</td><td>31-Mar-2016</td><td>Approved</td><td>HiRI</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>RISAT-1F</td><td>01-Jan-2012</td><td>01-Jan-2018</td><td>Considered</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>HY-3A</td><td>06-Jan-2012</td><td>06-Jan-2017</td><td>Planned</td><td>WSAR</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>Pleiades 2</td><td>31-Mar-2012</td><td>31-Mar-2017</td><td>Approved</td><td>HiRI</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>SAOCOM 1A</td><td>01-Dec-2012</td><td>01-Dec-2017</td><td>Approved</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>LDCM</td><td>19-Dec-2012</td><td>19-Dec-2017</td><td>Approved</td><td>OLI</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>ALOS-2</td><td>01-Jan-2013</td><td>01-Jan-2017</td><td>Approved</td><td>L-Band SAR (ALOS-2)</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>Sentinel-3 A</td><td>15-Apr-2013</td><td>15-Aug-2020</td><td>Approved</td><td>SRAL</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>SAOCOM 1B</td><td>01-Jun-2013</td><td>01-Jun-2018</td><td>Approved</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>Arkon-2M</td><td>31-Dec-2013</td><td>31-Dec-2018</td><td>Planned</td><td>Arkon-2M SAR</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>OCEANSAT-3</td><td>01-Jan-2014</td><td>01-Jan-2019</td><td>Considered</td><td>Altimeter (OCEANSAT-3)</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>RISAT-3L</td><td>01-Jan-2014</td><td>01-Jan-2020</td><td>Considered</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>RADARSAT C-1</td><td>01-Aug-2014</td><td>01-Aug-2021</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>Sentinel-3 B</td><td>31-Dec-2014</td><td>30-Apr-2022</td><td>Approved</td><td>SRAL</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>SAOCOM-2A</td><td>01-Jan-2015</td><td>01-Jan-2020</td><td>Planned</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>RADARSAT C-2</td><td>01-Apr-2015</td><td>01-Apr-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>RADARSAT C-3</td><td>01-Jun-2015</td><td>01-Jun-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>ICESat-II</td><td>31-Oct-2015</td><td>31-Oct-2020</td><td>Planned</td><td>ATLAS</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>SAOCOM-2B</td><td>01-Jan-2016</td><td>01-Jan-2021</td><td>Planned</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>HY-3B</td><td>06-Jan-2017</td><td>06-Jan-2022</td><td>Planned</td><td>WSAR</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>Sentinel-3 C</td><td>01-Jan-2020</td><td>01-May-2027</td><td>Considered</td><td>SRAL</td>
+		</tr><tr>
+			<td>Sea-ice sheet topography</td><td>HY-3C</td><td>06-Jan-2022</td><td>06-Jan-2027</td><td>Planned</td><td>WSAR</td>
+		</tr>
+	</table>
+</div>

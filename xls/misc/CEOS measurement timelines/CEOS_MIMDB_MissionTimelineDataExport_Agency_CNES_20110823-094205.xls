@@ -1,0 +1,49 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Mission Name Full</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>&nbsp;</td><td>Diademe 1&amp;2</td><td>15-Feb-1967</td><td>31-Dec-2050</td><td>Currently being flown</td><td>RRA</td>
+		</tr><tr>
+			<td>&nbsp;</td><td>STARLETTE</td><td>06-Feb-1975</td><td>31-Dec-2050</td><td>Currently being flown</td><td>Laser Reflectors</td>
+		</tr><tr>
+			<td>&nbsp;</td><td>STELLA</td><td>30-Sep-1993</td><td>31-Dec-2050</td><td>Currently being flown</td><td>Laser Reflectors</td>
+		</tr><tr>
+			<td>Satellite Pour l'Observation de la Terre - 4</td><td>SPOT-4</td><td>24-Mar-1998</td><td>01-Jun-2013</td><td>Currently being flown</td><td>HRVIR, VEGETATION, DORIS (SPOT)</td>
+		</tr><tr>
+			<td>Odin</td><td>Odin</td><td>20-Feb-2001</td><td>31-Dec-2012</td><td>Currently being flown</td><td>OSIRIS, SMR</td>
+		</tr><tr>
+			<td>Ocean surface topography</td><td>Jason</td><td>07-Dec-2001</td><td>30-Sep-2011</td><td>Currently being flown</td><td>LRA, JMR, DORIS-NG, POSEIDON-2 (SSALT-2), TRSR</td>
+		</tr><tr>
+			<td>Satellite Pour l'Observation de la Terre - 5</td><td>SPOT-5</td><td>04-May-2002</td><td>01-Jun-2014</td><td>Currently being flown</td><td>HRG, VEGETATION, HRS, DORIS-NG (SPOT)</td>
+		</tr><tr>
+			<td>Polarization and Anisotropy of Reflectances for Atmospheric Science coupled with Observations from a LIDAR</td><td>PARASOL</td><td>01-Dec-2004</td><td>30-Jun-2011</td><td>Currently being flown</td><td>POLDER-P</td>
+		</tr><tr>
+			<td>Cloud-Aerosol Lidar and Infrared Pathfinder Satellite Observations</td><td>CALIPSO</td><td>28-Apr-2006</td><td>30-Sep-2011</td><td>Currently being flown</td><td>WFC, IIR, CALIOP</td>
+		</tr><tr>
+			<td>Ocean Surface Topography Mission</td><td>OSTM (Jason-2)</td><td>20-Jun-2008</td><td>31-Dec-2013</td><td>Currently being flown</td><td>LRA, JMR, DORIS-NG, POSEIDON-3, AMR, GPSP</td>
+		</tr><tr>
+			<td>Soil Moisture and Ocean Salinity (Earth Explorer Opportunity Mission)</td><td>SMOS</td><td>02-Nov-2009</td><td>02-Nov-2012</td><td>Currently being flown</td><td>MIRAS (SMOS)</td>
+		</tr><tr>
+			<td>&nbsp;</td><td>PICARD</td><td>15-Jun-2010</td><td>01-Dec-2011</td><td>Currently being flown</td><td>SODISM, SOVAP, PREMOS</td>
+		</tr><tr>
+			<td>Megha-Tropiques</td><td>MEGHA-TROPIQUES</td><td>01-Jan-2011</td><td>01-Apr-2015</td><td>Approved</td><td>ScaRaB, SAPHIR, MADRAS, ROSA</td>
+		</tr><tr>
+			<td>&nbsp;</td><td>Pleiades 1</td><td>31-Mar-2011</td><td>31-Mar-2016</td><td>Approved</td><td>HiRI</td>
+		</tr><tr>
+			<td>Satellite with ARgos and ALtiKa</td><td>SARAL</td><td>01-Oct-2011</td><td>01-Oct-2013</td><td>Approved</td><td>ARGOS, AltiKa</td>
+		</tr><tr>
+			<td>Earth's Magnetic Field and Environment Explorers; </td><td>Swarm</td><td>17-Jan-2012</td><td>17-May-2016</td><td>Approved</td><td>Laser Reflectors (ESA), ASM, VFM, STR, EFI, ACC, GPS Receiver (Swarm)</td>
+		</tr><tr>
+			<td>&nbsp;</td><td>Pleiades 2</td><td>31-Mar-2012</td><td>31-Mar-2017</td><td>Approved</td><td>HiRI</td>
+		</tr><tr>
+			<td>Vegetation and Environment monitoring on a New Micro-Satellite</td><td>VENUS</td><td>31-Jan-2013</td><td>31-Jan-2016</td><td>Approved</td><td>VSC</td>
+		</tr><tr>
+			<td>Methane Remote Sensing LIDAR Mission </td><td>D/F Climate Mission</td><td>01-Jan-2014</td><td>01-Jan-2017</td><td>Planned</td><td>IPDA LIDAR</td>
+		</tr><tr>
+			<td>Global Precipitation Measurement Satellite</td><td>GPM-Br</td><td>01-Dec-2016</td><td>01-Dec-2020</td><td>Planned</td><td>RADIOMETRO, LIS, DCS</td>
+		</tr><tr>
+			<td>Surface Water Ocean Topography</td><td>SWOT</td><td>01-Jan-2020</td><td>01-Jan-2023</td><td>Considered</td><td>CO Sensor (ASCENDS), Ka-band Radar INterferometer (KaRIN)</td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,85 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Sea-ice type</td><td>ERS-2</td><td>21-Apr-1995</td><td>30-Jun-2011</td><td>Currently being flown</td><td>AMI/SAR/Image, AMI/Scatterometer</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>RADARSAT-1</td><td>04-Nov-1995</td><td>31-Mar-2012</td><td>Currently being flown</td><td>SAR (RADARSAT)</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Envisat</td><td>01-Mar-2002</td><td>31-Dec-2013</td><td>Currently being flown</td><td>ASAR, ASAR (image mode)</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>ALOS</td><td>24-Jan-2006</td><td>01-Sep-2013</td><td>Currently being flown</td><td>PALSAR</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Metop-A</td><td>19-Oct-2006</td><td>30-Apr-2012</td><td>Currently being flown</td><td>ASCAT</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>COSMO-SkyMed 1</td><td>08-Jun-2007</td><td>08-Jun-2014</td><td>Currently being flown</td><td>SAR 2000</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>TerraSAR-X</td><td>15-Jun-2007</td><td>31-Dec-2012</td><td>Currently being flown</td><td>X-Band SAR</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>COSMO-SkyMed 2</td><td>09-Dec-2007</td><td>09-Dec-2014</td><td>Currently being flown</td><td>SAR 2000</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>RADARSAT-2</td><td>14-Dec-2007</td><td>17-Apr-2015</td><td>Currently being flown</td><td>SAR (RADARSAT-2)</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>COSMO-SkyMed 3</td><td>27-Oct-2008</td><td>27-Oct-2015</td><td>Currently being flown</td><td>SAR 2000</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Meteor-M N1</td><td>18-Sep-2009</td><td>18-Sep-2014</td><td>Currently being flown</td><td>BRLK</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>TanDEM-X</td><td>21-Jun-2010</td><td>31-Dec-2015</td><td>Currently being flown</td><td>X-Band SAR</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>COSMO-SkyMed 4</td><td>30-Oct-2010</td><td>15-Oct-2017</td><td>Approved</td><td>SAR 2000</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Meteor-M N2</td><td>01-Jul-2011</td><td>01-Jul-2016</td><td>Approved</td><td>BRLK</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>NPP</td><td>23-Sep-2011</td><td>23-Sep-2016</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>HY-3A</td><td>06-Jan-2012</td><td>06-Jan-2017</td><td>Planned</td><td>WSAR</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Metop-B</td><td>02-Apr-2012</td><td>01-May-2017</td><td>Approved</td><td>ASCAT</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Sentinel-1 A</td><td>15-Dec-2012</td><td>15-Mar-2020</td><td>Approved</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Meteor-M N3</td><td>31-Dec-2012</td><td>31-Dec-2017</td><td>Approved</td><td>SAR </td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>ALOS-2</td><td>01-Jan-2013</td><td>01-Jan-2017</td><td>Approved</td><td>L-Band SAR (ALOS-2)</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>TerraSAR-X2</td><td>01-Jan-2013</td><td>01-Jan-2018</td><td>Planned</td><td>X-Band SAR</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Arkon-2M</td><td>31-Dec-2013</td><td>31-Dec-2018</td><td>Planned</td><td>Arkon-2M SAR</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>CSG-1</td><td>30-Apr-2014</td><td>30-Oct-2021</td><td>Approved</td><td>SAR-2000 S.G.</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>RADARSAT C-1</td><td>01-Aug-2014</td><td>01-Aug-2021</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Sentinel-1 B</td><td>15-Dec-2014</td><td>15-Mar-2022</td><td>Approved</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Meteor-MP N1</td><td>31-Dec-2014</td><td>31-Dec-2019</td><td>Planned</td><td>Advanced SAR </td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>JPSS-1</td><td>01-Jan-2015</td><td>01-Jun-2023</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>RADARSAT C-2</td><td>01-Apr-2015</td><td>01-Apr-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>CSG-2</td><td>30-Apr-2015</td><td>30-Oct-2022</td><td>Approved</td><td>SAR-2000 S.G.</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>RADARSAT C-3</td><td>01-Jun-2015</td><td>01-Jun-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>MAPSAR</td><td>03-Dec-2015</td><td>03-Dec-2019</td><td>Planned</td><td>SAR (MAPSAR)</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Meteor-MP N2</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>Advanced SAR </td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Metop-C</td><td>02-Apr-2016</td><td>01-Dec-2021</td><td>Approved</td><td>ASCAT</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Meteor-MP N3</td><td>31-Dec-2016</td><td>31-Dec-2021</td><td>Planned</td><td>Advanced SAR </td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>HY-3B</td><td>06-Jan-2017</td><td>06-Jan-2022</td><td>Planned</td><td>WSAR</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>JPSS-2</td><td>01-Jan-2018</td><td>01-Oct-2026</td><td>Approved</td><td>VIIRS</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Sentinel-1 C</td><td>31-Mar-2019</td><td>30-Jun-2026</td><td>Considered</td><td>C-Band SAR</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>Sentinel-5</td><td>01-Dec-2019</td><td>01-Dec-2026</td><td>Planned</td><td>METimage</td>
+		</tr><tr>
+			<td>Sea-ice type</td><td>HY-3C</td><td>06-Jan-2022</td><td>06-Jan-2027</td><td>Planned</td><td>WSAR</td>
+		</tr>
+	</table>
+</div>

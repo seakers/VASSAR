@@ -1,0 +1,75 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>ERS-2</td><td>21-Apr-1995</td><td>30-Jun-2011</td><td>Currently being flown</td><td>ATSR-2, GOME</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Landsat-7</td><td>15-Apr-1999</td><td>31-Dec-2012</td><td>Currently being flown</td><td>ETM+</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Terra</td><td>18-Dec-1999</td><td>30-Sep-2011</td><td>Currently being flown</td><td>ASTER, MISR</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>NOAA-16</td><td>21-Sep-2000</td><td>31-Dec-2012</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>NMP EO-1</td><td>21-Nov-2000</td><td>30-Sep-2011</td><td>Currently being flown</td><td>ALI, Hyperion</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>PROBA</td><td>22-Oct-2001</td><td>31-Dec-2012</td><td>Currently being flown</td><td>CHRIS</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Envisat</td><td>01-Mar-2002</td><td>31-Dec-2013</td><td>Currently being flown</td><td>AATSR, MERIS, SCIAMACHY</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Aqua</td><td>04-May-2002</td><td>30-Sep-2011</td><td>Currently being flown</td><td>AIRS</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>NOAA-17</td><td>24-Jun-2002</td><td>31-Dec-2014</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Meteosat-8</td><td>13-Aug-2002</td><td>30-Jun-2011</td><td>Currently being flown</td><td>SEVIRI</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>NOAA-18</td><td>20-May-2005</td><td>31-Dec-2015</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Meteosat-9</td><td>21-Dec-2005</td><td>30-Jun-2014</td><td>Currently being flown</td><td>SEVIRI</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Metop-A</td><td>19-Oct-2006</td><td>30-Apr-2012</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>HJ-1A</td><td>06-Sep-2008</td><td>01-Sep-2011</td><td>Currently being flown</td><td>HSI (HJ-1A)</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>FY-2E</td><td>26-Dec-2008</td><td>31-Dec-2011</td><td>Currently being flown</td><td>IVISSR (FY-2)</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>NOAA-19</td><td>04-Feb-2009</td><td>01-Mar-2016</td><td>Currently being flown</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Deimos-1</td><td>29-Jul-2009</td><td>29-Jul-2014</td><td>Currently being flown</td><td>MS</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Meteor-M N1</td><td>18-Sep-2009</td><td>18-Sep-2014</td><td>Currently being flown</td><td>MSU-MR</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Meteor-M N2</td><td>01-Jul-2011</td><td>01-Jul-2016</td><td>Approved</td><td>MSU-MR</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Elektro-L N1</td><td>01-Dec-2011</td><td>01-Dec-2018</td><td>Approved</td><td>MSU-GS</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>FY-2F</td><td>31-Dec-2011</td><td>31-Dec-2016</td><td>Approved</td><td>IVISSR (FY-2)</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Meteosat-10</td><td>31-Jan-2012</td><td>31-Jan-2019</td><td>Approved</td><td>SEVIRI</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Metop-B</td><td>02-Apr-2012</td><td>01-May-2017</td><td>Approved</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>LDCM</td><td>19-Dec-2012</td><td>19-Dec-2017</td><td>Approved</td><td>OLI</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Elektro-L N2</td><td>31-Dec-2012</td><td>31-Dec-2018</td><td>Approved</td><td>MSU-GS</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Meteosat-11</td><td>31-Jan-2014</td><td>31-Jan-2021</td><td>Approved</td><td>SEVIRI</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Elektro-L N3</td><td>31-Dec-2014</td><td>31-Dec-2021</td><td>Planned</td><td>MSU-GS</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Meteor-MP N1</td><td>31-Dec-2014</td><td>31-Dec-2019</td><td>Planned</td><td>Advanced MSU-MR</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Meteor-MP N2</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>Advanced MSU-MR</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Metop-C</td><td>02-Apr-2016</td><td>01-Dec-2021</td><td>Approved</td><td>AVHRR/3</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>MTG-I1 (imaging)</td><td>15-Dec-2016</td><td>15-Jun-2025</td><td>Approved</td><td>FCI</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>Meteor-MP N3</td><td>31-Dec-2016</td><td>31-Dec-2021</td><td>Planned</td><td>Advanced MSU-MR</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>MTG-I2 (imaging)</td><td>15-Jun-2021</td><td>15-Dec-2029</td><td>Approved</td><td>FCI</td>
+		</tr><tr>
+			<td>Short-wave Earth surface bi-directional reflectance</td><td>MTG-I3 (imaging)</td><td>15-Jan-2025</td><td>15-Jul-2033</td><td>Approved</td><td>FCI</td>
+		</tr>
+	</table>
+</div>

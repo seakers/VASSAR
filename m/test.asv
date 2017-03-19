@@ -1,0 +1,11 @@
+(defrule FUZZY::test 
+(declare (salience -5))
+    ?c <- (accumulate (bind ?map (new java.util.HashMap))   ;; initializer
+                ((lambda (?pa ?i) (?map put ?pa ?i)) ?p ?id)
+                 ?map                                        ;; result
+                (REQUIREMENTS::Measurement (Parameter ?p&~nil) (Id ?id)
+                          ))  ;; CE
+    =>
+    
+    (printout t (?c toString) crlf)
+    )

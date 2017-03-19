@@ -1,0 +1,53 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>ERS-2</td><td>21-Apr-1995</td><td>30-Jun-2011</td><td>Currently being flown</td><td>RA</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>RADARSAT-1</td><td>04-Nov-1995</td><td>31-Mar-2012</td><td>Currently being flown</td><td>SAR (RADARSAT)</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>Jason</td><td>07-Dec-2001</td><td>30-Sep-2011</td><td>Currently being flown</td><td>JMR, LRA, TRSR</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>Envisat</td><td>01-Mar-2002</td><td>31-Dec-2013</td><td>Currently being flown</td><td>RA-2</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>GRACE</td><td>17-Mar-2002</td><td>30-Sep-2011</td><td>Currently being flown</td><td>GRACE instrument</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>RADARSAT-2</td><td>14-Dec-2007</td><td>17-Apr-2015</td><td>Currently being flown</td><td>SAR (RADARSAT-2)</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>OSTM (Jason-2)</td><td>20-Jun-2008</td><td>31-Dec-2013</td><td>Currently being flown</td><td>AMR, GPSP, JMR, LRA</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>HY-2A</td><td>01-Jan-2011</td><td>01-Jan-2012</td><td>Planned</td><td>ALT</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>RISAT-1</td><td>25-Mar-2011</td><td>25-Mar-2015</td><td>Approved</td><td>SAR (RISAT)</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>HJ-1C</td><td>31-Dec-2011</td><td>31-Dec-2014</td><td>Approved</td><td>S-Band SAR</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>SAOCOM 1A</td><td>01-Dec-2012</td><td>01-Dec-2017</td><td>Approved</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>Sentinel-3 A</td><td>15-Apr-2013</td><td>15-Aug-2020</td><td>Approved</td><td>SRAL</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>SAOCOM 1B</td><td>01-Jun-2013</td><td>01-Jun-2018</td><td>Approved</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>OCEANSAT-3</td><td>01-Jan-2014</td><td>01-Jan-2019</td><td>Considered</td><td>Altimeter (OCEANSAT-3)</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>RADARSAT C-1</td><td>01-Aug-2014</td><td>01-Aug-2021</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>Sentinel-3 B</td><td>31-Dec-2014</td><td>30-Apr-2022</td><td>Approved</td><td>SRAL</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>SAOCOM-2A</td><td>01-Jan-2015</td><td>01-Jan-2020</td><td>Planned</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>RADARSAT C-2</td><td>01-Apr-2015</td><td>01-Apr-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>RADARSAT C-3</td><td>01-Jun-2015</td><td>01-Jun-2022</td><td>Approved</td><td>SAR (RCM)</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>SAOCOM-2B</td><td>01-Jan-2016</td><td>01-Jan-2021</td><td>Planned</td><td>SAR-L</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>GRACE FO</td><td>31-Dec-2016</td><td>31-Dec-2021</td><td>Approved</td><td>GRACE instrument</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>Sentinel-3 C</td><td>01-Jan-2020</td><td>01-May-2027</td><td>Considered</td><td>SRAL</td>
+		</tr><tr>
+			<td>Ocean dynamic topography</td><td>SWOT</td><td>01-Jan-2020</td><td>01-Jan-2023</td><td>Considered</td><td>Ka-band Radar INterferometer (KaRIN)</td>
+		</tr>
+	</table>
+</div>

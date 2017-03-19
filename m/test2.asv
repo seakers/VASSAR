@@ -1,0 +1,30 @@
+facts = r.listFacts(); % iterator
+
+map = java.util.HashMap;
+while facts.hasNext()
+    f = facts.next();
+    if ~strcmp(f.getDeftemplate,'[deftemplate ORBIT-SELECTION::orbit]')
+        continue
+    end
+    miss = char(f.getSlotValue('in-mission').stringValue(r.getGlobalContext()));
+    var = char(f.getSlotValue('penalty-var').stringValue(r.getGlobalContext()));
+    %str = char(f.getSlotValue('of-instrument').stringValue(r.getGlobalContext()));
+    penalty = r.eval(var).floatValue(r.getGlobalContext());
+    if map.containsKey(miss)
+        pen = map.get(miss);
+        map.put(miss,pen+penalty);
+    else
+        map.put(miss,penalty);
+    end
+end
+
+tmp = map.entrySet.iterator;
+min_penalty = Inf;
+best_orbit = 'none';
+while(tmp.hasNext())
+    n = tmp.next
+    if penalty < min_penalty
+        best_orbit = miss;
+        min_penalty = penalty;
+    end
+end

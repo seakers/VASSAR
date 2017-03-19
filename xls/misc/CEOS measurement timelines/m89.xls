@@ -1,0 +1,53 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>DMSP F-15</td><td>12-Dec-1999</td><td>01-May-2013</td><td>Currently being flown</td><td>SSM</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>SAC-C</td><td>21-Nov-2000</td><td>01-Jan-2012</td><td>Currently being flown</td><td>MMP</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>GRACE</td><td>17-Mar-2002</td><td>30-Sep-2011</td><td>Currently being flown</td><td>GRACE instrument</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>DMSP F-16</td><td>18-Oct-2003</td><td>01-Oct-2011</td><td>Currently being flown</td><td>SSM</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>Resurs DK 1</td><td>15-Jun-2006</td><td>30-Jun-2011</td><td>Currently being flown</td><td>Arina</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>DMSP F-17</td><td>04-Nov-2006</td><td>01-Jun-2013</td><td>Currently being flown</td><td>SSM</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>Meteor-M N1</td><td>18-Sep-2009</td><td>18-Sep-2014</td><td>Currently being flown</td><td>GGAK-M</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>DMSP F-18</td><td>18-Oct-2009</td><td>01-Apr-2014</td><td>Currently being flown</td><td>SSM</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>Meteor-M N2</td><td>01-Jul-2011</td><td>01-Jul-2016</td><td>Approved</td><td>GGAK-M</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>Elektro-L N1</td><td>01-Dec-2011</td><td>01-Dec-2018</td><td>Approved</td><td>GGAK-E</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>Resurs P N1</td><td>31-Dec-2011</td><td>31-Dec-2016</td><td>Planned</td><td>Arina</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>Swarm</td><td>17-Jan-2012</td><td>17-May-2016</td><td>Approved</td><td>EFI, STR, VFM</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>DMSP F-19</td><td>01-Oct-2012</td><td>01-Oct-2017</td><td>Approved</td><td>SSM</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>Elektro-L N2</td><td>31-Dec-2012</td><td>31-Dec-2018</td><td>Approved</td><td>GGAK-E</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>Resurs P N2</td><td>31-Dec-2013</td><td>31-Dec-2018</td><td>Planned</td><td>Arina</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>DMSP F-20</td><td>05-Jun-2014</td><td>01-Jun-2019</td><td>Approved</td><td>SSM</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>Elektro-L N3</td><td>31-Dec-2014</td><td>31-Dec-2021</td><td>Planned</td><td>GGAK-E</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>Meteor-MP N1</td><td>31-Dec-2014</td><td>31-Dec-2019</td><td>Planned</td><td>Advanced GGAK-M</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>GOES-R</td><td>01-Oct-2015</td><td>01-Mar-2025</td><td>Approved</td><td>SEISS</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>Meteor-MP N2</td><td>31-Dec-2015</td><td>31-Dec-2020</td><td>Planned</td><td>Advanced GGAK-M</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>GRACE FO</td><td>31-Dec-2016</td><td>31-Dec-2021</td><td>Approved</td><td>GRACE instrument</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>Meteor-MP N3</td><td>31-Dec-2016</td><td>31-Dec-2021</td><td>Planned</td><td>Advanced GGAK-M</td>
+		</tr><tr>
+			<td>Magnetic field (vector)</td><td>GOES-S</td><td>01-Feb-2017</td><td>01-Oct-2028</td><td>Approved</td><td>SEISS</td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,9 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Measurement Type</th><th scope="col">Mission Name Short</th><th scope="col">Launch Date</th><th scope="col">EOL Date</th><th scope="col">Mission Status</th><th scope="col">Mission Instruments</th>
+		</tr><tr>
+			<td>Atmospheric specific humidity (at surface)</td><td>MAPSAR</td><td>03-Dec-2015</td><td>03-Dec-2019</td><td>Planned</td><td>DCS</td>
+		</tr>
+	</table>
+</div>
