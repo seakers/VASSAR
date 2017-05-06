@@ -43,7 +43,6 @@ struct ArchitectureInfo{
 }
 
 
-
 service VASSARInterface{
 
   /**
