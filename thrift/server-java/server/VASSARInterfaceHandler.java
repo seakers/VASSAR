@@ -42,7 +42,7 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
     
     rbsa.eoss.ArchitectureEvaluator AE = rbsa.eoss.ArchitectureEvaluator.getInstance();
     rbsa.eoss.ArchitectureGenerator AG = rbsa.eoss.ArchitectureGenerator.getInstance();
-    
+    boolean jessInitialized = false;
 
     public void ping() {
       System.out.println("ping()");
@@ -56,44 +56,34 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
         ResultManager RM = ResultManager.getInstance();
         Params params = null;
         String search_clps = "";
-        params = new Params( path, "FUZZY-ATTRIBUTES", "test","normal",search_clps);//FUZZY or CRISP
+        params = new Params(path, "FUZZY-ATTRIBUTES", "test","normal",search_clps);//FUZZY or CRISP
         AE.init(1);        
+        jessInitialized = true;
         return "Jess Initialized";
     }
  
   
-    public ArchitectureInfo eval(String anything){
+    public ArchitectureInfo eval(String bitString){
+        
         // Input a new architecture design
         // There must be 5 orbits. Instrument name is represented by a capital letter, taken from {A,B,C,D,E,F,G,H,I,J,K,L}
-        ArrayList<String> input_arch = new ArrayList<>();
-        String orbit_1 = "ABH"; input_arch.add(orbit_1);
-        String orbit_2 = "KG"; input_arch.add(orbit_2);
-        String orbit_3 = "A"; input_arch.add(orbit_3);
-        String orbit_4 = "ALE"; input_arch.add(orbit_4);
-        String orbit_5 = "BE"; input_arch.add(orbit_5);
+
+        if(!jessInitialized){
+            initJess();
+        }
+
         // Generate a new architecture
-        Architecture architecture = AG.defineNewArch(input_arch);
+        Architecture architecture = AG.defineNewArch(bitString);
 
         // Evaluate the architecture
         Result result = AE.evaluateArchitecture(architecture,"Slow");
-        
-        boolean[] bitString = result.getArch().getBitString();
-        String booleanString = "";
-        for(int i=0;i<bitString.length;i++){
-            if(bitString[i]){
-                booleanString = booleanString + "1";
-            }else{
-                booleanString = booleanString + "0";
-            }
-                    
-        }
         
         // Save the score and the cost
         double cost = result.getCost();
         double science = result.getScience();
         
         System.out.println("Performance Score: " + science + ", Cost: " + cost);
-        return new ArchitectureInfo(science,cost,booleanString);
+        return new ArchitectureInfo(science,cost,bitString);
     }
   
     

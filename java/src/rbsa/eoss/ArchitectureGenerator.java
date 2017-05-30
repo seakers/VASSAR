@@ -339,6 +339,12 @@ public class ArchitectureGenerator {
      //   arch.setEval_mode("DEBUG");
         return arch;
     }
+        
+        
+    public Architecture defineNewArch(String booleanString){
+        return new Architecture(booleanString, 1);        
+    }        
+        
     
     public Architecture defineNewArch(ArrayList<String> input_arch){
         
