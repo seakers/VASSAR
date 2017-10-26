@@ -36,10 +36,13 @@ typedef i32 int
  * in the serialized output if they aren't set.  Note that this requires some
  * manual management in some languages.
  */
-struct ArchitectureInfo{
-  1: double science,
-  2: double cost,
-  3: string booleanString
+ 
+ 
+ 
+struct BinaryInputArchitecture{
+  1: int id,
+  2: list<bool> inputs,
+  3: list<double> outputs
 }
 
 
@@ -53,10 +56,16 @@ service VASSARInterface{
    */
 
    void ping(),
+   
    string initJess(),
-   ArchitectureInfo eval(1:string booleanString),
+   
+   BinaryInputArchitecture eval(1:list<bool> inputs),
+   
    list<string> getOrbitList(),
-   list<string> getInstrumentList()
+   
+   list<string> getInstrumentList(),
+   
+   list<string> getCritique(1:BinaryInputArchitecture arch)
 }
 
 

@@ -24,11 +24,11 @@ package server;
 import rbsa.eoss.Architecture;
 import rbsa.eoss.Result;
 import rbsa.eoss.ResultManager;
+
 import java.util.ArrayList;
+import java.util.List;
 
-
-
-import javaInterface.ArchitectureInfo;
+import javaInterface.BinaryInputArchitecture;
 import javaInterface.VASSARInterface;
 import org.apache.thrift.TException;
 
@@ -40,9 +40,9 @@ import rbsa.eoss.local.Params;
 
 public class VASSARInterfaceHandler implements VASSARInterface.Iface {
     
-    rbsa.eoss.ArchitectureEvaluator AE = rbsa.eoss.ArchitectureEvaluator.getInstance();
-    rbsa.eoss.ArchitectureGenerator AG = rbsa.eoss.ArchitectureGenerator.getInstance();
-    boolean jessInitialized = false;
+    private rbsa.eoss.ArchitectureEvaluator AE = rbsa.eoss.ArchitectureEvaluator.getInstance();
+    private rbsa.eoss.ArchitectureGenerator AG = rbsa.eoss.ArchitectureGenerator.getInstance();
+    private boolean jessInitialized = false;
 
     public void ping() {
       System.out.println("ping()");
@@ -63,13 +63,19 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
     }
  
   
-    public ArchitectureInfo eval(String bitString){
+    public BinaryInputArchitecture eval(List<Boolean> boolList){
         
         // Input a new architecture design
         // There must be 5 orbits. Instrument name is represented by a capital letter, taken from {A,B,C,D,E,F,G,H,I,J,K,L}
 
         if(!jessInitialized){
             initJess();
+        }
+        
+        String bitString = "";
+        for(Boolean b:boolList){
+            if(b) bitString = bitString + "1";
+            else bitString = bitString + "0";
         }
 
         // Generate a new architecture
@@ -81,11 +87,24 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
         // Save the score and the cost
         double cost = result.getCost();
         double science = result.getScience();
+        List<Double> outputs = new ArrayList<>();
+        outputs.add(cost);
+        outputs.add(science);
         
         System.out.println("Performance Score: " + science + ", Cost: " + cost);
-        return new ArchitectureInfo(science,cost,bitString);
+        return new BinaryInputArchitecture(0,boolList,outputs);
     }
-  
+    
+    
+    public List<String> getCritique(BinaryInputArchitecture arch){
+        
+        
+        
+        
+        return new ArrayList<String>();
+    }
+    
+    
     
     public ArrayList<String> getOrbitList(){
         ArrayList<String> orbitList = new ArrayList<>();
@@ -95,6 +114,8 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
         }
         return orbitList;
     }
+    
+    
     public ArrayList<String> getInstrumentList(){
         ArrayList<String> instrumentList = new ArrayList<>();
         String[] list = Params.instrument_list;
