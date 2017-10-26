@@ -18,7 +18,7 @@ import rbsa.eoss.local.Params;
 public class CritiqueGenerator extends GenericTask {
     
     
-    public CritiqueGenerator ( Architecture arch)
+    public CritiqueGenerator (Architecture arch)
     {
         super(arch,"slow");        
     }
@@ -26,7 +26,7 @@ public class CritiqueGenerator extends GenericTask {
     
     public List<String> getCritique() {
 
-        getResource();
+        super.getResource();
         Rete r = res.getRete();
         QueryBuilder qb = res.getQueryBuilder();
         MatlabFunctions m = res.getM();
@@ -80,8 +80,9 @@ public class CritiqueGenerator extends GenericTask {
 
             System.out.println(e.getMessage()+" "+e.getClass()+" "+e.getStackTrace());
         }
-
-
+        
+        super.freeResource();
+        
         return list;
     }
     

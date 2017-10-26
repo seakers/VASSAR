@@ -98,6 +98,7 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
     }
     
     
+    @Override
     public List<String> getCritique(List<Boolean> boolList){
         
         initJess();
@@ -107,6 +108,8 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
             if(b) bitString = bitString + "1";
             else bitString = bitString + "0";
         }
+        
+        System.out.println(bitString);
 
         // Generate a new architecture
         Architecture architecture = AG.defineNewArch(bitString);
@@ -115,10 +118,6 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
         CritiqueGenerator critiquer = new CritiqueGenerator(architecture);
         
         List<String> critique = critiquer.getCritique();
-        
-//        for(int i=0;i<critique.size();i++){
-//            System.out.println(critique.get(i));
-//        }
         
         return critique;
     }
