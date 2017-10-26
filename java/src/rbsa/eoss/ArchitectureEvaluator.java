@@ -19,6 +19,7 @@ import jess.*;
 import rbsa.eoss.GenericTask;
 import java.util.TreeMap;
 import java.util.Map;
+import java.util.List;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -408,8 +409,8 @@ public class ArchitectureEvaluator {
             }
         }
     }
-
-
+     
+    
     public Result evaluateArchitecture(Architecture arch, String mode)
     {
         if(arch.getResult().getScience()==-1){ //not yet evaluated

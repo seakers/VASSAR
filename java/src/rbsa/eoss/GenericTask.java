@@ -38,8 +38,8 @@ import org.bson.Document;
 //import rbsa.eoss.Nto1pair;
 
 public class GenericTask implements Callable {
-    private Architecture arch;
-    private Resource res;
+    protected Architecture arch;
+    protected Resource res;
     private String type;
     private boolean debug;
     private boolean saveRete = false;
@@ -154,6 +154,8 @@ public class GenericTask implements Callable {
         
         return resu;
     }
+    
+    
     private Result evaluatePerformanceFast(Rete r, Architecture arch, QueryBuilder qb, MatlabFunctions m) { 
         Result result = null;
         
@@ -357,7 +359,7 @@ public class GenericTask implements Callable {
         return theresult;
     }
     
-    private void evaluateCost(Rete r, Architecture arch, Result res, QueryBuilder qb, MatlabFunctions m) {
+    protected void evaluateCost(Rete r, Architecture arch, Result res, QueryBuilder qb, MatlabFunctions m) {
         try {
             
             
@@ -431,7 +433,7 @@ public class GenericTask implements Callable {
         //System.out.println("Arch " + arch.toBitString() + ": Science = " + res.getScience() + "; Cost = " + res.getCost());
     }
     
-    private void designSpacecraft(Rete r, Architecture arch, QueryBuilder qb, MatlabFunctions m) {
+    protected void designSpacecraft(Rete r, Architecture arch, QueryBuilder qb, MatlabFunctions m) {
         try {
 
             r.eval("(focus PRELIM-MASS-BUDGET)");
@@ -683,7 +685,7 @@ public class GenericTask implements Callable {
         return result;
     }
    
-    private Result evaluatePerformance(Rete r, Architecture arch, QueryBuilder qb, MatlabFunctions m) {
+    protected Result evaluatePerformance(Rete r, Architecture arch, QueryBuilder qb, MatlabFunctions m) {
         Result result = new Result();
         try {
 
@@ -868,73 +870,6 @@ public class GenericTask implements Callable {
         }
         return result;
     }
-    
-
-
-    
-//    private List<String> criticizePerformance(Rete r, Architecture arch, QueryBuilder qb, MatlabFunctions m) {
-//
-//        Result result = new Result();
-//        
-//        List<String> list = new ArrayList<>();
-//
-//        // Criticize using rules
-//        try {
-//            // First evaluate performance
-//            result = evaluatePerformance(r, arch, qb, m);
-//            
-//            // Criticize performance rules
-//            r.batch(Params.critique_performance_initialize_facts_clp);
-//            r.batch(Params.critique_performance_clp);
-//            r.batch(Params.critique_performance_precalculation_clp);
-//            
-//            r.setFocus("CRITIQUE-PERFORMANCE-PRECALCULATION1");
-//            r.run();
-//            r.setFocus("CRITIQUE-PERFORMANCE-PRECALCULATION2");
-//            r.run();
-//            r.setFocus("CRITIQUE-PERFORMANCE-PRECALCULATION3");
-//            r.run();
-//            r.setFocus("CRITIQUE-PERFORMANCE");
-//            r.run();
-//            
-//            // First evaluate cost
-//            evaluateCost(r, arch, result, qb, m);
-//            
-//            // Criticize cost rules
-//            r.batch(Params.critique_cost_initialize_facts_clp);
-//            r.batch(Params.critique_cost_clp);
-//            r.batch(Params.critique_cost_precalculation_clp);
-//            
-//            r.setFocus("CRITIQUE-COST-PRECALCULATION1");
-//            r.run();
-//            r.setFocus("CRITIQUE-COST-PRECALCULATION2");
-//            r.run();
-//            r.setFocus("CRITIQUE-COST");
-//            r.run();
-//            
-//            //Fetch the results for performance
-//            Vector<String> list1 = new Vector<String>();
-//            list1 = (Vector<String>) r.getGlobalContext().getVariable("*p*").externalAddressValue(null);
-//            
-//            //Fetch the results for cost
-//            Vector<String> list2 = new Vector<String>();
-//            list2 = (Vector<String>) r.getGlobalContext().getVariable("*q*").externalAddressValue(null);
-//            
-//            //Combine results and save to result
-//            list.addAll(list1);
-//            list.addAll(list2);
-//
-//            
-//        } catch(Exception e) {
-//
-//            System.out.println(e.getMessage()+" "+e.getClass()+" "+e.getStackTrace());
-//        }
-//
-//
-//        return list;
-//    }
-    
-    
 
     
 }

@@ -24,6 +24,7 @@ package server;
 import rbsa.eoss.Architecture;
 import rbsa.eoss.Result;
 import rbsa.eoss.ResultManager;
+import rbsa.eoss.CritiqueGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,9 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
     }
   
     public String initJess(){
+        
+        if(jessInitialized) return "Jess already initialized";
+        
         // Set a path to the project folder
         String path = "/Users/bang/workspace/RBSAEOSS-Eval-netbeans";
         
@@ -68,9 +72,7 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
         // Input a new architecture design
         // There must be 5 orbits. Instrument name is represented by a capital letter, taken from {A,B,C,D,E,F,G,H,I,J,K,L}
 
-        if(!jessInitialized){
-            initJess();
-        }
+        initJess();
         
         String bitString = "";
         for(Boolean b:boolList){
@@ -96,12 +98,29 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
     }
     
     
-    public List<String> getCritique(BinaryInputArchitecture arch){
+    public List<String> getCritique(List<Boolean> boolList){
         
+        initJess();
         
+        String bitString = "";
+        for(Boolean b:boolList){
+            if(b) bitString = bitString + "1";
+            else bitString = bitString + "0";
+        }
+
+        // Generate a new architecture
+        Architecture architecture = AG.defineNewArch(bitString);
+
+        // Initialize Critique Generator
+        CritiqueGenerator critiquer = new CritiqueGenerator(architecture);
         
+        List<String> critique = critiquer.getCritique();
         
-        return new ArrayList<String>();
+//        for(int i=0;i<critique.size();i++){
+//            System.out.println(critique.get(i));
+//        }
+        
+        return critique;
     }
     
     

@@ -65,7 +65,7 @@ service VASSARInterface{
    
    list<string> getInstrumentList(),
    
-   list<string> getCritique(1:BinaryInputArchitecture arch)
+   list<string> getCritique(1:list<bool> inputs)
 }
 
 

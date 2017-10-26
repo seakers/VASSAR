@@ -223,12 +223,12 @@ public class Params {
         
         down_selection_rules_clp     = path + "/clp/down_selection_rules_smap.clp";
         adhoc_rules_clp              = path + "/clp/climate_centric_rules.clp";
-        critique_cost_clp   = path + "/clp/critique_cost.clp";
-        critique_performance_clp  = path + "/clp/critique_performance.clp";
-        critique_performance_precalculation_clp  = path + "/clp/critique_performance_precalculation.clp";
-        critique_cost_precalculation_clp = path + "/clp/critique_cost_precalculation.clp";
-        critique_performance_initialize_facts_clp = path + "/clp/critique_performance_initialize_facts.clp";
-        critique_cost_initialize_facts_clp = path + "/clp/critique_cost_initialize_facts.clp";
+        critique_cost_clp   = path + "/clp/critique/critique_cost.clp";
+        critique_performance_clp  = path + "/clp/critique/critique_performance.clp";
+        critique_performance_precalculation_clp  = path + "/clp/critique/critique_performance_precalculation.clp";
+        critique_cost_precalculation_clp = path + "/clp/critique/critique_cost_precalculation.clp";
+        critique_performance_initialize_facts_clp = path + "/clp/critique/critique_performance_initialize_facts.clp";
+        critique_cost_initialize_facts_clp = path + "/clp/critique/critique_cost_initialize_facts.clp";
         
         // Metrics for utility and pareto calculations
         pareto_metrics = new ArrayList<String>();
