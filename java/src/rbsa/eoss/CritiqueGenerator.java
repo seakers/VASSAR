@@ -38,7 +38,7 @@ public class CritiqueGenerator extends GenericTask {
         try {
             // First evaluate performance
             Result result = super.evaluatePerformance(r, arch, qb, m);
-            
+
             // Criticize performance rules
             r.batch(Params.critique_performance_initialize_facts_clp);
             r.batch(Params.critique_performance_clp);
@@ -77,12 +77,12 @@ public class CritiqueGenerator extends GenericTask {
             list.addAll(list2);
 
         } catch(Exception e) {
-
+            
+            System.out.println("Exc in generating a critique");
             System.out.println(e.getMessage()+" "+e.getClass()+" "+e.getStackTrace());
         }
         
         super.freeResource();
-        
         return list;
     }
     

@@ -54,7 +54,7 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
         if(jessInitialized) return "Jess already initialized";
         
         // Set a path to the project folder
-        String path = "/Users/bang/workspace/RBSAEOSS-Eval-netbeans";
+        String path = "/Users/bang/workspace/daphne/VASSAR";
         
         // Initialization
         ResultManager RM = ResultManager.getInstance();
