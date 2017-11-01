@@ -14,11 +14,10 @@ public class ResourcePool
 {
     private Stack<Resource> pool;
     
-    public ResourcePool( int numCPU )
-    {
-        pool = new Stack<Resource>();
+    public ResourcePool(int numCPU) {
+        pool = new Stack<>();
         
-        for (int i = 0; i < numCPU; i++ ) {
+        for (int i = 0; i < numCPU; i++) {
             Resource res = new Resource();
             
             pool.push( res );
@@ -26,15 +25,16 @@ public class ResourcePool
         }
     }
     
-    public synchronized void freeResource( Resource res ) {
+    public synchronized void freeResource(Resource res) {
         if(!pool.contains(res))
-            pool.push( res );
+            pool.push(res);
     }
     
     public synchronized Resource getResource() {
         if(!pool.empty()) {
             return pool.pop();
-        } else {
+        }
+        else {
             System.out.println("getResource: No available resources");
             return null;
         }

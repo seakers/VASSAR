@@ -16,23 +16,20 @@ public class Resource {
     private QueryBuilder qb;
     private MatlabFunctions m;
     
-    public Resource()
-    {
+    public Resource() {
         r = new Rete();
-        qb = new QueryBuilder( r );
+        qb = new QueryBuilder(r);
         m = new MatlabFunctions(this);
         r.addUserfunction(m);
         
-        JessInitializer.getInstance().initializeJess( r, qb, m );
+        JessInitializer.getInstance().initializeJess(r, qb, m);
     }
     
-    public Rete getRete()
-    {
+    public Rete getRete() {
         return r;
     }
 
-    public QueryBuilder getQueryBuilder()
-    {
+    public QueryBuilder getQueryBuilder() {
         return qb;
     }
 

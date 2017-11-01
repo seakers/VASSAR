@@ -40,6 +40,7 @@ import org.bson.Document;
 public class GenericTask implements Callable {
     protected Architecture arch;
     protected Resource res;
+    protected Params params;
     private String type;
     private boolean debug;
     private boolean saveRete = false;
@@ -47,8 +48,8 @@ public class GenericTask implements Callable {
 //    DBManagement dbm;
 
     
-    public GenericTask ( Architecture arch , String type)
-    {
+    public GenericTask(Architecture arch, String type) {
+        params = Params.getInstance();
         this.arch = arch;
         this.type = type;
         //if (type.equalsIgnoreCase("Slow") || arch.getEval_mode().equalsIgnoreCase("DEBUG"))
@@ -57,8 +58,9 @@ public class GenericTask implements Callable {
         else
             debug = false;
     }
-    public GenericTask ( Architecture arch , String type, boolean saveRete)
-    {
+
+    public GenericTask(Architecture arch, String type, boolean saveRete) {
+        params = Params.getInstance();
         this.saveRete = saveRete;
         this.arch = arch;
         this.type = type;
@@ -68,8 +70,9 @@ public class GenericTask implements Callable {
         else
             debug = false;
     }
-    public GenericTask ( Architecture arch , String type, int archID)
-    {
+
+    public GenericTask ( Architecture arch , String type, int archID) {
+        params = Params.getInstance();
         this.archID = archID;
         this.arch = arch;
         this.type = type;
@@ -88,6 +91,7 @@ public class GenericTask implements Callable {
         ArchitectureEvaluator.getInstance().getResourcePool().freeResource( res );
         res = null;
     }
+
     @Override
     public Result call()
     {   //System.out.println("Evaluating Arch " + arch.toBitString() + " nsats = " + arch.getNsats() + " ... " );
@@ -104,7 +108,7 @@ public class GenericTask implements Callable {
         MatlabFunctions m = res.getM();
         Result resu = new Result();
 //        dbm = DBManagement.getInstance();
-        try{
+        try {
             if (type.equalsIgnoreCase("Fast")) {
                 resu = evaluatePerformanceFast(r, arch,qb, m);
                 r.eval("(reset)");
@@ -180,7 +184,7 @@ public class GenericTask implements Callable {
                 String orbit = Params.orbit_list[i];
                 if (subset.length>0) {
                     String key = arch.getNsats() + " x " + orbit + "@" + m.StringArraytoStringWithSpaces(subset);
-                    ArrayList<Fact> measurements = (ArrayList<Fact>) Params.capabilities.get(key);
+                    ArrayList<Fact> measurements = (ArrayList<Fact>) params.capabilities.get(key);
                     for(int j = 0;j<measurements.size();j++) {
                         Fact tmp = (Fact) measurements.get(j).clone();
                         r.assertString(tmp.toString());
@@ -189,7 +193,7 @@ public class GenericTask implements Callable {
             }
             
             //Revisit times
-            Iterator parameters = Params.parameter_list.iterator();
+            Iterator parameters = params.parameter_list.iterator();
             while (parameters.hasNext()) {
                 String param = "\"" + (String)parameters.next() + "\"";
                 Value v = r.eval("(update-fovs " + param + " (create$ " + m.StringArraytoStringWithSpaces(Params.orbit_list) + "))");
@@ -202,7 +206,7 @@ public class GenericTask implements Callable {
                     }
                     String key = arch.getNsats() + " x " + m.StringArraytoStringWith(fovs,"  ");
                                         
-                    HashMap therevtimes = (HashMap) Params.revtimes.get(key); //key: 'Global' or 'US', value Double
+                    HashMap therevtimes = (HashMap) params.revtimes.get(key); //key: 'Global' or 'US', value Double
                     String call = "(assert (ASSIMILATION2::UPDATE-REV-TIME (parameter " +  param + ") (avg-revisit-time-global# " + therevtimes.get("Global") + ") "
                             + "(avg-revisit-time-US# " + therevtimes.get("US") + ")))";
                     r.eval(call);
@@ -225,21 +229,21 @@ public class GenericTask implements Callable {
             r.setFocus( "SYNERGIES-ACROSS-ORBITS" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.setFocus( "FUZZY-REQUIREMENTS" );
             else
                 r.setFocus( "REQUIREMENTS" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.setFocus( "FUZZY-AGGREGATION" );
             else
                 r.setFocus( "AGGREGATION" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES"))) 
+            if ((params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 result = aggregate_performance_score_facts(r, m, qb);
-             else if ((Params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-CASES")))
+             else if ((params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-CASES")))
                 result = aggregate_performance_score(r);
             
 
@@ -266,7 +270,7 @@ public class GenericTask implements Callable {
            ArrayList<Fact> vals = qb.makeQuery("AGGREGATION::VALUE");
            Fact val = vals.get(0);
            science = val.getSlotValue("satisfaction").floatValue(r.getGlobalContext());
-           if (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES") || Params.req_mode.equalsIgnoreCase("FUZZY-CASES"))
+           if (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES") || params.req_mode.equalsIgnoreCase("FUZZY-CASES"))
                fuzzy_science = (FuzzyValue)val.getSlotValue("fuzzy-value").javaObjectValue(r.getGlobalContext());
            panel_scores = m.JessList2ArrayList(val.getSlotValue("sh-scores").listValue(r.getGlobalContext()),r);
            
@@ -304,11 +308,11 @@ public class GenericTask implements Callable {
         double science = 0.0;
         double cost = 0.0;
         //Subobjective scores
-        for (int p = 0;p<Params.npanels;p++) {
-            int nob = Params.num_objectives_per_panel.get(p);
+        for (int p = 0;p<params.npanels;p++) {
+            int nob = params.num_objectives_per_panel.get(p);
             ArrayList subobj_scores_p = new ArrayList(nob);
             for (int o=0;o<nob;o++) {
-                ArrayList subobj_p = (ArrayList)Params.subobjectives.get(p);
+                ArrayList subobj_p = (ArrayList)params.subobjectives.get(p);
                 ArrayList subobj_o = (ArrayList)subobj_p.get(o);
                 int nsubob = subobj_o.size();
                 ArrayList subobj_scores_o = new ArrayList(nsubob);
@@ -326,11 +330,11 @@ public class GenericTask implements Callable {
         }
         
         //Objective scores
-        for (int p = 0;p<Params.npanels;p++) {
-            int nob = Params.num_objectives_per_panel.get(p);
+        for (int p = 0;p<params.npanels;p++) {
+            int nob = params.num_objectives_per_panel.get(p);
             ArrayList obj_scores_p = new ArrayList(nob);
             for (int o=0;o<nob;o++) {
-                ArrayList subobj_weights_p = (ArrayList) Params.subobj_weights.get(p);
+                ArrayList subobj_weights_p = (ArrayList) params.subobj_weights.get(p);
                 ArrayList subobj_weights_o = (ArrayList)subobj_weights_p.get(o);
                 ArrayList subobj_scores_p = (ArrayList) subobj_scores.get(p);
                 ArrayList subobj_scores_o = (ArrayList)subobj_scores_p.get(o);
@@ -343,15 +347,15 @@ public class GenericTask implements Callable {
             obj_scores.add(obj_scores_p);
         }
         //Stakeholder and final score
-        for (int p = 0;p<Params.npanels;p++) {
+        for (int p = 0;p<params.npanels;p++) {
             try {
-                panel_scores.add(Result.sumProduct((ArrayList)Params.obj_weights.get(p),(ArrayList)obj_scores.get(p)));
+                panel_scores.add(Result.sumProduct((ArrayList)params.obj_weights.get(p),(ArrayList)obj_scores.get(p)));
             }catch(Exception e) {
                 System.out.println(e.getMessage());
             }
         }
         try{
-            science = Result.sumProduct(Params.panel_weights,panel_scores);
+            science = Result.sumProduct(params.panel_weights,panel_scores);
         }catch(Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -384,7 +388,7 @@ public class GenericTask implements Callable {
             r.eval("(focus LV-SELECTION3)");
             r.eval("(run)");
 
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.eval("(focus FUZZY-COST-ESTIMATION)");
             else
             r.eval("(focus COST-ESTIMATION)");
@@ -396,7 +400,7 @@ public class GenericTask implements Callable {
             ArrayList<Fact> missions = qb.makeQuery("MANIFEST::Mission");
             for (int i = 0;i<missions.size();i++)  {
                 cost = cost + missions.get(i).getSlotValue("lifecycle-cost#").floatValue(r.getGlobalContext());
-                if (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES") || Params.req_mode.equalsIgnoreCase("FUZZY-CASES"))
+                if (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES") || params.req_mode.equalsIgnoreCase("FUZZY-CASES"))
                     fzcost = fzcost.add((FuzzyValue)missions.get(i).getSlotValue("lifecycle-cost").javaObjectValue(r.getGlobalContext()));
             }
 
@@ -408,9 +412,9 @@ public class GenericTask implements Callable {
 
             ///////////////////////////////////////////////////////////////////
 //            long t0 = System.currentTimeMillis();
-//            r.batch(Params.critique_cost_initialize_facts_clp);
-//            r.batch(Params.critique_cost_clp);
-//            r.batch(Params.critique_cost_precalculation_clp);
+//            r.batch(params.critique_cost_initialize_facts_clp);
+//            r.batch(params.critique_cost_clp);
+//            r.batch(params.critique_cost_precalculation_clp);
 //            
 //            r.setFocus("CRITIQUE-COST-PRECALCULATION1");
 //            r.run();
@@ -529,16 +533,16 @@ public class GenericTask implements Callable {
                      }        
                  }
                  call = call + "(instruments " + payload + ") (lifetime 5) (launch-date 2015) (select-orbit no) " + orb.toJessSlots() + ""
-                         + "(factHistory F" + Params.nof + ")))";
-                 Params.nof++;
+                         + "(factHistory F" + params.nof + ")))";
+                 params.nof++;
 
                  
                  call = call + "(assert (SYNERGIES::cross-registered-instruments " +
                 " (instruments " + payload + 
                 ") (degree-of-cross-registration spacecraft) " +
                 " (platform " + orbit +  " )"
-                         + "(factHistory F" + Params.nof + ")))";
-                 Params.nof++;
+                         + "(factHistory F" + params.nof + ")))";
+                 params.nof++;
                  r.eval(call);  
                 }
          }       
@@ -563,14 +567,14 @@ public class GenericTask implements Callable {
                             String instr = Params.instrument_list[i];
                             String call = "(assert (MANIFEST::Mission (Name " + orbit + "-" + instr + ") ";
                             call = call + "(instruments " + instr + ")  (lifetime 5)  (launch-date 2015) (select-orbit no) " + orb.toJessSlots() + ""
-                                    + "(factHistory " + Params.nof + ")))";
-                            Params.nof++;
+                                    + "(factHistory " + params.nof + ")))";
+                            params.nof++;
                             call = call + "(assert (SYNERGIES::cross-registered-instruments " +
                            " (instruments " + instr  + ") " +
                            " (degree-of-cross-registration spacecraft) " +
                            " (platform " + orbit +  " )"
-                                    + "(factHistory F" + Params.nof + ")))";
-                            Params.nof++;
+                                    + "(factHistory F" + params.nof + ")))";
+                            params.nof++;
                             r.eval(call);  
                         }     
                     }
@@ -584,21 +588,21 @@ public class GenericTask implements Callable {
                 //base mission (N instruments)
                 String call = "(assert (MANIFEST::Mission (Name " + orbit + "_base) ";
                 call = call + "(instruments " + StringUtils.join(base, " ") + ") (lifetime 2) (launch-date 2015) (select-orbit no) " + orb.toJessSlots() + ""
-                        + "(factHistory " + Params.nof + ")))";
-                Params.nof++;
+                        + "(factHistory " + params.nof + ")))";
+                params.nof++;
                 call = call + "(assert (SYNERGIES::cross-registered-instruments " +
                " (instruments " + StringUtils.join(base, " ")  + ") " +
                " (degree-of-cross-registration spacecraft) " +
                " (platform " + orbit +  " )"
-                        + "(factHistory F" + Params.nof + ")))";
-                Params.nof++;
+                        + "(factHistory F" + params.nof + ")))";
+                params.nof++;
                 r.eval(call);  
 
                 //add mission (1 instrument)
                 String call2 = "(assert (MANIFEST::Mission (Name " + orbit + "_added) ";
                 call2 = call2 + "(instruments " + StringUtils.join(add, " ") + ") (lifetime 2) (launch-date 2015) (select-orbit no) " + orb.toJessSlots() + ""
-                        + "(factHistory " + Params.nof + ")))";
-                Params.nof++;
+                        + "(factHistory " + params.nof + ")))";
+                params.nof++;
                 r.eval(call2);
              }
         } catch (Exception e) {
@@ -628,7 +632,7 @@ public class GenericTask implements Callable {
             r.run();
             
             //Revisit times
-            Iterator parameters = Params.measurements_to_instruments.keySet().iterator();
+            Iterator parameters = params.measurements_to_instruments.keySet().iterator();
             while (parameters.hasNext()) {
                 String param = (String)parameters.next();
                 Value v = r.eval("(update-fovs " + param + " (create$ " + m.StringArraytoStringWithSpaces(Params.orbit_list) + "))");
@@ -640,11 +644,11 @@ public class GenericTask implements Callable {
                         fovs[i] = String.valueOf(tmp);
                     }
                     String key = arch.getNsats() + " x " + m.StringArraytoStringWith(fovs,"  ");
-                    HashMap therevtimes = (HashMap) Params.revtimes.get(key); //key: 'Global' or 'US', value Double
+                    HashMap therevtimes = (HashMap) params.revtimes.get(key); //key: 'Global' or 'US', value Double
                     String call = "(assert (ASSIMILATION2::UPDATE-REV-TIME (parameter " +  param + ") (avg-revisit-time-global# " + therevtimes.get("Global") + ") "
                             + "(avg-revisit-time-US# " + therevtimes.get("US") + ")"
-                            + "(factHistory " + Params.nof + ")))";
-                    Params.nof++;
+                            + "(factHistory " + params.nof + ")))";
+                    params.nof++;
                     r.eval(call);
                 } 
                 
@@ -658,21 +662,21 @@ public class GenericTask implements Callable {
             r.setFocus( "FUZZY" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.setFocus( "FUZZY-REQUIREMENTS" );
             else
                 r.setFocus( "REQUIREMENTS" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.setFocus( "FUZZY-AGGREGATION" );
             else
                 r.setFocus( "AGGREGATION" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES"))) {
+            if ((params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES"))) {
                 result = aggregate_performance_score_facts(r, m, qb);
-            } else if ((Params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-CASES"))){
+            } else if ((params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-CASES"))){
                 result = aggregate_performance_score(r);
             }
             
@@ -728,7 +732,7 @@ public class GenericTask implements Callable {
             
             int javaAssertedFactID = 1;
             
-            Iterator parameters = Params.measurements_to_instruments.keySet().iterator();
+            Iterator parameters = params.measurements_to_instruments.keySet().iterator();
             while (parameters.hasNext()) {
                 String param = (String)parameters.next();
                 Value v = r.eval("(update-fovs " + param + " (create$ " + m.StringArraytoStringWithSpaces(Params.orbit_list) + "))");
@@ -741,7 +745,7 @@ public class GenericTask implements Callable {
                     }
                     String key = arch.getNsats() + " x " + m.StringArraytoStringWith(fovs,"  ");
                     
-                    HashMap therevtimes = (HashMap) Params.revtimes.get(key); //key: 'Global' or 'US', value Double
+                    HashMap therevtimes = (HashMap) params.revtimes.get(key); //key: 'Global' or 'US', value Double
                     String call = "(assert (ASSIMILATION2::UPDATE-REV-TIME (parameter " +  param + ") (avg-revisit-time-global# " + therevtimes.get("Global") + ") "
                             + "(avg-revisit-time-US# " + therevtimes.get("US") + ")"
                             + "(factHistory J" + javaAssertedFactID + ")))";
@@ -766,21 +770,21 @@ public class GenericTask implements Callable {
             r.setFocus( "SYNERGIES-ACROSS-ORBITS" );
             r.run();
 
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.setFocus( "FUZZY-REQUIREMENTS" );
             else
                 r.setFocus( "REQUIREMENTS" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.setFocus( "FUZZY-AGGREGATION" );
             else
                 r.setFocus( "AGGREGATION" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES"))) {
+            if ((params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES"))) {
                 result = aggregate_performance_score_facts(r, m, qb);
-            } else if ((Params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-CASES"))){
+            } else if ((params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-CASES"))){
                 result = aggregate_performance_score(r);
             }
             
@@ -793,9 +797,9 @@ public class GenericTask implements Callable {
             
             long t0 = System.currentTimeMillis();
 
-            r.batch(Params.critique_performance_initialize_facts_clp);
-            r.batch(Params.critique_performance_clp);
-            r.batch(Params.critique_performance_precalculation_clp);
+            r.batch(params.critique_performance_initialize_facts_clp);
+            r.batch(params.critique_performance_clp);
+            r.batch(params.critique_performance_precalculation_clp);
 
             r.setFocus("CRITIQUE-PERFORMANCE-PRECALCULATION1");
             r.run();

@@ -38,7 +38,8 @@ import rbsa.eoss.local.Params;
  * @author Bang
  */
 public class DBManagement {
-    
+
+    private Params params;
     private MongoClient mongoClient;
 //    private String dbName = "EOSS_eval_data";
     private String dbName = "rbsa_eoss";
@@ -48,32 +49,34 @@ public class DBManagement {
     private static DBManagement instance = null;
 
     
-    public DBManagement(){
-        try{            
-//            mongoClient = new MongoClient( "localhost" , 27017 );
+    public DBManagement() {
+        try {
+            params = Params.getInstance();
+            // mongoClient = new MongoClient( "localhost" , 27017 );
             MongoClientURI uri = new MongoClientURI("mongodb://bang:qkdgustmd@ds145828.mlab.com:45828/rbsa_eoss");
             mongoClient = new MongoClient(uri);
             
             dataCollectionNames = new ArrayList<>();
-        }catch(Exception e){
+        }
+        catch(Exception e) {
             System.out.println(e.getMessage());
         }
     }    
     
     public DBManagement(String dbName){
-        try{            
+        try {
+            params = Params.getInstance();
             this.dbName = dbName;
             mongoClient = new MongoClient( "localhost" , 27017 );
             dataCollectionNames = new ArrayList<>();
-        }catch(Exception e){
+        }
+        catch(Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static DBManagement getInstance()
-    {
-        if( instance == null ) 
-        {
+    public static DBManagement getInstance() {
+        if(instance == null) {
             instance = new DBManagement();
         }
         return instance;
@@ -253,9 +256,9 @@ public class DBManagement {
     
     public void encodeRules(){
         
-        HashMap<Integer,String> rules_id_to_name = Params.rules_IDtoName_map;
-        HashMap<String,Integer> rules_name_to_id = Params.rules_NametoID_Map;
-        HashMap<String,Defrule> rules = Params.rules_defrule_map;
+        HashMap<Integer,String> rules_id_to_name = params.rules_IDtoName_map;
+        HashMap<String,Integer> rules_name_to_id = params.rules_NametoID_Map;
+        HashMap<String,Defrule> rules = params.rules_defrule_map;
         
         MongoDatabase Mdb = mongoClient.getDatabase(dbName);
         MongoCollection col = Mdb.getCollection(this.ruleCollectionName);

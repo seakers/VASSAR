@@ -28,8 +28,18 @@ import java.util.Collections;
  * @author Marc
  */
 public class ArchitectureEvaluator {
+
+    public static ArchitectureEvaluator getInstance() {
+        if(instance == null) {
+            instance = new ArchitectureEvaluator();
+        }
+        return instance;
+    }
     
     private static ArchitectureEvaluator instance = null;
+
+    private Params params;
+
     private ArrayList<Architecture> population;
     private ResourcePool rp;
     private Resource searchRes;
@@ -44,51 +54,76 @@ public class ArchitectureEvaluator {
     private HashMap<String,NDSM> dsm_map;
     private HashMap<ArrayList<String>, HashMap<String,Double>> scores;
     private HashMap<ArrayList<String>, HashMap<String,ArrayList<Double>>> subobj_scores;
-    private boolean saveRete=false;
+    private boolean saveRete = false;
     
-    private ArchitectureEvaluator () {
-        results = new Stack<Result>();
+    private ArchitectureEvaluator() {
+        reset();
+    }
+
+    public void init(int n) {
+        numCPU = n;
+        rp = new ResourcePool(numCPU);
+//        searchRes = new Resource();
+        tpe = Executors.newFixedThreadPool(numCPU);
+        if (!params.run_mode.equalsIgnoreCase("update_dsms")) {
+            setDsm_map(params.all_dsms);
+        }
+        if (!params.run_mode.equalsIgnoreCase("update_capabilities")) {
+            setCapabilities(params.capabilities);
+        }
+        if (!params.run_mode.equalsIgnoreCase("update_scores")) {
+            setScores(params.scores);
+            setSubobj_scores(params.subobj_scores);
+        }
+        results.clear();
+        futures.clear();
+//        for (String instr:Params.instrument_list) {
+//            Fact f = (Fact)searchRes.getQueryBuilder().getPrecomputed_query("DATABASE::Instrument").get(instr);
+//            try{
+//                if(f.getSlotValue("Technology-Readiness-Level").intValue(null)<5)
+//                    lowTRLinstruments.add(instr);
+//            }catch(JessException e) {
+//                e.printStackTrace();
+//            }
+//        }
+    }
+
+    public void reset() {
+        params = Params.getInstance();
+        results = new Stack<>();
         searchRes = null;
-        futures = new ArrayList<Future<Result>>();
+        futures = new ArrayList<>();
         population = null;
         rp = null;
         tpe = null;
         numCPU = 0;
         capabilities = null;
-        lowTRLinstruments = new ArrayList<String>();
-       // population_size = 0;
-        dsm_map = new HashMap<String,NDSM>();
-        scores = new HashMap<ArrayList<String>, HashMap<String,Double>>();
-        subobj_scores = new  HashMap<ArrayList<String>, HashMap<String,ArrayList<Double>>>();
+        lowTRLinstruments = new ArrayList<>();
+        // population_size = 0;
+        dsm_map = new HashMap<>();
+        scores = new HashMap<>();
+        subobj_scores = new HashMap<>();
     }
+
     public void clear() {
-        results = new Stack<Result>();
-        searchRes = null;
-        futures = new ArrayList<Future<Result>>();
-        lowTRLinstruments = new ArrayList<String>();
-        population = null;
-        rp = null;
         tpe.shutdownNow();
-        tpe = null;
-        numCPU = 0;
-        capabilities = null;
-       // population_size = 0;
-        dsm_map = new HashMap<String,NDSM>();
-        scores = new HashMap<ArrayList<String>, HashMap<String,Double>>();
-        subobj_scores = new  HashMap<ArrayList<String>, HashMap<String,ArrayList<Double>>>();
+        reset();
     }
+
     public ExecutorService getTpe() {
         return tpe;
-    
     }
+
     public NDSM getDSM(String desc, String orb) {
         String key = desc + "@" + orb;
         return dsm_map.get(key);
     }
+
     public HashMap<String,Double> getAllOrbitScores(ArrayList<String> instruments) {
         Collections.sort(instruments);
         return scores.get(instruments);
     }
+
     public HashMap<String,ArrayList<Double>> getAllOrbitSubobjScores(ArrayList<String> instruments) {
         Collections.sort(instruments);
         HashMap<String,ArrayList<Double>> ret = subobj_scores.get(instruments);
@@ -100,10 +135,12 @@ public class ArchitectureEvaluator {
     public HashMap<ArrayList<String>, HashMap<String,Double>> getScores() {
         return scores;
     }
+
     public Double getScore(ArrayList<String> instruments,String orbit) {
         return getAllOrbitScores(instruments).get(orbit);
     }
-    public void setScore(ArrayList<String> instruments,String orbit,Double score) {
+
+    public void setScore(ArrayList<String> instruments, String orbit, Double score) {
         Collections.sort(instruments);
         HashMap<String,Double> hmap =  getAllOrbitScores(instruments);
         if(hmap == null) {
@@ -114,7 +151,8 @@ public class ArchitectureEvaluator {
         if(hmap.get(orbit) == null)
             hmap.put(orbit,score);
     }
-    public ArrayList<Double> getSubobjScores(ArrayList<String> instruments,String orbit) {
+
+    public ArrayList<Double> getSubobjScores(ArrayList<String> instruments, String orbit) {
         Collections.sort(instruments);
         ArrayList<Double> ret;
         ret = getAllOrbitSubobjScores(instruments).get(orbit);
@@ -123,7 +161,8 @@ public class ArchitectureEvaluator {
         }
         return ret;
     }
-    public void setSubobjScores(ArrayList<String> instruments,String orbit,ArrayList<Double> scores) {
+
+    public void setSubobjScores(ArrayList<String> instruments, String orbit, ArrayList<Double> scores) {
         Collections.sort(instruments);
         HashMap<String,ArrayList<Double>> hmap =  getAllOrbitSubobjScores(instruments);
         if(hmap == null) {
@@ -134,8 +173,8 @@ public class ArchitectureEvaluator {
         if(hmap.get(orbit) == null)
             hmap.put(orbit,scores);
     }
+
     public void recomputeScores(int dim) {
-        
         ICombinatoricsVector<String> originalVector = Factory.createVector(Params.instrument_list);
         Generator<String> gen = Factory.createSimpleCombinationGenerator(originalVector, dim);
         Iterator it = gen.iterator();
@@ -170,6 +209,7 @@ public class ArchitectureEvaluator {
             }
         }
     }
+
     private ArrayList<String> combin2ArrayList(ICombinatoricsVector<String> combin) {
         int n = combin.getSize();
         ArrayList<String> thepayloads = new ArrayList<String>();
@@ -283,7 +323,8 @@ public class ArchitectureEvaluator {
                 System.out.println(e.getMessage());
             }
         }
-    } 
+    }
+
     public HashMap<String, NDSM> getDsm_map() {
         return dsm_map;
     }
@@ -304,49 +345,11 @@ public class ArchitectureEvaluator {
         this.capabilities = capabilities;
     }
     
-    public static ArchitectureEvaluator getInstance()
-    {
-        if( instance == null ) 
-        {
-            instance = new ArchitectureEvaluator();
-        }
-        return instance;
-    }
-    
-    public void init(int n) {
-        
-        numCPU = n;
-        rp = new ResourcePool( numCPU );
-//        searchRes = new Resource();
-        tpe = Executors.newFixedThreadPool(numCPU);
-        if (!Params.run_mode.equalsIgnoreCase("update_dsms")) {
-            setDsm_map(Params.all_dsms);
-        }
-        if (!Params.run_mode.equalsIgnoreCase("update_capabilities")) {
-            setCapabilities(Params.capabilities);
-        }
-        if (!Params.run_mode.equalsIgnoreCase("update_scores")) {
-            setScores(Params.scores);
-            setSubobj_scores(Params.subobj_scores);
-        }
-        results.clear();
-        futures.clear();
-//        for (String instr:Params.instrument_list) {
-//            Fact f = (Fact)searchRes.getQueryBuilder().getPrecomputed_query("DATABASE::Instrument").get(instr);
-//            try{
-//                if(f.getSlotValue("Technology-Readiness-Level").intValue(null)<5)
-//                    lowTRLinstruments.add(instr);
-//            }catch(JessException e) {
-//                e.printStackTrace();
-//            }
-//        }
-    }
-    
     public void setScores (HashMap<ArrayList<String>, HashMap<String,Double>> scores) {
         this.scores = scores;
     }
-    public void clearResults()
-    {
+
+    public void clearResults() {
         //rp = new ResourcePool( numCPU );
         //ArrayBlockingQueue<Runnable> taskList = new ArrayBlockingQueue( population_size );
         //tpe = new ThreadPoolExecutor( numCPU, numCPU, 0, TimeUnit.MILLISECONDS, taskList );
@@ -354,6 +357,7 @@ public class ArchitectureEvaluator {
         results.clear();
         futures.clear();
     }
+
     public void precomputeCapabilities() {
         capabilities = new HashMap<String,ArrayList<Fact>>();
         population = ArchitectureGenerator.getInstance().generatePrecomputedPopulation();
@@ -364,7 +368,7 @@ public class ArchitectureEvaluator {
             
         }
        int it = 0;
-        for (Future<Result> future:futures){
+        for (Future<Result> future:futures) {
             try {
                 Result resu = future.get(); //Do something with the results..
                 String key = resu.getArch().getKey();
@@ -373,20 +377,17 @@ public class ArchitectureEvaluator {
                 ArchitectureEvaluator.getInstance().pushResult(resu);
                 System.out.println(it++);
                 // Add a quality check to see if science < 1 and arch is not empty. Push only if it passes quality control
-            }catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-        
     }
 
     public ArrayList<String> getLowTRLinstruments() {
         return lowTRLinstruments;
     }
-            
-             
-     public void evaluatePopulation()
-    {
+
+    public void evaluatePopulation() {
         //ArrayList<Result> results = new ArrayList<Result>();
         for( int i = 0; i < population.size(); i++ ) {
             GenericTask t;
@@ -409,10 +410,8 @@ public class ArchitectureEvaluator {
             }
         }
     }
-     
     
-    public Result evaluateArchitecture(Architecture arch, String mode)
-    {
+    public Result evaluateArchitecture(Architecture arch, String mode) {
         if(arch.getResult().getScience()==-1){ //not yet evaluated
             GenericTask t;
             if (saveRete==true){
@@ -438,8 +437,7 @@ public class ArchitectureEvaluator {
             return arch.getResult();
     }
     
-    public Result evaluateArchitecture(Architecture arch, String mode, int archID)
-    {
+    public Result evaluateArchitecture(Architecture arch, String mode, int archID) {
         if(arch.getResult().getScience()==-1){ //not yet evaluated
             GenericTask t;
             t = new GenericTask( arch , mode, archID);
@@ -461,20 +459,17 @@ public class ArchitectureEvaluator {
         else 
             return arch.getResult();
     }    
-    
-    
-    
+
     public void evalMinMax() {
-       
         Architecture max_arch = ArchitectureGenerator.getInstance().getMaxArch2();
         Result r2 = evaluateArchitecture(max_arch,"Slow");
-        Params.max_science = r2.getScience();
-        Params.max_cost = r2.getCost();
+        params.max_science = r2.getScience();
+        params.max_cost = r2.getCost();
         
         Architecture min_arch = ArchitectureGenerator.getInstance().getMinArch();
         Result r1 = evaluateArchitecture(min_arch,"Slow");
-        Params.min_science = r1.getScience();
-        Params.min_cost = r1.getCost();
+        params.min_science = r1.getScience();
+        params.min_cost = r1.getCost();
         
         clearResults();
     }
@@ -484,21 +479,20 @@ public class ArchitectureEvaluator {
         return population;
     }
     
-    public void setPopulation( ArrayList<Architecture> population )
-    {
+    public void setPopulation( ArrayList<Architecture> population ) {
         this.population = population;
         //this.population_size = population.size();
     }
-    public void setPopulation( boolean[][] pop, int norb, int ninstr, int[] nsats)
-    {
+
+    public void setPopulation( boolean[][] pop, int norb, int ninstr, int[] nsats) {
         int narchs = pop.length;
         population = new ArrayList<Architecture>(narchs);
         for (int i = 0;i<narchs;i++) {
             population.add(new Architecture(pop[i],norb, ninstr,nsats[i]));
         }      
     }
-    public void setPopulation( boolean[] pop, int norb, int ninstr, int nsats)
-    {
+
+    public void setPopulation( boolean[] pop, int norb, int ninstr, int nsats) {
         int narchs = 1;
         population = new ArrayList<Architecture>(narchs);
         population.add(new Architecture(pop,norb, ninstr, nsats));      
@@ -545,10 +539,13 @@ public class ArchitectureEvaluator {
     public void freeSearchResource() {
         try {
             searchRes.getRete().eval("(reset)");
-        }catch(Exception e) {System.out.println("HOLA");}
+        }
+        catch (Exception e) {
+            System.out.println("HOLA");
+        }
     }
     
-    public void setSaveRete(){
+    public void setSaveRete() {
         this.saveRete=true;
     }
     

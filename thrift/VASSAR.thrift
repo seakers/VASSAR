@@ -57,13 +57,13 @@ service VASSARInterface{
 
    void ping(),
    
-   string initJess(),
-   
    BinaryInputArchitecture eval(1:list<bool> inputs),
    
    list<string> getOrbitList(),
    
    list<string> getInstrumentList(),
+
+   list<string> getObjectiveList(),
    
    list<string> getCritique(1:list<bool> inputs)
 }

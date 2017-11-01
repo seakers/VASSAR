@@ -26,6 +26,7 @@ import java.util.HashMap;
  */
 //import jess.*;
 public class Architecture implements Comparable<Architecture>, java.io.Serializable {
+    private Params params;
     private boolean[] bitString;
     private int norb;
     private int ninstr;
@@ -49,6 +50,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
     
     //Constructors
     public Architecture(boolean[] bitString, int no, int ni, int nsat) {
+        params = Params.getInstance();
         this.bitString = bitString;
         norb = no;
         ninstr = ni;
@@ -70,6 +72,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         id = UUID.randomUUID().toString();
     }
     public Architecture(Fact f) {
+        params = Params.getInstance();
         Resource res = ArchitectureEvaluator.getInstance().getResourcePool().getResource();
         Rete r = res.getRete();
         Context c = res.getRete().getGlobalContext();
@@ -115,7 +118,9 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
             heuristics_applied = res.getM().StringArraytoStringWithSpaces((String[])(_heuristics_applied.toArray()));
         id = UUID.randomUUID().toString();
     }//BooleanString2Matrix
+
     public Architecture(String bs, int nsat) {
+        params = Params.getInstance();
         mat = BooleanString2Matrix(bs);
         norb = Params.norb;
         ninstr = Params.ninstr;
@@ -136,7 +141,9 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         heuristics_applied = "";
         id = UUID.randomUUID().toString();
     }//BooleanString2Matrix
+
     public Architecture(boolean[][] mat, int nsat) {
+        params = Params.getInstance();
         this.mat = mat;
         norb = mat.length;
         ninstr = mat[0].length;
@@ -157,14 +164,15 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         heuristics_applied = "";
         id = UUID.randomUUID().toString();
     }
+
     public Architecture(String[] payload, String orbit) {
+        params = Params.getInstance();
         this.payloads = payload;
         this.orbit = orbit;
         mat = new boolean[Params.norb][Params.ninstr];
         for (int o = 0;o<Params.norb;o++)
             for (int i = 0;i<Params.ninstr;i++)
                 this.mat[o][i] = false;
-        
         for (int i = 0;i<payload.length;i++) {
             try {
                 mat[(Integer)Params.orbit_indexes.get(orbit)][(Integer)Params.instrument_indexes.get(payload[i])] = true;
@@ -172,7 +180,6 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
                 System.out.println("Architecture " + e.getMessage());
             }
         }
-        
         norb = mat.length;
         ninstr = mat[0].length;
         bitString = Mat2bitString(mat);
@@ -188,11 +195,10 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         heuristics_applied = "";
         id = UUID.randomUUID().toString();
         nsats = 1;
-        
-        
-        
     }
+
     public Architecture(Nto1pair nto1pair, String orbit) {
+        params = Params.getInstance();
         this.nto1pair = nto1pair;
         String[] base = nto1pair.getBase();
         String add = nto1pair.getAdded();
@@ -207,15 +213,13 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         for (int o = 0;o<Params.norb;o++)
             for (int i = 0;i<Params.ninstr;i++)
                 this.mat[o][i] = false;
-        
         for (int i = 0;i<payloads.length;i++) {
             try {
-                mat[(Integer)Params.orbit_indexes.get(orbit)][(Integer)Params.instrument_indexes.get(payloads[i])] = true;
-            } catch(Exception e) {
+                mat[(Integer) Params.orbit_indexes.get(orbit)][(Integer) Params.instrument_indexes.get(payloads[i])] = true;
+            } catch (Exception e) {
                 System.out.println("Architecture " + e.getMessage());
             }
         }
-        
         norb = mat.length;
         ninstr = mat[0].length;
         bitString = Mat2bitString(mat);
@@ -232,7 +236,9 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         id = UUID.randomUUID().toString();
         nsats = 1;
     }
+
     public Architecture(ICombinatoricsVector<String> payl, String orbit) {
+        params = Params.getInstance();
         int n = payl.getSize();
         payloads = new String[n];
         payload = "";
@@ -269,7 +275,9 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         id = UUID.randomUUID().toString();
         nsats = 1;
     }
+
     public Architecture(HashMap<String,String[]> mapping, int nsat) {
+        params = Params.getInstance();
         mat = new boolean[Params.norb][Params.ninstr];
          for(int o = 0;o<Params.norb;o++) {
              for(int i = 0;i<Params.ninstr;i++) {
@@ -310,7 +318,6 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
     }
     
     //Getters
-    
     public int getNsats() {
         return nsats;
     }
@@ -434,16 +441,15 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
             if(payls!=null) {
                 ret = ret + "\n" + orb + ": " + StringUtils.join(payls, " ") ;
             }
-            
         }
         return ret;
     }
+
     public String toFactString() {
-        
         String ret =  "(MANIFEST::ARCHITECTURE" + " (id " + id + ") (num-sats-per-plane " + nsats + ") (bitString " + toBitString() + ") (payload " + payload + ") (orbit " + orbit + ")"
                 + " (mutate " + mutate + " ) (crossover " + crossover + ") (improve " + improve + ") (heuristics-to-apply " + heuristics_to_apply + " ) (heuristics-applied " + heuristics_applied + ") "
-                + "(factHistory F" + Params.nof + ")";
-                Params.nof++;
+                + "(factHistory F" + params.nof + ")";
+                params.nof++;
         if(result != null) {
             ret = ret + " (benefit " + result.getScience() + " ) (lifecycle-cost " + result.getCost() + ")" + " (pareto-ranking " + result.getParetoRanking() + " ) (utility " + result.getUtility() + ")";
         }
@@ -451,6 +457,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         return ret;
 
     }
+
     public String toBitString() {
         String str = "\"";
         for (int i = 0;i<bitString.length;i++) {
@@ -480,7 +487,8 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
             }         
         }
         return mat;
-    } 
+    }
+
     public static boolean[][] bitString2Mat(boolean[] bitString, int norb, int ninstr) {
         boolean[][] mat = new boolean[norb][ninstr];
         int b = 0;
@@ -491,6 +499,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         }
         return mat;
     }
+
     public static boolean[] Mat2bitString (boolean[][] mat) {
         int norb = mat.length;
         int ninstr = mat[0].length;
@@ -503,6 +512,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         }
         return bitString;
     }
+
     private String createKey(boolean[][] mat, int nsat) {
         String the_orbit = null;
         String the_payload = null;
@@ -524,6 +534,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         }
         return nsat + " x " + the_orbit + "@"  + the_payload;
     }
+
     private void updateOrbitPayload() {
 
         for (int i = 0; i < Params.norb; i++) {
@@ -543,6 +554,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
             }
         }
     }
+
     private int SumRowBool(boolean[][] mat, int row) {
         int x = 0;
         int ncols = mat[0].length;
@@ -553,6 +565,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         }
         return x;
     }
+
     private int SumAllInstruments(boolean[][] mat) {
         int x = 0;
         int ncols = mat[0].length;
@@ -565,13 +578,16 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         }
         return x;
     }
+
     public Boolean isEmptyOrbit(String orb) {
         return (getPayloadInOrbit(orb).length==0);
     }
+
     private Boolean capturesInteraction(ArrayList<String>  thepayload, ArrayList<String> al) {
         //returns true if payl contains all elements in nt IN THE desired ORBIT     
         return (al.containsAll(thepayload));
     }
+
     private Boolean ContainsAllBut1FromInteraction(ArrayList<String>  thepayload, ArrayList<String> al) {
         //returns true if payl contains all but 1 elements in nt IN THE desired ORBIT
         int count = 0;
@@ -584,6 +600,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         //return true if from the N elements in the interaction, we have exactly N-1 elements in the payload (i.e. 1 missing)
         return count == al.size()-1;
     }
+
     public String StringArraytoStringWithSpaces(String[] array) {
         String res = array[0];
         for (int i = 1;i<array.length;i++) {
@@ -591,10 +608,12 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         }
         return res;
     }
+
     public String[] StringWithSpacestoStringArrayList(String str) {
         String[] res = str.split(" ");
         return res;
     }
+
     public String[] getPayloadInOrbit(String orb) {
         String[] thepayloads = null;
          for (int i = 0; i < Params.norb; i++) {
@@ -610,8 +629,9 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
                 }
             }
         }
-         return thepayloads;
+        return thepayloads;
     }
+
     public boolean hasInstrument(String instr) {
         for (int i = 0; i < Params.norb; i++) {
             String[] payl = getPayloadInOrbit(Params.orbit_list[i]);
@@ -623,6 +643,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         }
         return false;
     }
+
     public int getNInstrLowTRL() {
         int ninstrlowTRL = 0;
         for (String instr:ArchitectureEvaluator.getInstance().getLowTRLinstruments())
@@ -638,6 +659,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
             return 0;
         else return 1;
     }
+
     public static Comparator<Architecture> ArchCrowdDistComparator = new Comparator<Architecture>() {
         @Override
         public int compare(Architecture a1, Architecture a2) {
@@ -649,9 +671,9 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
             } else {
                 return 0;
             }
-            
         }
     };
+
     public static Comparator<Architecture> ArchScienceComparator = new Comparator<Architecture>() {
         @Override
         public int compare(Architecture a1, Architecture a2) {
@@ -665,6 +687,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
             }
         }
     };
+
     public static Comparator<Architecture> ArchCostComparator = new Comparator<Architecture>() {
         @Override
         public int compare(Architecture a1, Architecture a2) {
@@ -678,6 +701,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
             }
         }
     };
+
     public static Comparator<Map.Entry<String,Double>> ByValueComparator = new Comparator<Map.Entry<String,Double>>() {
         @Override
         public int compare(Map.Entry<String,Double> a1, Map.Entry<String,Double> a2) {
@@ -686,7 +710,6 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         }
     };
 
-    
     //Heuristics
     public Architecture mutate1bit() {
        if (rnd.nextBoolean()) { //mutate matrix but not nsats
@@ -705,57 +728,60 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
             new_one.setImprove(improve);
             return new_one;
        }
-       
     }
+
     public Architecture randomSearch() {
-       //System.out.println("randomSearch");
-       return ArchitectureGenerator.getInstance().getRandomArch();
+        //System.out.println("randomSearch");
+        return ArchitectureGenerator.getInstance().getRandomArch();
     }
+
     public Architecture crossover1point(Architecture other) {
-       Integer index = rnd.nextInt(norb*ninstr-1);
-       boolean[] other_bs = other.getBitString();
-       boolean[] new_bitString = new boolean[norb*ninstr];
-       System.arraycopy(bitString,0,new_bitString,0,index);
-       System.arraycopy(other_bs,index+1,new_bitString,index+1,norb*ninstr-index-1);//norb*ninstr
-       if (rnd.nextBoolean())
+        Integer index = rnd.nextInt(norb*ninstr-1);
+        boolean[] other_bs = other.getBitString();
+        boolean[] new_bitString = new boolean[norb*ninstr];
+        System.arraycopy(bitString,0,new_bitString,0,index);
+        System.arraycopy(other_bs,index+1,new_bitString,index+1,norb*ninstr-index-1);//norb*ninstr
+        if (rnd.nextBoolean())
            return new Architecture(new_bitString,this.norb,this.ninstr,nsats);
-       else
+        else
            return new Architecture(new_bitString,this.norb,this.ninstr,other.getNsats());
-       //System.out.println("crossover1point");
+        //System.out.println("crossover1point");
     }
+
     public Architecture removeRandomFromLoadedSat() {
-        //Find a random non-empty orbit and its payload 
-       String[] payl0 = null;
-       int MINSIZE = 3;
-       int ntrials = 0;
-       String orb = "";
-       ArrayList<String> theorbits = new ArrayList<String>();
-       Collections.addAll(theorbits,Params.orbit_list);
-       Collections.shuffle(theorbits);//this sorts orbits in random order
-       while(ntrials<Params.norb)  {
-           orb = theorbits.get(ntrials);
-           payl0 = getPayloadInOrbit(orb);
-           if(payl0 == null || payl0.length < MINSIZE) { // is there at least MINSIZE instruments in this orbit?
-               ntrials++;
-               continue;
-           } else {
-               break;
-           }
-       }
-       //If all orbits are empty mutate 1 bit = add 1 instrument to 1 orbit
-       if(payl0 == null || ntrials == Params.norb) {
-           //System.out.println("removeRandomFromLoadedSat > mutate1bit");
-           return mutate1bit();
-       }
-       //Return new architecture with one instrument (random) removed from orb
-       ArrayList<String> candidates = new ArrayList<String>();
-       Collections.addAll(candidates,payl0);
-       Collections.shuffle(candidates);//this sorts candidates in random order
-       String instr = candidates.get(0);
-       boolean[][] new_mat = removeInstrumentFromOrbit(mat,instr,orb);
-       //System.out.println("removeRandomFromLoadedSat");
-       return new Architecture(new_mat,nsats);       
+        //Find a random non-empty orbit and its payload
+        String[] payl0 = null;
+        int MINSIZE = 3;
+        int ntrials = 0;
+        String orb = "";
+        ArrayList<String> theorbits = new ArrayList<String>();
+        Collections.addAll(theorbits,Params.orbit_list);
+        Collections.shuffle(theorbits);//this sorts orbits in random order
+        while (ntrials<Params.norb) {
+            orb = theorbits.get(ntrials);
+            payl0 = getPayloadInOrbit(orb);
+            if (payl0 == null || payl0.length < MINSIZE) { // is there at least MINSIZE instruments in this orbit?
+                ntrials++;
+            }
+            else {
+                break;
+            }
+        }
+        //If all orbits are empty mutate 1 bit = add 1 instrument to 1 orbit
+        if(payl0 == null || ntrials == Params.norb) {
+            //System.out.println("removeRandomFromLoadedSat > mutate1bit");
+            return mutate1bit();
+        }
+        //Return new architecture with one instrument (random) removed from orb
+        ArrayList<String> candidates = new ArrayList<String>();
+        Collections.addAll(candidates,payl0);
+        Collections.shuffle(candidates);//this sorts candidates in random order
+        String instr = candidates.get(0);
+        boolean[][] new_mat = removeInstrumentFromOrbit(mat,instr,orb);
+        //System.out.println("removeRandomFromLoadedSat");
+        return new Architecture(new_mat,nsats);
     }
+
     public Architecture removeInterference() {
         String[] payl0 = null;
         String orb;        
@@ -763,7 +789,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         Collections.addAll(theorbits,Params.orbit_list);
         Collections.shuffle(theorbits);//this sorts orbits in random order
         int ntrials = 0;
-        while(ntrials<Params.norb)  {
+        while (ntrials < Params.norb)  {
             orb = theorbits.get(ntrials);
             payl0 = getPayloadInOrbit(orb);
             if(payl0 == null) { // is there any instrument in this orbit?
@@ -771,7 +797,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
                 continue;
             } else {
                 //get dsm and positive binary inteferences for that orbit
-                NDSM edsm = (NDSM) Params.all_dsms.get("EDSM2@" + orb);
+                NDSM edsm = (NDSM) params.all_dsms.get("EDSM2@" + orb);
                 TreeMap<Nto1pair,Double> tm = edsm.getAllInteractions("+");
 
                 //Find a current interference
@@ -791,7 +817,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
                 }
 
                 //try with 3-lateral interferences
-                edsm = (NDSM) Params.all_dsms.get("EDSM3@" + orb);
+                edsm = (NDSM) params.all_dsms.get("EDSM3@" + orb);
                 tm = edsm.getAllInteractions("+");
 
                 //Find a missing synergy from intreaction tree
@@ -823,6 +849,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
        //System.out.println("removeInterference > No Changes"); 
        return new Architecture(mat,nsats);
     }
+
     public Architecture removeSuperfluous() {
         String[] payl0 = null;
         String orb;        
@@ -830,15 +857,16 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         Collections.addAll(theorbits,Params.orbit_list);
         Collections.shuffle(theorbits);//this sorts orbits in random order
         int ntrials = 0;
-        while(ntrials<Params.norb)  {
+        while (ntrials < Params.norb)  {
             orb = theorbits.get(ntrials);
             payl0 = getPayloadInOrbit(orb);
-            if(payl0 == null) { // is there any instrument in this orbit?
+            if (payl0 == null) { // is there any instrument in this orbit?
                 ntrials++;
                 continue;
-            } else {
+            }
+            else {
                 //get redundancy dsm and zero binary inteferences for that orbit
-                NDSM rdsm = (NDSM) Params.all_dsms.get("RDSM" + (Params.ninstr) + "@" + orb);
+                NDSM rdsm = (NDSM) params.all_dsms.get("RDSM" + (Params.ninstr) + "@" + orb);
                 TreeMap<Nto1pair,Double> tm = rdsm.getAllInteractions("-");
 
                 //Find a current interference
@@ -858,7 +886,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
                 }
 
                 //try with 3-lateral interferences
-                rdsm = (NDSM) Params.all_dsms.get("RDSM3@" + orb);
+                rdsm = (NDSM) params.all_dsms.get("RDSM3@" + orb);
                 tm = rdsm.getAllInteractions("-");
 
                 //Find a missing synergy from intreaction tree
@@ -883,23 +911,23 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
             //System.out.println("removeSuperfluous > mutate");
             return mutate1bit();
         }
-       //if there are non-empty orbits, but all 2- and 3-inteferences are already solved, return with no changes
-       /*
-       System.out.println("removeSuperfluous > bestNeighbor");
-       return bestNeighbor();*/
-       System.out.println("removeSuperfluous > No changes");
-       return new Architecture(mat,nsats);
-      
+        //if there are non-empty orbits, but all 2- and 3-inteferences are already solved, return with no changes
+        /*
+        System.out.println("removeSuperfluous > bestNeighbor");
+        return bestNeighbor();*/
+        System.out.println("removeSuperfluous > No changes");
+        return new Architecture(mat,nsats);
     }
+
     public Architecture improveOrbit() {
-        //Find a random non-empty orbit and its payload 
-       String[] payl0 = null;
-       int ntrials = 0;
-       String orb;
-       ArrayList<String> theorbits = new ArrayList<String>();
-       Collections.addAll(theorbits,Params.orbit_list);
-       Collections.shuffle(theorbits);//this sorts orbits in random order
-       while(ntrials<Params.norb)  {
+        //Find a random non-empty orbit and its payload
+        String[] payl0 = null;
+        int ntrials = 0;
+        String orb;
+        ArrayList<String> theorbits = new ArrayList<String>();
+        Collections.addAll(theorbits,Params.orbit_list);
+        Collections.shuffle(theorbits);//this sorts orbits in random order
+        while(ntrials < Params.norb)  {
            orb = theorbits.get(ntrials);
            payl0 = getPayloadInOrbit(orb);
            if(payl0 == null) { // is there any instrument in this orbit?
@@ -944,6 +972,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
        System.out.println("improveOrbit > No changes");
        return new Architecture(mat,nsats);
     }
+
     public Architecture addSynergy() {
         //Find a random non-empty orbit and its payload 
         String[] payl0 = null;
@@ -961,7 +990,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
                 continue;
             } else {
                 //get dsm and positive binary synergies for that orbit
-                NDSM sdsm = (NDSM) Params.all_dsms.get("SDSM2@" + orb);
+                NDSM sdsm = (NDSM) params.all_dsms.get("SDSM2@" + orb);
                 TreeMap<Nto1pair,Double> tm = sdsm.getAllInteractions("+");
 
                 //Find a missing synergy from intreaction tree
@@ -990,7 +1019,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
                 }
 
                 //try with 3-lateral synergies
-                sdsm = (NDSM) Params.all_dsms.get("SDSM3@" + orb);
+                sdsm = (NDSM) params.all_dsms.get("SDSM3@" + orb);
                 tm = sdsm.getAllInteractions("+");
 
                 //Find a missing synergy from intreaction tree
@@ -1032,6 +1061,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         //System.out.println("addSynergy > No changes");
         return new Architecture(mat,nsats);
     }
+
     public Architecture addRandomToSmallSat() {
        //Find a random non-empty orbit and its payload 
        String[] payl0 = null;
@@ -1070,6 +1100,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
        //System.out.println("addRandomToSmallSat");
        return new Architecture(new_mat,nsats); 
     }
+
     public ArrayList<Architecture> bestNeighbor() {
         ArrayList<Architecture> neighbors = new ArrayList<Architecture>();
         for (int i = 0;i<bitString.length;i++) {
@@ -1081,6 +1112,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         }
         return neighbors;
     }
+
     public Architecture askUserToImprove() {
         //System.out.println("askUserToImprove");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -1134,6 +1166,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         thenew[(Integer) Params.orbit_indexes.get(where)][(Integer)Params.instrument_indexes.get(toadd)] = true;
         return thenew;
     }
+
     public boolean[][] removeInstrumentFromOrbit(boolean[][] old, String instr, String from) {
         //create copy of current matrix
         boolean[][] thenew = new boolean[norb][ninstr];
@@ -1144,6 +1177,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         thenew[(Integer) Params.orbit_indexes.get(from)][(Integer)Params.instrument_indexes.get(instr)] = false;
         return thenew;
     }
+
     public boolean[][] moveInstrument(boolean[][] old, String instr, String from, String to) {
         //create copy of current matrix
         boolean[][] thenew = new boolean[norb][ninstr];
@@ -1155,6 +1189,7 @@ public class Architecture implements Comparable<Architecture>, java.io.Serializa
         thenew[(Integer) Params.orbit_indexes.get(to)][(Integer)Params.instrument_indexes.get(instr)] = true;
         return thenew;
     }
+
     public boolean[][] breakupPayload(boolean[][] old, Nto1pair tobreak, String orb) {
         //create copy of current matrix
         boolean[][] thenew = new boolean[norb][ninstr];

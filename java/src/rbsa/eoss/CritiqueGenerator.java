@@ -40,9 +40,9 @@ public class CritiqueGenerator extends GenericTask {
             Result result = super.evaluatePerformance(r, arch, qb, m);
 
             // Criticize performance rules
-            r.batch(Params.critique_performance_initialize_facts_clp);
-            r.batch(Params.critique_performance_clp);
-            r.batch(Params.critique_performance_precalculation_clp);
+            r.batch(params.critique_performance_initialize_facts_clp);
+            r.batch(params.critique_performance_clp);
+            r.batch(params.critique_performance_precalculation_clp);
             
             r.setFocus("CRITIQUE-PERFORMANCE-PRECALCULATION");
             r.run();
@@ -59,9 +59,9 @@ public class CritiqueGenerator extends GenericTask {
             evaluateCost(r, arch, result, qb, m);
             
             // Criticize cost rules
-            r.batch(Params.critique_cost_initialize_facts_clp);
-            r.batch(Params.critique_cost_clp);
-            r.batch(Params.critique_cost_precalculation_clp);
+            r.batch(params.critique_cost_initialize_facts_clp);
+            r.batch(params.critique_cost_clp);
+            r.batch(params.critique_cost_precalculation_clp);
             
             r.setFocus("CRITIQUE-COST-PRECALCULATION");
             r.run();

@@ -18,6 +18,8 @@ import rbsa.eoss.local.Params;
  */
 public class ArchTradespaceExplorer {
     private static ArchTradespaceExplorer instance = null;
+
+    private Params params;
     private ArrayList<Architecture> current_population;
     private ArrayList<Architecture> current_best_archs;
     private Stack<Result> results;
@@ -35,6 +37,7 @@ public class ArchTradespaceExplorer {
         rnd = new Random();
         sp = null;
     }
+
     public void clear() {
         results = new Stack<Result>();
         current_population = null;
@@ -44,6 +47,7 @@ public class ArchTradespaceExplorer {
         rnd = new Random();
         sp = null;
     }
+
     public static ArchTradespaceExplorer getInstance()
     {
         if( instance == null ) 
@@ -53,9 +57,7 @@ public class ArchTradespaceExplorer {
         return instance;
     }
 
-
     public void search_NSGA2() {
-        
         Boolean converged = false;
         //Init population
         current_population = term_crit.getInit_population();
@@ -88,8 +90,6 @@ public class ArchTradespaceExplorer {
         }
     }
 
-    
-    
     public void down_select() {
         Resource res = ArchitectureEvaluator.getInstance().getResourcePool().getResource();
         
@@ -108,6 +108,7 @@ public class ArchTradespaceExplorer {
         
         ArchitectureEvaluator.getInstance().getResourcePool().freeResource(res);
     }
+
     public void generateNextPopulation() {
         if (nits == 0) {
             current_population = ArchitectureGenerator.getInstance().generateRandomPopulation(term_crit.getPopulation_size());
@@ -127,9 +128,8 @@ public class ArchTradespaceExplorer {
             }
             ArchitectureEvaluator.getInstance().getResourcePool().freeResource(res);
         }
-        
-        
     }
+
     public void extendPopulation() {
         if(nits>0) {
             //Mark small fraction for random mutation
@@ -196,6 +196,7 @@ public class ArchTradespaceExplorer {
             current_population.addAll(ArchitectureGenerator.getInstance().generateRandomPopulation(term_crit.getPopulation_size()));
         }
     }
+
     public void extendPopulationWithCooperation() {
         if(nits>0) {
             //Mark small fraction for random mutation
@@ -252,6 +253,7 @@ public class ArchTradespaceExplorer {
             current_population.addAll(ArchitectureGenerator.getInstance().generateRandomPopulation(term_crit.getPopulation_size()));
         }
     }
+
     public void selection() {
         //Mutation
         for (int i = 0;i<current_population.size();i++) {
@@ -268,6 +270,7 @@ public class ArchTradespaceExplorer {
             }
         }
     }
+
     public void selection_NSGA2() {
         ArrayList<Architecture> new_population = new ArrayList<Architecture>();
         //non-dominated sorting, returns fronts
@@ -297,6 +300,7 @@ public class ArchTradespaceExplorer {
             results.push(arch.getResult());
         }
     }
+
     public void computeCrowdingDistance(ArrayList<Architecture> front) {
         
         int nsol = front.size();
@@ -308,7 +312,7 @@ public class ArchTradespaceExplorer {
         for (int i = 1;i<nsol-1;i++) 
             front.get(i).getResult().setCrowdingDistance(
                     front.get(i).getResult().getCrowdingDistance() + Math.abs(
-                    (front.get(i+1).getResult().getScience() - front.get(i-1).getResult().getScience())/(Params.max_science-Params.min_science))) ;
+                    (front.get(i+1).getResult().getScience() - front.get(i-1).getResult().getScience())/(params.max_science-params.min_science))) ;
         
         //Cost
         Collections.sort(front,Architecture.ArchCostComparator);
@@ -317,8 +321,9 @@ public class ArchTradespaceExplorer {
         for (int i = 1;i<nsol-1;i++) 
             front.get(i).getResult().setCrowdingDistance(
                     front.get(i).getResult().getCrowdingDistance() + Math.abs(
-                    (front.get(i+1).getResult().getCost() - front.get(i-1).getResult().getCost())/(Params.max_cost-Params.min_cost))) ;
+                    (front.get(i+1).getResult().getCost() - front.get(i-1).getResult().getCost())/(params.max_cost-params.min_cost))) ;
     }
+
     public HashMap<Integer,ArrayList<Architecture>> nonDominatedSorting(boolean compute_all_fronts) {
 
         HashMap<Integer,ArrayList<Architecture>> fronts = new HashMap<Integer,ArrayList<Architecture>>();//archs in front i
@@ -435,6 +440,7 @@ public class ArchTradespaceExplorer {
         }
         return rankings;
     }
+
     public int dominates(Result r1,Result r2) {
         // Feasibility before fitness
         if (r1.getArch().isFeasibleAssignment() && !r2.getArch().isFeasibleAssignment())
@@ -457,7 +463,8 @@ public class ArchTradespaceExplorer {
         else if((x1<=0 && x2>=0) && !(x1==0 && x2==0))
             return -1;
         else return 0;
-    } 
+    }
+
     public void assertArchs(Resource res, ArrayList<Architecture> archs) {
         try {
             Rete r = res.getRete();
@@ -469,10 +476,9 @@ public class ArchTradespaceExplorer {
             e.printStackTrace();
             ArchitectureEvaluator.getInstance().freeSearchResource();
         }
-        
     }
-    public ArrayList<Architecture> retrieveArchs(Resource res)
-    {
+
+    public ArrayList<Architecture> retrieveArchs(Resource res) {
         ArrayList<Architecture> archs = new ArrayList<Architecture>();
         results.clear();
         try {
@@ -506,9 +512,7 @@ public class ArchTradespaceExplorer {
             converged = true;
         }
         return converged;
-       
     }
-    
 
     public SearchPerformance getSp() {
         return sp;
@@ -537,7 +541,7 @@ public class ArchTradespaceExplorer {
         return term_crit;
     }
     
-     public void setCurrent_population(ArrayList<Architecture> current_population) {
+    public void setCurrent_population(ArrayList<Architecture> current_population) {
         this.current_population = current_population;
     }
     

@@ -20,10 +20,13 @@ import rbsa.eoss.local.Params;
 
 public class SearchPerformanceManager {
     private static SearchPerformanceManager instance;
+
+    private Params params;
     private HashMap<String,SearchPerformanceComparator> results;
     
     private SearchPerformanceManager()
     {
+        params = Params.getInstance();
         results = new HashMap<String,SearchPerformanceComparator>();
     }
     
@@ -56,7 +59,7 @@ public class SearchPerformanceManager {
             String name = "sp";
             SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd--HH-mm-ss" );
             String stamp = dateFormat.format( new Date() );
-            String file_path = Params.path_save_results + "\\" + name + "_" + stamp + ".rs";
+            String file_path = params.path_save_results + "\\" + name + "_" + stamp + ".rs";
             FileOutputStream file = new FileOutputStream( file_path );
             ObjectOutputStream os = new ObjectOutputStream( file );
             os.writeObject( sp );
@@ -72,14 +75,14 @@ public class SearchPerformanceManager {
         if( res != null )
             return res;
         
-        if( Params.path_save_results == null )
+        if( params.path_save_results == null )
         {
             System.out.println( "The params class needs to be initialized" );
             return null;
         }
         System.out.println("hello");
         try {
-            String filePath = Params.path_save_results + "\\" + name + "_" + stamp + ".rs";
+            String filePath = params.path_save_results + "\\" + name + "_" + stamp + ".rs";
             FileInputStream file = new FileInputStream( filePath );
             ObjectInputStream is = new ObjectInputStream( file );
             res = (SearchPerformanceComparator)is.readObject();
@@ -96,7 +99,7 @@ public class SearchPerformanceManager {
     public SearchPerformanceComparator loadSearchPerformanceComparatorFromFile( String filePath)
     {
         SearchPerformanceComparator res;
-//        if( Params.path_save_results == null )
+//        if( params.path_save_results == null )
 //        {
 //            System.out.println( "The params class needs to be initialized" );
 //            return null;
@@ -119,7 +122,7 @@ public class SearchPerformanceManager {
     public SearchPerformance loadSearchPerformanceFromFile( String filePath)
     {
         SearchPerformance res;
-        if( Params.path_save_results == null )
+        if( params.path_save_results == null )
         {
             System.out.println( "The params class needs to be initialized" );
             return null;

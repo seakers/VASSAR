@@ -19,11 +19,14 @@ import rbsa.eoss.local.Params;
 public class ResultManager {
     
     private static ResultManager instance;
+
+    private Params params;
     private HashMap<String,ResultCollection> results;
     
     private ResultManager()
     {
-        results = new HashMap<String,ResultCollection>();
+        params = Params.getInstance();
+        results = new HashMap<>();
     }
     
     public static ResultManager getInstance()
@@ -56,14 +59,14 @@ public class ResultManager {
         if( res != null )
             return res;
         
-        if( Params.path_save_results == null )
+        if( params.path_save_results == null )
         {
             System.out.println( "The params class needs to be initialized" );
             return null;
         }
         
         try {
-            String filePath = Params.path_save_results + "\\" + stamp;
+            String filePath = params.path_save_results + "\\" + stamp;
             FileInputStream file = new FileInputStream( filePath );
             ObjectInputStream is = new ObjectInputStream( file );
             res = (ResultCollection)is.readObject();
@@ -99,7 +102,7 @@ public class ResultManager {
     
     public void loadAllCollections( String path )
     {
-        if( Params.path_save_results == null )
+        if( params.path_save_results == null )
         {
             System.out.println( "The params class needs to be initialized" );
             return;
@@ -107,7 +110,7 @@ public class ResultManager {
         
         clear();
         
-        path = Params.path + "\\" + path;
+        path = params.path + "\\" + path;
         
         ResultCollection res;
         File folder = new File( path );

@@ -58,7 +58,7 @@ public class RBSAEOSSSMAP {
         String search_clps = "";
         switch(MODE) {
             case 1: //1 arch
-                params = new Params( path, "FUZZY-ATTRIBUTES", "test","normal",search_clps);//FUZZY or CRISP
+                params = Params.initInstance( path, "FUZZY-ATTRIBUTES", "test","normal",search_clps);//FUZZY or CRISP
                 AE.init(1);
                 //Architecture arch = ArchitectureGenerator.getInstance().getMaxArch2();
                 Architecture arch = ArchitectureGenerator.getInstance().getTestArch();
@@ -73,7 +73,7 @@ public class RBSAEOSSSMAP {
                 System.out.println("DONE");
                 break;
             case 2://Full factorial 7 CPUS with random population
-                params = new Params( path, "FUZZY-ATTRIBUTES", "test","normal",search_clps);//FUZZY or CRISP
+                params = Params.initInstance( path, "FUZZY-ATTRIBUTES", "test","normal",search_clps);//FUZZY or CRISP
                 ArrayList<Architecture> population = ArchitectureGenerator.getInstance().generateRandomPopulation(80);
                 AE.init(1);
                 AE.setPopulation( population );
@@ -86,7 +86,7 @@ public class RBSAEOSSSMAP {
             case 3://Search
                 int POP_SIZE = 200;
                 int MAX_SEARCH_ITS = 4;
-                params = new Params( path, "FUZZY-ATTRIBUTES", "test","normal","search_heuristic_rules_smap_127");
+                params = Params.initInstance( path, "FUZZY-ATTRIBUTES", "test","normal","search_heuristic_rules_smap_127");
                 ResultCollection c = null;
                 ArrayList<Architecture> init_pop = ArchitectureGenerator.getInstance().getInitialPopulation(POP_SIZE);
                 for (int i = 0;i<20;i++) {
@@ -109,7 +109,7 @@ public class RBSAEOSSSMAP {
                 System.out.println("DONE");
                 break;
             case 4://Explore different heuristics
-                params = new Params( path, "CRISP-ATTRIBUTES", "test","normal","search_heuristic_rules_smap_2");//FUZZY or CRISP
+                params = Params.initInstance( path, "CRISP-ATTRIBUTES", "test","normal","search_heuristic_rules_smap_2");//FUZZY or CRISP
                 AE.init(3);
                 AE.evalMinMax();
                 ArrayList<SearchPerformance> perfs = new ArrayList<SearchPerformance>();
@@ -132,7 +132,7 @@ public class RBSAEOSSSMAP {
                 try {
                     SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd-HH-mm-ss" );
                     String stamp = dateFormat.format( new Date() );
-                    FileOutputStream file = new FileOutputStream( Params.path_save_results + "\\perfs_" + stamp + ".dat");
+                    FileOutputStream file = new FileOutputStream( params.path_save_results + "\\perfs_" + stamp + ".dat");
                     ObjectOutputStream os = new ObjectOutputStream( file );
                     os.writeObject( perfs );
                     os.close();
@@ -143,7 +143,7 @@ public class RBSAEOSSSMAP {
                 System.out.println("DONE");
                 break;
             case 5://Update DSMs
-                params = new Params( path, "FUZZY-ATTRIBUTES", "test","update_dsms",search_clps);//FUZZY or CRISP
+                params = Params.initInstance( path, "FUZZY-ATTRIBUTES", "test","update_dsms",search_clps);//FUZZY or CRISP
                 AE.init(8);
                 //AE.recomputeAllDSM();
                 AE.recomputeNDSM(2);
@@ -154,7 +154,7 @@ public class RBSAEOSSSMAP {
                 try {
                     SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd-HH-mm-ss" );
                     String stamp = dateFormat.format( new Date() );
-                    FileOutputStream file = new FileOutputStream( Params.path_save_results + "\\all_dsms" + stamp + ".dat");
+                    FileOutputStream file = new FileOutputStream( params.path_save_results + "\\all_dsms" + stamp + ".dat");
                     ObjectOutputStream os = new ObjectOutputStream( file );
                     os.writeObject( AE.getDsm_map() );
                     os.close();
@@ -165,13 +165,13 @@ public class RBSAEOSSSMAP {
                 System.out.println("DONE");
                 break;
             case 6://Update capabilities file
-                params = new Params( path, "FUZZY-ATTRIBUTES", "test","update_capabilities",search_clps);//FUZZY or CRISP
+                params = Params.initInstance( path, "FUZZY-ATTRIBUTES", "test","update_capabilities",search_clps);//FUZZY or CRISP
                 AE.init(8);
                 AE.precomputeCapabilities();                
                 try{
                     SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd-HH-mm-ss" );
                     String stamp = dateFormat.format( new Date() );
-                    FileOutputStream fos = new FileOutputStream(Params.path_save_results + "\\capabilities" + stamp + ".dat");
+                    FileOutputStream fos = new FileOutputStream(params.path_save_results + "\\capabilities" + stamp + ".dat");
                     ObjectOutputStream oos = new ObjectOutputStream(fos);
                     oos.writeObject(AE.getCapabilities());
                     oos.close();
@@ -182,7 +182,7 @@ public class RBSAEOSSSMAP {
                 System.out.println("DONE");
                 break;
              case 7://Update scores file
-                params = new Params( path, "FUZZY-ATTRIBUTES", "test","update_scores",search_clps);//FUZZY or CRISP
+                params = Params.initInstance( path, "FUZZY-ATTRIBUTES", "test","update_scores",search_clps);//FUZZY or CRISP
                 AE.init(8);
                 AE.recomputeScores(1);
                 AE.clearResults();
@@ -196,7 +196,7 @@ public class RBSAEOSSSMAP {
                 try{
                     SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd-HH-mm-ss" );
                     String stamp = dateFormat.format( new Date() );
-                    FileOutputStream fos = new FileOutputStream(Params.path_save_results + "\\scores" + stamp + ".dat");
+                    FileOutputStream fos = new FileOutputStream(params.path_save_results + "\\scores" + stamp + ".dat");
                     ObjectOutputStream oos = new ObjectOutputStream(fos);
                     oos.writeObject(AE.getScores());
                     oos.writeObject(AE.getSubobj_scores());
@@ -222,7 +222,7 @@ public class RBSAEOSSSMAP {
                 SearchPerformanceManager spm = SearchPerformanceManager.getInstance();
                 for (int i = 0;i<look_at.size();i++) {
                     int num = look_at.get(i);
-                    params = new Params( path, "CRISP-ATTRIBUTES", "test","normal","search_heuristic_rules_smap_" + num );//FUZZY or CRISP
+                    params = Params.initInstance( path, "CRISP-ATTRIBUTES", "test","normal","search_heuristic_rules_smap_" + num );//FUZZY or CRISP
                     AE.init(7);
                     AE.evalMinMax();
                     perfs = new ArrayList<SearchPerformance>(); 
@@ -255,8 +255,8 @@ public class RBSAEOSSSMAP {
                 System.out.println("DONE");
                 break;
             case 9://local search
-                params = new Params( path, "FUZZY-ATTRIBUTES", "test","normal","search_heuristic_rules_smap_2");
-                ArrayList<Architecture> init_popu = ResultManager.getInstance().loadResultCollectionFromFile(Params.initial_pop).getPopulation();
+                params = Params.initInstance( path, "FUZZY-ATTRIBUTES", "test","normal","search_heuristic_rules_smap_2");
+                ArrayList<Architecture> init_popu = ResultManager.getInstance().loadResultCollectionFromFile(params.initial_pop).getPopulation();
                 AE.setPopulation(ArchitectureGenerator.getInstance().localSearch(init_popu));
                 AE.init(8);
                 AE.evalMinMax();
