@@ -64,23 +64,15 @@ public class GenericTask implements Callable {
         this.saveRete = saveRete;
         this.arch = arch;
         this.type = type;
-        //if (type.equalsIgnoreCase("Slow") || arch.getEval_mode().equalsIgnoreCase("DEBUG"))
-        if (arch.getEval_mode().equalsIgnoreCase("DEBUG")) 
-            debug = true;
-        else
-            debug = false;
+        debug = arch.getEval_mode().equalsIgnoreCase("DEBUG");
     }
 
-    public GenericTask ( Architecture arch , String type, int archID) {
+    public GenericTask(Architecture arch, String type, int archID) {
         params = Params.getInstance();
         this.archID = archID;
         this.arch = arch;
         this.type = type;
-        //if (type.equalsIgnoreCase("Slow") || arch.getEval_mode().equalsIgnoreCase("DEBUG"))
-        if (arch.getEval_mode().equalsIgnoreCase("DEBUG")) 
-            debug = true;
-        else
-            debug = false;
+        debug = arch.getEval_mode().equalsIgnoreCase("DEBUG");
     }    
    
     public void getResource() {
@@ -257,70 +249,110 @@ public class GenericTask implements Callable {
     }
     
     private Result aggregate_performance_score_facts(Rete r, MatlabFunctions m, QueryBuilder qb) {
-       ArrayList subobj_scores = new ArrayList();
-       ArrayList obj_scores = new ArrayList();
-       ArrayList panel_scores = new ArrayList();
-       double science = 0.0;
-       double cost = 0.0;
-       FuzzyValue fuzzy_science = null;
-       FuzzyValue fuzzy_cost = null;
-       TreeMap<String,ArrayList<Fact>> explanations = new TreeMap<String,ArrayList<Fact>>();
-       TreeMap<String,Double> tm = new TreeMap<String,Double>();
-       try {
-           ArrayList<Fact> vals = qb.makeQuery("AGGREGATION::VALUE");
-           Fact val = vals.get(0);
-           science = val.getSlotValue("satisfaction").floatValue(r.getGlobalContext());
-           if (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES") || params.req_mode.equalsIgnoreCase("FUZZY-CASES"))
-               fuzzy_science = (FuzzyValue)val.getSlotValue("fuzzy-value").javaObjectValue(r.getGlobalContext());
-           panel_scores = m.JessList2ArrayList(val.getSlotValue("sh-scores").listValue(r.getGlobalContext()),r);
-           
-           ArrayList<Fact> subobj_facts = qb.makeQuery("AGGREGATION::SUBOBJECTIVE");
-           for (int n = 0;n<subobj_facts.size();n++) {
-               Fact f = subobj_facts.get(n);
-               String subobj = f.getSlotValue("id").stringValue(r.getGlobalContext());
-               Double subobj_score = f.getSlotValue("satisfaction").floatValue(r.getGlobalContext());
-               Double current_subobj_score = tm.get(subobj);
-               if(current_subobj_score != null && subobj_score > current_subobj_score || current_subobj_score == null)
-                   tm.put(subobj, subobj_score);
-               explanations.put(subobj, qb.makeQuery("AGGREGATION::SUBOBJECTIVE (id " + subobj + ")"));   
-           }
-           
-           for (Iterator<String> name = tm.keySet().iterator();name.hasNext();) {
-               subobj_scores.add(tm.get(name.next()));
-           }
-       }catch(Exception e) {
-                System.out.println(e.getMessage() + " " + e.getClass() + " " + e.getStackTrace());
-                e.printStackTrace();
-            }
-       Result theresult = new Result(arch, science, cost, fuzzy_science, fuzzy_cost, subobj_scores, obj_scores, panel_scores,tm);
-       if(debug) {
-           theresult.setCapabilities(qb.makeQuery("REQUIREMENTS::Measurement"));
-           theresult.setExplanations(explanations);
-       }
-       
-       return theresult;
-   }
-        
-    private Result aggregate_performance_score(Rete r) {
-        ArrayList subobj_scores = new ArrayList();
-        ArrayList obj_scores = new ArrayList();
-        ArrayList panel_scores = new ArrayList();
+        ArrayList<ArrayList<ArrayList<Double>>> subobj_scores = new ArrayList<>();
+        ArrayList<ArrayList<Double>> obj_scores = new ArrayList<>();
+        ArrayList<Double> panel_scores = new ArrayList<>();
         double science = 0.0;
         double cost = 0.0;
-        //Subobjective scores
-        for (int p = 0;p<params.npanels;p++) {
-            int nob = params.num_objectives_per_panel.get(p);
-            ArrayList subobj_scores_p = new ArrayList(nob);
-            for (int o=0;o<nob;o++) {
-                ArrayList subobj_p = (ArrayList)params.subobjectives.get(p);
-                ArrayList subobj_o = (ArrayList)subobj_p.get(o);
-                int nsubob = subobj_o.size();
-                ArrayList subobj_scores_o = new ArrayList(nsubob);
-                for (int so = 0;so<nsubob;so++) {
-                    String var_name = "?*subobj-" + subobj_o.get(so) + "*";
+        FuzzyValue fuzzy_science = null;
+        FuzzyValue fuzzy_cost = null;
+        TreeMap<String, ArrayList<Fact>> explanations = new TreeMap<>();
+        TreeMap<String, Double> subobj_scores_map = new TreeMap<>();
+        try {
+            // General and panel scores
+            ArrayList<Fact> vals = qb.makeQuery("AGGREGATION::VALUE");
+            Fact val = vals.get(0);
+            science = val.getSlotValue("satisfaction").floatValue(r.getGlobalContext());
+            if (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES") || params.req_mode.equalsIgnoreCase("FUZZY-CASES")) {
+                fuzzy_science = (FuzzyValue)val.getSlotValue("fuzzy-value").javaObjectValue(r.getGlobalContext());
+            }
+            for (String str_val: m.JessList2ArrayList(val.getSlotValue("sh-scores").listValue(r.getGlobalContext()), r)) {
+                panel_scores.add(Double.parseDouble(str_val));
+            }
+
+            ArrayList<Fact> subobj_facts = qb.makeQuery("AGGREGATION::SUBOBJECTIVE");
+            for (Fact f: subobj_facts) {
+                String subobj = f.getSlotValue("id").stringValue(r.getGlobalContext());
+                Double subobj_score = f.getSlotValue("satisfaction").floatValue(r.getGlobalContext());
+                Double current_subobj_score = subobj_scores_map.get(subobj);
+                if(current_subobj_score != null && subobj_score > current_subobj_score || current_subobj_score == null) {
+                    subobj_scores_map.put(subobj, subobj_score);
+                }
+                explanations.put(subobj, qb.makeQuery("AGGREGATION::SUBOBJECTIVE (id " + subobj + ")"));
+            }
+
+            //Subobjective scores
+            for (int p = 0; p < params.npanels; p++) {
+                int nob = params.num_objectives_per_panel.get(p);
+                ArrayList<ArrayList<Double>> subobj_scores_p = new ArrayList<>(nob);
+                for (int o = 0; o < nob; o++) {
+                    ArrayList<ArrayList<String>> subobj_p = params.subobjectives.get(p);
+                    ArrayList<String> subobj_o = subobj_p.get(o);
+                    int nsubob = subobj_o.size();
+                    ArrayList<Double> subobj_scores_o = new ArrayList<>(nsubob);
+                    for (String subobj : subobj_o) {
+                        subobj_scores_o.add(subobj_scores_map.get(subobj));
+                    }
+                    subobj_scores_p.add(subobj_scores_o);
+                }
+                subobj_scores.add(subobj_scores_p);
+            }
+
+            //Objective scores
+            for (int p = 0; p < params.npanels; p++) {
+                int nob = params.num_objectives_per_panel.get(p);
+                ArrayList<Double> obj_scores_p = new ArrayList<>(nob);
+                for (int o = 0; o < nob; o++) {
+                    ArrayList<ArrayList<Double>> subobj_weights_p = params.subobj_weights.get(p);
+                    ArrayList<Double> subobj_weights_o = subobj_weights_p.get(o);
+                    ArrayList<ArrayList<Double>> subobj_scores_p = subobj_scores.get(p);
+                    ArrayList<Double> subobj_scores_o = subobj_scores_p.get(o);
                     try {
-                    subobj_scores_o.add(r.eval(var_name).floatValue(r.getGlobalContext()));
-                    }catch(Exception e) {
+                        obj_scores_p.add(Result.sumProduct(subobj_weights_o, subobj_scores_o));
+                    }
+                    catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                obj_scores.add(obj_scores_p);
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage() + " " + e.getClass() + " " + e.getStackTrace());
+            e.printStackTrace();
+        }
+        Result theresult = new Result(arch, science, cost, fuzzy_science, fuzzy_cost, subobj_scores, obj_scores,
+                panel_scores, subobj_scores_map);
+        if (debug) {
+           theresult.setCapabilities(qb.makeQuery("REQUIREMENTS::Measurement"));
+           theresult.setExplanations(explanations);
+        }
+
+        return theresult;
+    }
+        
+    private Result aggregate_performance_score(Rete r) {
+        ArrayList<ArrayList<ArrayList<Double>>> subobj_scores = new ArrayList<>();
+        ArrayList<ArrayList<Double>> obj_scores = new ArrayList<>();
+        ArrayList<Double> panel_scores = new ArrayList<>();
+        double science = 0.0;
+        double cost = 0.0;
+
+        //Subobjective scores
+        for (int p = 0; p < params.npanels; p++) {
+            int nob = params.num_objectives_per_panel.get(p);
+            ArrayList<ArrayList<Double>> subobj_scores_p = new ArrayList<>(nob);
+            for (int o = 0; o < nob; o++) {
+                ArrayList<ArrayList<String>> subobj_p = params.subobjectives.get(p);
+                ArrayList<String> subobj_o = subobj_p.get(o);
+                int nsubob = subobj_o.size();
+                ArrayList<Double> subobj_scores_o = new ArrayList<>(nsubob);
+                for (String subobj : subobj_o) {
+                    String var_name = "?*subobj-" + subobj + "*";
+                    try {
+                        subobj_scores_o.add(r.eval(var_name).floatValue(r.getGlobalContext()));
+                    }
+                    catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                 }
@@ -330,43 +362,46 @@ public class GenericTask implements Callable {
         }
         
         //Objective scores
-        for (int p = 0;p<params.npanels;p++) {
+        for (int p = 0; p < params.npanels; p++) {
             int nob = params.num_objectives_per_panel.get(p);
-            ArrayList obj_scores_p = new ArrayList(nob);
-            for (int o=0;o<nob;o++) {
-                ArrayList subobj_weights_p = (ArrayList) params.subobj_weights.get(p);
-                ArrayList subobj_weights_o = (ArrayList)subobj_weights_p.get(o);
-                ArrayList subobj_scores_p = (ArrayList) subobj_scores.get(p);
-                ArrayList subobj_scores_o = (ArrayList)subobj_scores_p.get(o);
+            ArrayList<Double> obj_scores_p = new ArrayList<>(nob);
+            for (int o = 0; o < nob; o++) {
+                ArrayList<ArrayList<Double>> subobj_weights_p = params.subobj_weights.get(p);
+                ArrayList<Double> subobj_weights_o = subobj_weights_p.get(o);
+                ArrayList<ArrayList<Double>> subobj_scores_p = subobj_scores.get(p);
+                ArrayList<Double> subobj_scores_o = subobj_scores_p.get(o);
                 try {
-                    obj_scores_p.add(Result.sumProduct(subobj_weights_o,subobj_scores_o));
-                }catch(Exception e) {
-                System.out.println(e.getMessage());
-            }
+                    obj_scores_p.add(Result.sumProduct(subobj_weights_o, subobj_scores_o));
+                }
+                catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
             obj_scores.add(obj_scores_p);
         }
+
         //Stakeholder and final score
-        for (int p = 0;p<params.npanels;p++) {
+        for (int p = 0; p < params.npanels; p++) {
             try {
-                panel_scores.add(Result.sumProduct((ArrayList)params.obj_weights.get(p),(ArrayList)obj_scores.get(p)));
-            }catch(Exception e) {
+                panel_scores.add(Result.sumProduct(params.obj_weights.get(p), obj_scores.get(p)));
+            }
+            catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-        try{
-            science = Result.sumProduct(params.panel_weights,panel_scores);
-        }catch(Exception e) {
+
+        try {
+            science = Result.sumProduct(params.panel_weights, panel_scores);
+        }
+        catch (Exception e) {
                 System.out.println(e.getMessage());
-            }
-        Result theresult = new Result(arch, science, cost, subobj_scores, obj_scores, panel_scores,null);
-        return theresult;
+        }
+
+        return new Result(arch, science, cost, subobj_scores, obj_scores, panel_scores,null);
     }
     
     protected void evaluateCost(Rete r, Architecture arch, Result res, QueryBuilder qb, MatlabFunctions m) {
         try {
-            
-            
             long t0 = System.currentTimeMillis();
 
             r.setFocus("MANIFEST0");
@@ -692,13 +727,10 @@ public class GenericTask implements Callable {
     protected Result evaluatePerformance(Rete r, Architecture arch, QueryBuilder qb, MatlabFunctions m) {
         Result result = new Result();
         try {
-
-            
             long t0 = System.currentTimeMillis();
-             
-            
+
             r.reset();
-            assertMissions(r,arch,m);           
+            assertMissions(r, arch, m);
             
             r.eval("(bind ?*science-multiplier* 1.0)");
             r.eval("(defadvice before (create$ >= <= < >) (foreach ?xxx $?argv (if (eq ?xxx nil) then (return FALSE))))");
@@ -709,10 +741,10 @@ public class GenericTask implements Callable {
             r.setFocus("MANIFEST0");
             r.run();            
             
-            r.setFocus( "MANIFEST" );
+            r.setFocus("MANIFEST");
             r.run();
 
-            r.setFocus( "CAPABILITIES" );
+            r.setFocus("CAPABILITIES");
             r.run();
             
             r.setFocus("CAPABILITIES-REMOVE-OVERLAPS");
@@ -724,12 +756,11 @@ public class GenericTask implements Callable {
             r.setFocus("CAPABILITIES-GENERATE");
             r.run();            
             
-            r.setFocus( "SYNERGIES" );
+            r.setFocus("SYNERGIES");
             r.run();
 
 
             //Revisit times
-            
             int javaAssertedFactID = 1;
             
             Iterator parameters = params.measurements_to_instruments.keySet().iterator();
@@ -739,7 +770,7 @@ public class GenericTask implements Callable {
                 if (RU.getTypeName(v.type()).equalsIgnoreCase("LIST")) {
                     ValueVector thefovs = v.listValue(r.getGlobalContext());           
                     String[] fovs = new String[thefovs.size()];
-                    for (int i = 0;i<thefovs.size();i++) {
+                    for (int i = 0; i < thefovs.size(); i++) {
                         int tmp = thefovs.get(i).intValue(r.getGlobalContext());
                         fovs[i] = String.valueOf(tmp);
                     }
@@ -753,33 +784,32 @@ public class GenericTask implements Callable {
                     r.eval(call);
                 } 
             }
-            
 
-            r.setFocus( "ASSIMILATION2" );
+            r.setFocus("ASSIMILATION2");
             r.run();
 
-            r.setFocus( "ASSIMILATION" );
+            r.setFocus("ASSIMILATION");
             r.run();
 
-            r.setFocus( "FUZZY" );
+            r.setFocus("FUZZY");
             r.run();
 
-            r.setFocus( "SYNERGIES" );
+            r.setFocus("SYNERGIES");
             r.run();
 
-            r.setFocus( "SYNERGIES-ACROSS-ORBITS" );
+            r.setFocus("SYNERGIES-ACROSS-ORBITS");
             r.run();
 
             if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
-                r.setFocus( "FUZZY-REQUIREMENTS" );
+                r.setFocus("FUZZY-REQUIREMENTS");
             else
-                r.setFocus( "REQUIREMENTS" );
+                r.setFocus("REQUIREMENTS");
             r.run();
             
             if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
-                r.setFocus( "FUZZY-AGGREGATION" );
+                r.setFocus("FUZZY-AGGREGATION");
             else
-                r.setFocus( "AGGREGATION" );
+                r.setFocus("AGGREGATION");
             r.run();
             
             if ((params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES"))) {
@@ -787,7 +817,6 @@ public class GenericTask implements Callable {
             } else if ((params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-CASES"))){
                 result = aggregate_performance_score(r);
             }
-            
 
             //////////////////////////////////////////////////////////////
 /*
@@ -813,54 +842,54 @@ public class GenericTask implements Callable {
             long t1 = System.currentTimeMillis();
             System.out.println( "Critique-Performance pattern matching done in: " + String.valueOf(t1-t0) + " msec");
             
-            */
-            // Implementation of WHY question about scores
-           // r.eval("(facts MANIFEST)");
-          //  r.eval("(facts AGGREGATION)");
-          //  r.eval("(facts REQUIREMENTS)");
 
-//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-//            
-//            double value = qb.makeQuery("AGGREGATION::VALUE").get(0).getSlotValue("satisfaction").floatValue(r.getGlobalContext());
-//            System.out.println("Total score of the current architecture: " + value);
-//             
-//            String input;
-//            DialogueHistory dh = new DialogueHistory(r,qb);
-//            while(true){
-//                
-//                input = bufferedReader.readLine();
-//                String[] inputWords = input.split(" ");
-//                if (inputWords[0].equalsIgnoreCase("why")) {
-//                    String IDinQuestion = "";
-//                    if (inputWords.length == 2){
-//                        IDinQuestion = inputWords[1];
-//                    } 
-//                    dh.newWhyQuestion(IDinQuestion);    
-//                }
-//                else if(inputWords[0].equalsIgnoreCase("how")){
-//                    dh.newHowQuestion(inputWords[1]);
-//                }
-//                else if(input.equalsIgnoreCase("up")){
-//                    dh.getHigherLevel();
-//                }
-//                else if(input.equalsIgnoreCase("end")){
-//                    break;
-//                }
-//                else if ((input.split("::").length==2)&&(input.split(" ").length == 1)){
-//                    dh.queryFact(input);
-//                }
-//                else if ((input.startsWith("R"))&&(input.split(" ").length == 1)){
-//                    dh.queryRule(Integer.parseInt(input.substring(1)));
-//                }
-//                else if(input.equalsIgnoreCase("history")){
-//                    dh.printDialogueHistory();
-//                }
-//            }
+            Implementation of WHY question about scores
+            r.eval("(facts MANIFEST)");
+            r.eval("(facts AGGREGATION)");
+            r.eval("(facts REQUIREMENTS)");
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+            double value = qb.makeQuery("AGGREGATION::VALUE").get(0).getSlotValue("satisfaction").floatValue(r.getGlobalContext());
+            System.out.println("Total score of the current architecture: " + value);
+
+            String input;
+            DialogueHistory dh = new DialogueHistory(r,qb);
+            while(true){
+
+                input = bufferedReader.readLine();
+                String[] inputWords = input.split(" ");
+                if (inputWords[0].equalsIgnoreCase("why")) {
+                    String IDinQuestion = "";
+                    if (inputWords.length == 2){
+                        IDinQuestion = inputWords[1];
+                    }
+                    dh.newWhyQuestion(IDinQuestion);
+                }
+                else if(inputWords[0].equalsIgnoreCase("how")){
+                    dh.newHowQuestion(inputWords[1]);
+                }
+                else if(input.equalsIgnoreCase("up")){
+                    dh.getHigherLevel();
+                }
+                else if(input.equalsIgnoreCase("end")){
+                    break;
+                }
+                else if ((input.split("::").length==2)&&(input.split(" ").length == 1)){
+                    dh.queryFact(input);
+                }
+                else if ((input.startsWith("R"))&&(input.split(" ").length == 1)){
+                    dh.queryRule(Integer.parseInt(input.substring(1)));
+                }
+                else if(input.equalsIgnoreCase("history")){
+                    dh.printDialogueHistory();
+                }
+            }
 
 
-//            dbm.encodeData(archID,"science",r,qb);
+            dbm.encodeData(archID,"science",r,qb);
             
-
+            */
             //////////////////////////////////////////////////////////////
             if (arch.getEval_mode().equalsIgnoreCase("DEBUG")) {
                 ArrayList<Fact> partials = qb.makeQuery("REASONING::partially-satisfied");
@@ -874,7 +903,5 @@ public class GenericTask implements Callable {
         }
         return result;
     }
-
-    
 }
 

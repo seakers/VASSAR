@@ -39,14 +39,20 @@ typedef i32 int
  
  
  
-struct BinaryInputArchitecture{
+struct BinaryInputArchitecture {
   1: int id,
   2: list<bool> inputs,
   3: list<double> outputs
 }
 
+struct ObjectiveSatisfaction {
+  1: string objective_name,
+  2: double satisfaction,
+  3: double weight
+}
 
-service VASSARInterface{
+
+service VASSARInterface {
 
   /**
    * A method definition looks like C code. It has a return type, arguments,
@@ -65,7 +71,9 @@ service VASSARInterface{
 
    list<string> getObjectiveList(),
    
-   list<string> getCritique(1:list<bool> inputs)
+   list<string> getCritique(1:list<bool> inputs),
+
+   list<ObjectiveSatisfaction> getScoreExplanation(1:list<bool> arch)
 }
 
 

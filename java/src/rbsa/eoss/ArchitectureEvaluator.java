@@ -412,29 +412,24 @@ public class ArchitectureEvaluator {
     }
     
     public Result evaluateArchitecture(Architecture arch, String mode) {
-        if(arch.getResult().getScience()==-1){ //not yet evaluated
-            GenericTask t;
-            if (saveRete==true){
-                t = new GenericTask( arch , mode, saveRete);
-            } else{
-                t = new GenericTask( arch , mode);
-            }
+        if (arch.getResult().getScience() == -1) { //not yet evaluated
+            GenericTask t = saveRete ? new GenericTask(arch, mode, saveRete) : new GenericTask(arch, mode);
 
-            //ArrayList<Future<Result>> futures = new ArrayList<Future<Result>>();
-            //tpe.execute(t);
             futures.clear();
             futures.add(tpe.submit(t));
-            Result resu = null;
+            Result result = null;
             try {
-                resu = futures.get(0).get();
-                ArchitectureEvaluator.getInstance().pushResult(resu);
-            }catch (Exception e) {
+                result = futures.get(0).get();
+                ArchitectureEvaluator.getInstance().pushResult(result);
+            }
+            catch (Exception e) {
                 System.out.println(e.getClass() + " : " + e.getMessage());
             }
-            return resu;
+            return result;
         }
-        else 
+        else {
             return arch.getResult();
+        }
     }
     
     public Result evaluateArchitecture(Architecture arch, String mode, int archID) {

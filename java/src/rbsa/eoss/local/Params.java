@@ -128,7 +128,7 @@ public class Params {
     public HashMap measurements_to_panels;
     public ArrayList parameter_list;
     public ArrayList objectives;
-    public ArrayList subobjectives;
+    public ArrayList<ArrayList<ArrayList<String>>> subobjectives;
     public HashMap instruments_to_measurements;
     public HashMap instruments_to_subobjectives;
     public HashMap instruments_to_objectives;
@@ -144,13 +144,13 @@ public class Params {
     public int npanels;
     public ArrayList<Double> panel_weights;
     public ArrayList<String> panel_names;
-    //public ArrayList<String> objective_descriptions;
-    public ArrayList obj_weights;
+    public ArrayList<ArrayList<Double>> obj_weights;
+    public ArrayList<ArrayList<String>> obj_names;
     public ArrayList<Integer> num_objectives_per_panel;
-    public ArrayList subobj_weights;
+    public ArrayList<ArrayList<ArrayList<Double>>> subobj_weights;
     public HashMap<String, String> objective_descriptions;
-    public HashMap subobj_descriptions;
-    public HashMap subobj_weights_map;
+    public HashMap<String, String> subobj_descriptions;
+    public HashMap<String, Double> subobj_weights_map;
     public HashMap revtimes;
     public HashMap scores;
     public HashMap subobj_scores;

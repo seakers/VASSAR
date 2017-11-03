@@ -18,9 +18,9 @@ public class Result implements java.io.Serializable {
     private double cost;
     private double norm_science;
     private double norm_cost;
-    private ArrayList subobjective_scores;
-    private ArrayList objective_scores;
-    private ArrayList panel_scores;
+    private ArrayList<ArrayList<ArrayList<Double>>> subobjective_scores;
+    private ArrayList<ArrayList<Double>> objective_scores;
+    private ArrayList<Double> panel_scores;
     private FuzzyValue fuzzy_science;
     private FuzzyValue fuzzy_cost;
     private Architecture arch;
@@ -39,11 +39,14 @@ public class Result implements java.io.Serializable {
 
     
     //Constructors
-    public Result () {
+    public Result() {
         params = Params.getInstance();
     }
 
-    public Result(Architecture arch, double science, double cost, ArrayList subobjective_scores, ArrayList objective_scores, ArrayList panel_scores, TreeMap<String,Double> subobjective_scores2) {
+    public Result(Architecture arch, double science, double cost,
+                  ArrayList<ArrayList<ArrayList<Double>>> subobjective_scores,
+                  ArrayList<ArrayList<Double>> objective_scores, ArrayList<Double> panel_scores,
+                  TreeMap<String,Double> subobjective_scores2) {
         params = Params.getInstance();
         this.science = science;
         this.cost = cost;
@@ -65,7 +68,10 @@ public class Result implements java.io.Serializable {
         this.fuzzy_cost = null;
     }
 
-    public Result(Architecture arch, double science, double cost, FuzzyValue fs, FuzzyValue fc, ArrayList subobjective_scores, ArrayList objective_scores, ArrayList panel_scores, TreeMap<String,Double> subobjective_scores2) {
+    public Result(Architecture arch, double science, double cost, FuzzyValue fs, FuzzyValue fc,
+                  ArrayList<ArrayList<ArrayList<Double>>> subobjective_scores,
+                  ArrayList<ArrayList<Double>> objective_scores, ArrayList<Double> panel_scores,
+                  TreeMap<String, Double> subobjective_scores2) {
         params = Params.getInstance();
         this.science = science;
         this.cost = cost;
@@ -234,7 +240,7 @@ public class Result implements java.io.Serializable {
     public void setSubobjective_scores(ArrayList subobjective_scores) {
         this.subobjective_scores = subobjective_scores;
     }
-    public ArrayList getObjective_scores() {
+    public ArrayList<ArrayList<Double>> getObjective_scores() {
         return objective_scores;
     }
     public void setObjective_scores(ArrayList objective_scores) {
@@ -342,31 +348,30 @@ public class Result implements java.io.Serializable {
         return c;
     }
 
-    public static double SumDollar(ArrayList a) {
-        int n = a.size();
+    public static double SumDollar(ArrayList<Double> a) {
         double res = 0.0;
-        for (int i = 0;i<n;i++) {
-            res = res +  (Double) a.get(i) ;
+        for (Double num: a) {
+            res += num;
         }
         return res;
     }
 
-    public static ArrayList dotMult(ArrayList a, ArrayList b) throws Exception {
-        int n = a.size();
+    public static ArrayList<Double> dotMult(ArrayList<Double> a, ArrayList<Double> b) throws Exception {
+        int n1 = a.size();
         int n2 = b.size();
-        if (n!=n2) {
-            throw new Exception ("dotSum: Arrays of different sizes");
+        if (n1 != n2) {
+            throw new Exception("dotSum: Arrays of different sizes");
         }
-        ArrayList c = new ArrayList(n);
-        for (int i = 0;i<n;i++) {
-            Double t = (Double) a.get(i) * (Double) b.get(i);
+        ArrayList<Double> c = new ArrayList<>(n1);
+        for (int i = 0; i < n1; i++) {
+            Double t = a.get(i) * b.get(i);
             c.add(t);
         }
         return c;
     }
 
-    public static double sumProduct(ArrayList a, ArrayList b) throws Exception {
-        return SumDollar(dotMult(a,b));
+    public static double sumProduct(ArrayList<Double> a, ArrayList<Double> b) throws Exception {
+        return SumDollar(dotMult(a, b));
     }
 
     public double distance(Result other) {

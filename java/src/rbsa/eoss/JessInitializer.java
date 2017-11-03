@@ -1361,29 +1361,29 @@ public class JessInitializer {
      }
      private void loadAggregationRules(Rete r, Workbook xls, String sheet, String[] clps) {
          try {
-             for (String clp:clps) {
+             for (String clp: clps) {
                  r.batch(clp);
              }
              Sheet meas = xls.getSheet(sheet);
              
              //Stakeholders or panels
              Cell[] col = meas.getColumn(1);
-             params.npanels = col.length-3;
+             params.npanels = col.length - 3;
              String call = "(deffacts AGGREGATION::init-aggregation-facts ";
              params.panel_names = new ArrayList<>(params.npanels);
              params.panel_weights = new ArrayList<>(params.npanels);
+             params.obj_names = new ArrayList<>(params.npanels);
              params.obj_weights = new ArrayList<>(params.npanels);
              params.subobj_weights = new ArrayList<>(params.npanels);
              params.num_objectives_per_panel = new ArrayList<>(params.npanels);
-             params.subobj_weights_map = new HashMap();
-             for(int i = 0; i < params.npanels; i++) {
+             params.subobj_weights_map = new HashMap<>();
+             for (int i = 0; i < params.npanels; i++) {
                  params.panel_names.add(meas.getCell(1, i+2).getContents());
-                 //params.panel_weights.add(Double.parseDouble(meas.getCell(3, i+2).getContents()));
                  NumberCell nc = (NumberCell)meas.getCell(3, i+2);
                  params.panel_weights.add(nc.getValue());
              }
-             call = call + " (AGGREGATION::VALUE (sh-scores (repeat$ -1.0 " + params.npanels + ")) (sh-fuzzy-scores (repeat$ -1.0 " + params.npanels + ")) (weights " + javaArrayList2JessList(params.panel_weights) + ")"
-                     + "(factHistory F" + params.nof + "))";
+             call = call.concat(" (AGGREGATION::VALUE (sh-scores (repeat$ -1.0 " + params.npanels + ")) (sh-fuzzy-scores (repeat$ -1.0 " + params.npanels + ")) (weights " + javaArrayList2JessList(params.panel_weights) + ")"
+                     + "(factHistory F" + params.nof + "))");
              params.nof++;
              
              // Objectives
@@ -1394,80 +1394,80 @@ public class JessInitializer {
              int p = 0;
 
              HashMap<String, String> obj_descriptions = new HashMap<>();
-             while(p < params.npanels) {
+             while (p < params.npanels) {
                  Boolean new_panel = false;
                  ArrayList<Double> obj_weights_p = new ArrayList<>();
-                 while(!new_panel) {             
-                     //Double weight = Double.parseDouble(obj_w[i].getContents());
+                 ArrayList<String> obj_names_p = new ArrayList<>();
+                 while (!new_panel) {
                      NumberCell nc2 = (NumberCell) obj_w[i];
                      obj_weights_p.add(nc2.getValue());
                      String obj = obj_n[i].getContents();
                      obj_descriptions.put(obj, obj_d[i].getContents());
                      new_panel = obj_d[i+1].getContents().equalsIgnoreCase("");
+                     obj_names_p.add(obj);
                      i++;
                  }
                  params.obj_weights.add(obj_weights_p);
+                 params.obj_names.add(obj_names_p);
                  params.num_objectives_per_panel.add(obj_weights_p.size());
                  
-                 call = call + " (AGGREGATION::STAKEHOLDER (id " + params.panel_names.get(p) + " ) (index " + (p + 1) + " ) (obj-fuzzy-scores (repeat$ -1.0 " +  obj_weights_p.size() + ")) (obj-scores (repeat$ -1.0 " + obj_weights_p.size() + ")) (weights " +  javaArrayList2JessList(obj_weights_p) + ")"
-                         + "(factHistory F" + params.nof + ")) ";
+                 call = call.concat(" (AGGREGATION::STAKEHOLDER (id " + params.panel_names.get(p) + " ) (index " + (p + 1) + " ) (obj-fuzzy-scores (repeat$ -1.0 " +  obj_weights_p.size() + ")) (obj-scores (repeat$ -1.0 " + obj_weights_p.size() + ")) (weights " +  javaArrayList2JessList(obj_weights_p) + ")"
+                         + "(factHistory F" + params.nof + ")) ");
                  params.nof++;
                  p++;
-                 i = i + 4;
+                 i += 4;
              }
              params.objective_descriptions = obj_descriptions;
 
              //Subobjectives
              p = 0;
-             params.subobjectives = new ArrayList();
-             HashMap<String,String> subobjDes = new HashMap<>();
-             while(p<params.npanels) {
+             params.subobjectives = new ArrayList<>();
+             HashMap<String, String> subobjDes = new HashMap<>();
+             while (p < params.npanels) {
                  Cell[] subobj_w = meas.getColumn(13+p*5);
                  Cell[] subobj_n = meas.getColumn(11+p*5);
                  Cell[] subobj_d = meas.getColumn(12+p*5);
-                 //Cell[] subobj_d = meas.getColumn(12*p*5);
-                 ArrayList<ArrayList> subobj_weights_p = new ArrayList<ArrayList>();
-                 ArrayList subobj_p = new ArrayList(params.num_objectives_per_panel.get(p));
+                 ArrayList<ArrayList<Double>> subobj_weights_p = new ArrayList<>();
+                 ArrayList<ArrayList<String>> subobj_p = new ArrayList<>(params.num_objectives_per_panel.get(p));
                  i = 4;
                  int o = 0;
-                 while(o<params.num_objectives_per_panel.get(p)) {
+                 while (o < params.num_objectives_per_panel.get(p)) {
                      Boolean new_obj = false;
-                     ArrayList<Double> subobj_weights_o = new ArrayList<Double>();
-                     ArrayList subobj_o = new ArrayList();
+                     ArrayList<Double> subobj_weights_o = new ArrayList<>();
+                     ArrayList<String> subobj_o = new ArrayList<>();
                      int so = 1;
-                     while(!new_obj) {             
-                         //Double weight = Double.parseDouble(subobj_w[i].getContents());
+                     while (!new_obj) {
                          NumberCell nc3 = (NumberCell) subobj_w[i];
                          double weight = nc3.getValue();
                          subobj_weights_o.add(weight);
-                         String subobj_name = params.panel_names.get(p) + (o+1) + "-" + so;
-//                         System.out.println(subobj_name + ": " + subobj_d[i].getContents());
+                         String subobj_name = params.panel_names.get(p) + (o + 1) + "-" + so;
                          subobjDes.put(subobj_name, subobj_d[i].getContents());
-                         params.subobj_weights_map.put(subobj_name,weight);
+                         params.subobj_weights_map.put(subobj_name, weight);
                          subobj_o.add(subobj_name);
-                         i++;so++;
-                         if (i>= subobj_n.length) {
+                         i++;
+                         so++;
+                         if (i >= subobj_n.length) {
                              new_obj = true;
-                         } else {
+                         }
+                         else {
                              String subobj = subobj_n[i].getContents();
                              new_obj = subobj.equalsIgnoreCase("");
                          }
-                         
                      }
                      subobj_weights_p.add(subobj_weights_o);
                      subobj_p.add(subobj_o);
-                     call = call + " (AGGREGATION::OBJECTIVE (id " + params.panel_names.get(p) + (o + 1) + " ) (parent " + params.panel_names.get(p) + ") (index " + (o + 1)+ " ) (subobj-fuzzy-scores (repeat$ -1.0 " +  subobj_weights_o.size() + ")) (subobj-scores (repeat$ -1.0 " + subobj_weights_o.size() + ")) (weights " +  javaArrayList2JessList(subobj_weights_o) + ")"
-                             + "(factHistory F" + params.nof + ")) ";
+                     call = call.concat(" (AGGREGATION::OBJECTIVE (id " + params.panel_names.get(p) + (o + 1) + " ) (parent " + params.panel_names.get(p) + ") (index " + (o + 1)+ " ) (subobj-fuzzy-scores (repeat$ -1.0 " +  subobj_weights_o.size() + ")) (subobj-scores (repeat$ -1.0 " + subobj_weights_o.size() + ")) (weights " +  javaArrayList2JessList(subobj_weights_o) + ")"
+                             + "(factHistory F" + params.nof + ")) ");
                      params.nof++;
                      o++;
-                     i = i + 4;
+                     i += 4;
                  }
                  p++;
                  params.subobj_weights.add(subobj_weights_p);
                  params.subobjectives.add(subobj_p);
              }
              params.subobj_descriptions = subobjDes;
-             call = call + ")";//close deffacts
+             call = call.concat(")");//close deffacts
              r.eval(call);         
          } catch (Exception e) {
             System.out.println( "EXC in loadAggregationRules " +e.getMessage() );

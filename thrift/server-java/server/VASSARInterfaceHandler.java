@@ -21,6 +21,8 @@ package server;
 
 
 
+import javaInterface.ObjectiveSatisfaction;
+import jess.Fact;
 import rbsa.eoss.Architecture;
 import rbsa.eoss.ArchitectureEvaluator;
 import rbsa.eoss.ArchitectureGenerator;
@@ -28,8 +30,7 @@ import rbsa.eoss.Result;
 import rbsa.eoss.ResultManager;
 import rbsa.eoss.CritiqueGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javaInterface.BinaryInputArchitecture;
 import javaInterface.VASSARInterface;
@@ -37,9 +38,6 @@ import org.apache.thrift.TException;
 
 // Generated code
 //import shared.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import rbsa.eoss.local.Params;
 
@@ -141,6 +139,45 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
             objectiveList.add(k);
         });
         return objectiveList;
+    }
+
+    private String satisfactionFromScore(double score) {
+        if (score == 0.0) {
+            return "not";
+        }
+        else if (score < 1.0) {
+            return "partially";
+        }
+        else {
+            return "fully";
+        }
+    }
+
+    public List<ObjectiveSatisfaction> getScoreExplanation(List<Boolean> arch) {
+        initJess();
+
+        String bitString = "";
+        for (Boolean b: arch) {
+            bitString += b ? "1" : "0";
+        }
+
+        // Generate a new architecture
+        Architecture architecture = AG.defineNewArch(bitString);
+
+        // Evaluate the architecture
+        Result result = AE.evaluateArchitecture(architecture, "Slow");
+
+        // Save the score and the cost
+        List<ObjectiveSatisfaction> explanations = new ArrayList<>();
+
+        for (int i = 0; i < params.obj_names.size(); ++i) {
+            for (int j = 0; j < params.obj_names.get(i).size(); ++j) {
+                explanations.add(new ObjectiveSatisfaction(params.obj_names.get(i).get(j),
+                        result.getObjective_scores().get(i).get(j), params.obj_weights.get(i).get(j)));
+            }
+        }
+
+        return explanations;
     }
 }
 
