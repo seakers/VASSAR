@@ -12,11 +12,7 @@ import rbsa.eoss.local.Params;
 import jess.*;
 import jxl.*;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Hashtable;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 import java.util.regex.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -625,12 +621,12 @@ public class JessInitializer {
             System.out.println( "EXC in loadAttributeInheritanceRules " +e.getMessage() );
         }
      }
-     private void loadFuzzyAttributeRules(Rete r, Workbook xls, String sheet, String template) {
-         try {
-             Sheet meas = xls.getSheet(sheet);
-             
+    private void loadFuzzyAttributeRules(Rete r, Workbook xls, String sheet, String template) {
+        try {
+            Sheet meas = xls.getSheet(sheet);
+
             int nrules = meas.getRows();
-           
+
             for (int i = 1;i<nrules;i++) {
                 Cell[] row = meas.getRow(i);
                 String att = row[0].getContents();
@@ -647,36 +643,37 @@ public class JessInitializer {
                 for (int j = 1;j<=num_values;j++) {
                     fuzzy_values[j-1] = row[4*j].getContents();
                     call_values = call_values + fuzzy_values[j-1] + " ";
-                    mins[j-1] = row[1+4*j].getContents();
+                    mins[j-1] = Double.toString(((NumberCell)row[1+4*j]).getValue());
                     call_mins = call_mins + mins[j-1] +   " ";
-                    means[j-1] = row[2+4*j].getContents();
-                    maxs[j-1] = row[3+4*j].getContents();
+                    means[j-1] = Double.toString(((NumberCell)row[2+4*j]).getValue());
+                    maxs[j-1] = Double.toString(((NumberCell)row[3+4*j]).getValue());
                     call_maxs = call_maxs + maxs[j-1] + " ";
                 }
                 call_values = call_values + ")";
                 call_mins = call_mins + ")";
                 call_maxs = call_maxs + ")";
-                
 
                 String call = "(defrule FUZZY::numerical-to-fuzzy-" + att + " ";
                 String ruleName = "FUZZY::numerical-to-fuzzy-" + att;
                 if (param.equalsIgnoreCase("all")) {
                     call = call + "?m <- (" + template + " (" + att + "# ?num&~nil) (" + att + " nil) (factHistory ?fh)) => " ;
                     call = call + "(bind ?value (numerical-to-fuzzy ?num " + call_values + " " + call_mins + " " + call_maxs + " )) (modify ?m (" + att  + " ?value)"
-                            + "(factHistory (str-cat \"{R\" (?*rulesMap* get "+ruleName+") \" \" ?fh \"}\"))"
-                            + ")) ";
-                } else {
+                        + "(factHistory (str-cat \"{R\" (?*rulesMap* get "+ruleName+") \" \" ?fh \"}\"))"
+                        + ")) ";
+                }
+                else {
                     String att2 = att.substring(0, att.length()-1);
                     call = call + "?m <- (" + template + " (Parameter \"" + param + "\") (" + att2 + "# ?num&~nil) (" + att + " nil) (factHistory ?fh)) => " ;
                     call = call + "(bind ?value (numerical-to-fuzzy ?num " + call_values + " " + call_mins + " " + call_maxs + " )) (modify ?m (" + att  + " ?value)"
-                            + "(factHistory (str-cat \"{R\" (?*rulesMap* get "+ruleName+") \" \" ?fh \"}\"))"
-                            + ")) ";
+                        + "(factHistory (str-cat \"{R\" (?*rulesMap* get "+ruleName+") \" \" ?fh \"}\"))"
+                        + ")) ";
                 }
 
-                r.eval(call);     
-            }          
-         }catch (Exception e) {
-            System.out.println( "EXC in loadAttributeInheritanceRules " +e.getMessage() );
+                r.eval(call);
+            }
+        }
+        catch (Exception e) {
+            System.out.println("EXC in loadAttributeInheritanceRules " +e.getMessage());
         }
      }
      
