@@ -167,14 +167,12 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
         // Evaluate the architecture
         Result result = AE.evaluateArchitecture(architecture, "Slow");
 
-        // Save the score and the cost
+        // Save the explanations for each stakeholder score
         List<ObjectiveSatisfaction> explanations = new ArrayList<>();
 
-        for (int i = 0; i < params.obj_names.size(); ++i) {
-            for (int j = 0; j < params.obj_names.get(i).size(); ++j) {
-                explanations.add(new ObjectiveSatisfaction(params.obj_names.get(i).get(j),
-                        result.getObjective_scores().get(i).get(j), params.obj_weights.get(i).get(j)));
-            }
+        for (int i = 0; i < params.panel_names.size(); ++i) {
+            explanations.add(new ObjectiveSatisfaction(params.panel_names.get(i),
+                    result.getPanel_scores().get(i), params.panel_weights.get(i)));
         }
 
         return explanations;

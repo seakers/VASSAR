@@ -234,16 +234,16 @@ public class Result implements java.io.Serializable {
     public double getUtility() {
         return utility;
     }
-    public ArrayList getSubobjective_scores() {
+    public ArrayList<ArrayList<ArrayList<Double>>> getSubobjective_scores() {
         return subobjective_scores;
     }
-    public void setSubobjective_scores(ArrayList subobjective_scores) {
+    public void setSubobjective_scores(ArrayList<ArrayList<ArrayList<Double>>> subobjective_scores) {
         this.subobjective_scores = subobjective_scores;
     }
     public ArrayList<ArrayList<Double>> getObjective_scores() {
         return objective_scores;
     }
-    public void setObjective_scores(ArrayList objective_scores) {
+    public void setObjective_scores(ArrayList<ArrayList<Double>> objective_scores) {
         this.objective_scores = objective_scores;
     }
     public TreeMap<String, Double> getSubobjective_scores2() {
@@ -252,10 +252,10 @@ public class Result implements java.io.Serializable {
     public void setSubobjective_scores2(TreeMap<String, Double> subobjective_scores2) {
         this.subobjective_scores2 = subobjective_scores2;
     }
-    public ArrayList getPanel_scores() {
+    public ArrayList<Double> getPanel_scores() {
         return panel_scores;
     }
-    public void setPanel_scores(ArrayList panel_scores) {
+    public void setPanel_scores(ArrayList<Double> panel_scores) {
         this.panel_scores = panel_scores;
     }
     public double getNorm_science() {

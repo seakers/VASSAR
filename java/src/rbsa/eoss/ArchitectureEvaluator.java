@@ -52,8 +52,8 @@ public class ArchitectureEvaluator {
     private ArrayList<Future<Result>> futures;
     private HashMap<String,ArrayList<Fact>> capabilities;
     private HashMap<String,NDSM> dsm_map;
-    private HashMap<ArrayList<String>, HashMap<String,Double>> scores;
-    private HashMap<ArrayList<String>, HashMap<String,ArrayList<Double>>> subobj_scores;
+    private HashMap<ArrayList<String>, HashMap<String, Double>> scores;
+    private HashMap<ArrayList<String>, HashMap<String, ArrayList<ArrayList<ArrayList<Double>>>>> subobj_scores;
     private boolean saveRete = false;
     
     private ArchitectureEvaluator() {
@@ -124,9 +124,9 @@ public class ArchitectureEvaluator {
         return scores.get(instruments);
     }
 
-    public HashMap<String,ArrayList<Double>> getAllOrbitSubobjScores(ArrayList<String> instruments) {
+    public HashMap<String, ArrayList<ArrayList<ArrayList<Double>>>> getAllOrbitSubobjScores(ArrayList<String> instruments) {
         Collections.sort(instruments);
-        HashMap<String,ArrayList<Double>> ret = subobj_scores.get(instruments);
+        HashMap<String, ArrayList<ArrayList<ArrayList<Double>>>> ret = subobj_scores.get(instruments);
         if(ret == null) {
             System.out.println("instruments " + instruments);
         }
@@ -152,9 +152,9 @@ public class ArchitectureEvaluator {
             hmap.put(orbit,score);
     }
 
-    public ArrayList<Double> getSubobjScores(ArrayList<String> instruments, String orbit) {
+    public ArrayList<ArrayList<ArrayList<Double>>> getSubobjScores(ArrayList<String> instruments, String orbit) {
         Collections.sort(instruments);
-        ArrayList<Double> ret;
+        ArrayList<ArrayList<ArrayList<Double>>> ret;
         ret = getAllOrbitSubobjScores(instruments).get(orbit);
         if(ret == null) {
             System.out.println(instruments.toString() + " " + orbit);
@@ -162,49 +162,49 @@ public class ArchitectureEvaluator {
         return ret;
     }
 
-    public void setSubobjScores(ArrayList<String> instruments, String orbit, ArrayList<Double> scores) {
+    public void setSubobjScores(ArrayList<String> instruments, String orbit, ArrayList<ArrayList<ArrayList<Double>>> scores) {
         Collections.sort(instruments);
-        HashMap<String,ArrayList<Double>> hmap =  getAllOrbitSubobjScores(instruments);
+        HashMap<String, ArrayList<ArrayList<ArrayList<Double>>>> hmap = getAllOrbitSubobjScores(instruments);
         if(hmap == null) {
-            hmap = new HashMap<String,ArrayList<Double>>();
+            hmap = new HashMap<>();
             subobj_scores.put(instruments, hmap);
         }
         
         if(hmap.get(orbit) == null)
-            hmap.put(orbit,scores);
+            hmap.put(orbit, scores);
     }
 
     public void recomputeScores(int dim) {
         ICombinatoricsVector<String> originalVector = Factory.createVector(Params.instrument_list);
         Generator<String> gen = Factory.createSimpleCombinationGenerator(originalVector, dim);
-        Iterator it = gen.iterator();
-        for (int i = 0;i<gen.getNumberOfGeneratedObjects();i++) {
-            ICombinatoricsVector<String> combination = ( ICombinatoricsVector<String>)it.next();
-            for (int o = 0;o<Params.norb;o++) {
+        Iterator<ICombinatoricsVector<String>> it = gen.iterator();
+        for (int i = 0; i < gen.getNumberOfGeneratedObjects(); i++) {
+            ICombinatoricsVector<String> combination = it.next();
+            for (int o = 0; o < Params.norb; o++) {
                 String orbit = Params.orbit_list[o];
-                GenericTask t = new GenericTask( new Architecture(combination, orbit),"Slow");
+                GenericTask t = new GenericTask(new Architecture(combination, orbit),"Slow");
                 futures.add(tpe.submit(t));
             }
         }
         
-        for (Future<Result> future:futures){
+        for (Future<Result> future: futures) {
             try {
-                Result resu = future.get(); //Do something with the results..
-                ArchitectureEvaluator.getInstance().pushResult(resu);
+                Result result = future.get(); //Do something with the results..
+                ArchitectureEvaluator.getInstance().pushResult(result);
                 // Add DSM
-                Architecture arch = resu.getArch();
+                Architecture arch = result.getArch();
                 String[] payloads = arch.getPayloads();
                 String orbit = arch.getOrbit();
                 
-                Double score = resu.getScience();
-                ArrayList<Double> the_subobj_scores = resu.getSubobjective_scores();
+                Double score = result.getScience();
+                ArrayList<ArrayList<ArrayList<Double>>> the_subobj_scores = result.getSubobjective_scores();
                 
-                ArrayList<String> als = new ArrayList<String>();
+                ArrayList<String> als = new ArrayList<>();
                 als.addAll(Arrays.asList(payloads));
-                setScore(als,orbit,score);
-                setSubobjScores(als,orbit,the_subobj_scores);
-                
-            }catch(Exception e) {
+                setScore(als, orbit, score);
+                setSubobjScores(als, orbit, the_subobj_scores);
+            }
+            catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -256,11 +256,16 @@ public class ArchitectureEvaluator {
                     ArrayList<String> als2 = new ArrayList<String>();
                     als2.addAll(nto10.toArrayList());
                     Collections.sort(als2);
-                    ArrayList<Double> subobj_scores0 = getSubobjScores(als,orbit);
-                    ArrayList<Double> subobj_scores1 = getSubobjScores(als2,orbit);
+                    ArrayList<ArrayList<ArrayList<Double>>> subobj_scores0 = getSubobjScores(als, orbit);
+                    ArrayList<ArrayList<ArrayList<Double>>> subobj_scores1 = getSubobjScores(als2, orbit);
                     double red = 0.0;
-                    for (int k = 0;k<subobj_scores0.size();k++)
-                        red -= (subobj_scores1.get(k) - subobj_scores0.get(k));
+                    for (int k = 0; k < subobj_scores0.size(); ++k) {
+                        for (int l = 0; l < subobj_scores0.get(k).size(); ++l) {
+                            for (int m = 0; m < subobj_scores0.get(k).get(l).size(); ++m) {
+                                red -= (subobj_scores1.get(k).get(l).get(m) - subobj_scores0.get(k).get(l).get(m));
+                            }
+                        }
+                    }
                     NDSM rdsm = dsm_map.get(key_r);
                     if (rdsm == null) {
                         rdsm = new NDSM(Params.instrument_list,key_r);
@@ -519,11 +524,11 @@ public class ArchitectureEvaluator {
         this.results.push(result);
     }
 
-    public void setSubobj_scores(HashMap<ArrayList<String>, HashMap<String, ArrayList<Double>>> subobj_scores) {
+    public void setSubobj_scores(HashMap<ArrayList<String>, HashMap<String, ArrayList<ArrayList<ArrayList<Double>>>>> subobj_scores) {
         this.subobj_scores = subobj_scores;
     }
 
-    public HashMap<ArrayList<String>, HashMap<String, ArrayList<Double>>> getSubobj_scores() {
+    public HashMap<ArrayList<String>, HashMap<String, ArrayList<ArrayList<ArrayList<Double>>>>> getSubobj_scores() {
         return subobj_scores;
     }
     

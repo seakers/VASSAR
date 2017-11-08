@@ -7,7 +7,7 @@
     (MANIFEST::Mission (Name ?n)(satellite-dry-mass ?sdm&:(> ?sdm 3000)))
     =>
     (call ?*q* addElement (new java.lang.String
-        (str-cat "Satellite in orbit " ?n " is too heavy: dry-mass " (format nil "%2.2f" ?sdm) " kg"))))
+        (str-cat "Satellite in orbit " ?n " is too heavy: dry-mass is " (format nil "%2.2f" ?sdm) " kg."))))
 
 
 
@@ -17,7 +17,7 @@
     =>
     (if (<> ?bn ?sn) then
     (call ?*q* addElement (new java.lang.String
-        (str-cat "It is desirable to have satellites of similar size: satellite " ?bn " more than " ?sn " (" (format nil "%2.2f" ?r) ")" )))))
+        (str-cat "It is desirable to have satellites of similar size: satellite " ?bn " more than " ?sn " " (format nil "%2.2f" ?r) "." )))))
 
 
 
@@ -27,7 +27,7 @@
     =>
     (if (<> ?bn ?sn) then
     (call ?*q* addElement (new java.lang.String
-        (str-cat "It is desirable to have satellites of similar cost: satellite " ?bn " more than " ?sn " (" (format nil "%2.2f" ?r) ")")))))
+        (str-cat "It is desirable to have satellites of similar cost: satellite " ?bn " more than " ?sn " " (format nil "%2.2f" ?r) ".")))))
 
 
 
@@ -43,4 +43,4 @@
     (if (> ?m 0.2)
     then (
         call ?*q* addElement (new java.lang.String
-            (str-cat "It is desirable to fill launch vehicles to their capacity. They are currently only usde at X %" ?n " is " ?lf ": "?m)))))
+            (str-cat "It is desirable to fill launch vehicles to their capacity. They are currently only used at X %" ?n " is " ?lf ": " ?m ".")))))
