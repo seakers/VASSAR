@@ -21,14 +21,16 @@ package server;
 
 
 
+import javaInterface.ObjectiveSatisfaction;
+import jess.Fact;
 import rbsa.eoss.Architecture;
+import rbsa.eoss.ArchitectureEvaluator;
+import rbsa.eoss.ArchitectureGenerator;
 import rbsa.eoss.Result;
 import rbsa.eoss.ResultManager;
 import rbsa.eoss.CritiqueGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import javaInterface.BinaryInputArchitecture;
 import javaInterface.VASSARInterface;
@@ -40,44 +42,43 @@ import javaInterface.VASSARInterface;
 import rbsa.eoss.local.Params;
 
 public class VASSARInterfaceHandler implements VASSARInterface.Iface {
-    
-    private rbsa.eoss.ArchitectureEvaluator AE = rbsa.eoss.ArchitectureEvaluator.getInstance();
-    private rbsa.eoss.ArchitectureGenerator AG = rbsa.eoss.ArchitectureGenerator.getInstance();
+
+    private Params params;
+    private ArchitectureEvaluator AE = null;
+    private ArchitectureGenerator AG = null;
     private boolean jessInitialized = false;
 
     public void ping() {
       System.out.println("ping()");
     }
   
-    public String initJess(){
-        
-        if(jessInitialized) return "Jess already initialized";
+    private String initJess() {
+        if(jessInitialized) {
+            return "Jess already initialized";
+        }
         
         // Set a path to the project folder
-        String path = "/Users/bang/workspace/daphne/VASSAR";
+        String path = System.getProperty("user.dir");
         
         // Initialization
-        ResultManager RM = ResultManager.getInstance();
-        Params params = null;
         String search_clps = "";
-        params = new Params(path, "FUZZY-ATTRIBUTES", "test","normal",search_clps);//FUZZY or CRISP
-        AE.init(1);        
+        params = Params.initInstance(path, "FUZZY-ATTRIBUTES", "test","normal", search_clps);//FUZZY or CRISP
+        AE = ArchitectureEvaluator.getInstance();
+        AG = ArchitectureGenerator.getInstance();
+        AE.init(1);
+        ResultManager RM = ResultManager.getInstance();
         jessInitialized = true;
         return "Jess Initialized";
     }
- 
-  
-    public BinaryInputArchitecture eval(List<Boolean> boolList){
-        
+
+    public BinaryInputArchitecture eval(List<Boolean> boolList) {
         // Input a new architecture design
         // There must be 5 orbits. Instrument name is represented by a capital letter, taken from {A,B,C,D,E,F,G,H,I,J,K,L}
-
         initJess();
         
         String bitString = "";
-        for(Boolean b:boolList){
-            if(b) bitString = bitString + "1";
-            else bitString = bitString + "0";
+        for (Boolean b: boolList) {
+            bitString += b ? "1" : "0";
         }
 
         // Generate a new architecture
@@ -94,19 +95,14 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
         outputs.add(cost);
         
         System.out.println("Performance Score: " + science + ", Cost: " + cost);
-        return new BinaryInputArchitecture(0,boolList,outputs);
+        return new BinaryInputArchitecture(0, boolList, outputs);
     }
-    
-    
-    @Override
-    public List<String> getCritique(List<Boolean> boolList){
-        
+
+    public List<String> getCritique(List<Boolean> boolList) {
         initJess();
-        
         String bitString = "";
-        for(Boolean b:boolList){
-            if(b) bitString = bitString + "1";
-            else bitString = bitString + "0";
+        for(Boolean b: boolList){
+            bitString += b ? "1" : "0";
         }
         
         System.out.println(bitString);
@@ -116,10 +112,8 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
 
         // Initialize Critique Generator
         CritiqueGenerator critiquer = new CritiqueGenerator(architecture);
-        
-        List<String> critique = critiquer.getCritique();
-        
-        return critique;
+
+        return critiquer.getCritique();
     }
     
     @Override
@@ -199,24 +193,66 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
     
     
     public ArrayList<String> getOrbitList(){
+
         ArrayList<String> orbitList = new ArrayList<>();
-        String[] list = Params.orbit_list;
-        for(String o:list){
+        for(String o: Params.orbit_list){
             orbitList.add(o);
         }
         return orbitList;
     }
-    
-    
-    public ArrayList<String> getInstrumentList(){
+
+    public ArrayList<String> getInstrumentList() {
         ArrayList<String> instrumentList = new ArrayList<>();
-        String[] list = Params.instrument_list;
-        for(String i:list){
+        for (String i: Params.instrument_list) {
             instrumentList.add(i);
         }
         return instrumentList;
     }
 
+    public ArrayList<String> getObjectiveList() {
+        initJess();
+        ArrayList<String> objectiveList = new ArrayList<>();
+        params.objective_descriptions.forEach((k, v) -> {
+            objectiveList.add(k);
+        });
+        return objectiveList;
+    }
 
+    private String satisfactionFromScore(double score) {
+        if (score == 0.0) {
+            return "not";
+        }
+        else if (score < 1.0) {
+            return "partially";
+        }
+        else {
+            return "fully";
+        }
+    }
+
+    public List<ObjectiveSatisfaction> getScoreExplanation(List<Boolean> arch) {
+        initJess();
+
+        String bitString = "";
+        for (Boolean b: arch) {
+            bitString += b ? "1" : "0";
+        }
+
+        // Generate a new architecture
+        Architecture architecture = AG.defineNewArch(bitString);
+
+        // Evaluate the architecture
+        Result result = AE.evaluateArchitecture(architecture, "Slow");
+
+        // Save the explanations for each stakeholder score
+        List<ObjectiveSatisfaction> explanations = new ArrayList<>();
+
+        for (int i = 0; i < params.panel_names.size(); ++i) {
+            explanations.add(new ObjectiveSatisfaction(params.panel_names.get(i),
+                    result.getPanel_scores().get(i), params.panel_weights.get(i)));
+        }
+
+        return explanations;
+    }
 }
 

@@ -389,16 +389,18 @@ private void initializeInflationFactors()
             return null;
         }
     }
-     public ArrayList JessList2ArrayList(ValueVector vv, Rete r) {
-         ArrayList al = new ArrayList();
-         try {
-             for (int i = 0;i<vv.size();i++) {
-                 al.add(vv.get(i).stringValue(r.getGlobalContext()));
-             }
-         }catch (Exception e) {
-             System.out.println(e.getMessage());
-             al = null;
-         }
-         return al;
-     } 
- }
+
+    public ArrayList<String> JessList2ArrayList(ValueVector vv, Rete r) {
+        ArrayList<String> al = new ArrayList<>();
+        try {
+            for (int i = 0; i < vv.size(); i++) {
+                al.add(vv.get(i).stringValue(r.getGlobalContext()));
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            al = null;
+        }
+        return al;
+    }
+}

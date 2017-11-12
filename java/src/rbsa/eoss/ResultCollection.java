@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
         
 public class ResultCollection implements java.io.Serializable {
-    
+
+    private Params params;
     private String stamp;
     private String filePath;
     private String name;
@@ -24,41 +25,50 @@ public class ResultCollection implements java.io.Serializable {
     private HashMap<String,String> conf;
     private ArrayList<Result> front;
     
-    public ResultCollection()
-    {
+    public ResultCollection() {
+        params = Params.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd_HH-mm-ss" );
         stamp = dateFormat.format( new Date() );
-        name = Params.getName();
-        conf = new HashMap<String,String>();
-        conf.put("Requirements",Params.requirement_satisfaction_xls);
-        conf.put("Capabilities",Params.capability_rules_xls);
+        name = params.getName();
+        conf = new HashMap<>();
+        conf.put("Requirements",params.requirement_satisfaction_xls);
+        conf.put("Capabilities",params.capability_rules_xls);
         //int ind1 = inputFile.indexOf("\\");
         //int ind2 = inputFile.indexOf(".");
         //String tmp = inputFile.substring(ind1+1, ind2);
         
-        filePath = Params.path_save_results + "\\" + stamp + "_" + name + ".rs";
+        filePath = params.path_save_results + "\\" + stamp + "_" + name + ".rs";
         filePath = filePath.replaceAll("\\\\", "\\\\\\\\");
-        results = new Stack<Result>();
-        front = new ArrayList<Result>();
+        results = new Stack<>();
+        front = new ArrayList<>();
     }
-     public ResultCollection(Stack<Result> results)
-    {
+
+    public ResultCollection(Stack<Result> results) {
+        params = Params.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd_HH-mm-ss" );
         stamp = dateFormat.format( new Date() );
-        name = Params.getName();
-        conf = new HashMap<String,String>();
-        conf.put("Requirements",Params.requirement_satisfaction_xls);
-        conf.put("Capabilities",Params.capability_rules_xls);
+        name = params.getName();
+        conf = new HashMap<>();
+        conf.put("Requirements",params.requirement_satisfaction_xls);
+        conf.put("Capabilities",params.capability_rules_xls);
         
         //int ind1 = inputFile.indexOf("\\");
         //int ind2 = inputFile.indexOf(".");
         //String tmp = inputFile.substring(ind1+1, ind2);
         
-        filePath = Params.path_save_results + "\\" + stamp + "_" + name + ".rs";
+        filePath = params.path_save_results + "\\" + stamp + "_" + name + ".rs";
         filePath = filePath.replaceAll("\\\\", "\\\\\\\\");
         this.results = results;
         front = compute_pareto_front(results);
     }
+
+    public ResultCollection(String stamp, Stack<Result> results) {
+        params = Params.getInstance();
+        this.stamp = stamp;
+        this.results = results;
+        front = compute_pareto_front(results);
+    }
+
     private ArrayList<Result> compute_pareto_front(Stack<Result> stack) {
         ArrayList<Result> thefront = new ArrayList<Result>();
         for (int i = 0;i<stack.size();i++) {
@@ -75,12 +85,6 @@ public class ResultCollection implements java.io.Serializable {
             }
         }
         return thefront;
-    } 
-    public ResultCollection( String stamp, Stack<Result> results )
-    {
-        this.stamp = stamp;
-        this.results = results;
-        front = compute_pareto_front(results);
     }
 
     public String getStamp() {
@@ -129,8 +133,7 @@ public class ResultCollection implements java.io.Serializable {
         this.front = front;
     }
 
-   
-    
+
     public void pushResult( Result result ) {
         results.push( result );
     }

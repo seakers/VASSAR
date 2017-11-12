@@ -16,17 +16,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
-import static rbsa.eoss.local.Params.path;
 
 public class ArchitectureGenerator {
-
-    private static ArchitectureGenerator instance = null;
-    private ArrayList<Architecture> population;
-    private Random rnd;
-    
-    private ArchitectureGenerator() {
-        rnd = new Random();
-    }
 
     public static ArchitectureGenerator getInstance() {
         if (instance == null) {
@@ -35,11 +26,22 @@ public class ArchitectureGenerator {
         return instance;
     }
 
+    private static ArchitectureGenerator instance = null;
+
+    private Params params;
+    private ArrayList<Architecture> population;
+    private Random rnd;
+    
+    private ArchitectureGenerator() {
+        params = Params.getInstance();
+        rnd = new Random();
+    }
+
     public ArrayList<Architecture> generatePrecomputedPopulation() {
         long NUM_ARCHS = Params.norb * Math.round(Math.pow(2, Params.ninstr) - 1);
-        population = new ArrayList((int) NUM_ARCHS);
+        population = new ArrayList<>((int) NUM_ARCHS);
         try {
-            for (int ns=0;ns<Params.nsats.length;ns++){
+            for (int ns=0; ns < Params.nsats.length;ns++){
                 for (int o = 0; o < Params.norb; o++) {
                     for (int ii = 1; ii < Math.round(Math.pow(2, Params.ninstr)); ii++) {
                         boolean[][] mat = new boolean[Params.norb][Params.ninstr];
@@ -87,13 +89,13 @@ public class ArchitectureGenerator {
     public ArrayList<Architecture> getInitialPopulation (int NUM_ARCHS) {
         population = new ArrayList<Architecture>();
         
-        if (Params.initial_pop.isEmpty()) {
+        if (params.initial_pop.isEmpty()) {
             population.addAll(getManualArchitectures());
             population.addAll(generateRandomPopulation(NUM_ARCHS - population.size()));
         }
         else {
             population.addAll(getManualArchitectures());
-            ArrayList<Architecture> init = ResultManager.getInstance().loadResultCollectionFromFile(Params.initial_pop).getPopulation();
+            ArrayList<Architecture> init = ResultManager.getInstance().loadResultCollectionFromFile(params.initial_pop).getPopulation();
             int n = Math.min(NUM_ARCHS - population.size(), init.size());
             population.addAll(init.subList(0, n));
             population.addAll(generateRandomPopulation(NUM_ARCHS - population.size()));
@@ -143,7 +145,7 @@ public class ArchitectureGenerator {
         }
         //ArrayList<Architecture> pop1  = new ArrayList<Architecture>(new HashSet<Architecture>(pop0));
         int n1 = pop1.size();
-        ArrayList<Architecture> pop2  = new ArrayList<Architecture>();
+        ArrayList<Architecture> pop2  = new ArrayList<>();
         int nvars = pop1.get(0).getBitString().length;
         for (Architecture arch:pop1) {
             pop2.add(arch);
@@ -159,16 +161,12 @@ public class ArchitectureGenerator {
                 pop2.add(newarch);
             }
         }
-        for (int k = 0;k<n1;k++) {
+        for (int k = 0; k < n1; k++) {
             //System.out.println("Searching around arch " + k);
             for (int j = 0;j<nvars;j++) {
                 boolean[] arch = pop1.get(k).getBitString().clone();
-                if(arch[j]) {
-                    arch[j] = false;
-                } else {
-                    arch[j] = true;
-                }
-                Architecture new_one = new Architecture(arch,Params.norb,Params.ninstr,pop1.get(k).getNsats());
+                arch[j] = !arch[j];
+                Architecture new_one = new Architecture(arch, Params.norb, Params.ninstr, pop1.get(k).getNsats());
                 //new_one.setEval_mode("DEBUG");
                 pop2.add(new_one);
             }
@@ -196,7 +194,7 @@ public class ArchitectureGenerator {
     }
 
     public ArrayList<Architecture> getManualArchitectures() {
-        ArrayList<Architecture> man_archs = new ArrayList<Architecture>();
+        ArrayList<Architecture> man_archs = new ArrayList<>();
         man_archs.add(new Architecture("000000000000000000000000000000000000000000000000000000000000",1));
         //N = 1 in random orbit (12) 
         for (int i = 0;i<Params.ninstr;i++) {
@@ -223,7 +221,7 @@ public class ArchitectureGenerator {
         man_archs.add(new Architecture("111111111111111111111111000000000000000000000000000000000000",1));
         
         //Reference architecture #1
-        HashMap<String,String[]> map = new HashMap<String,String[]>();
+        HashMap<String,String[]> map = new HashMap<>();
         String[] payl_polar = {""};map.put("LEO-600-polar-NA",payl_polar);
         String[] payl_AM = {"HYSP_TIR"};map.put("SSO-600-SSO-AM",payl_AM);
         String[] payl_600DD = {""};map.put("SSO-600-SSO-DD",payl_600DD);
@@ -232,7 +230,7 @@ public class ArchitectureGenerator {
         man_archs.add(new Architecture(map,1));
         
         //Reference architecture #2
-        HashMap<String,String[]> map2 = new HashMap<String,String[]>();
+        HashMap<String,String[]> map2 = new HashMap<>();
         String[] payl2_polar = {""};map2.put("LEO-600-polar-NA",payl2_polar);
         String[] payl2_AM = {"HYSP_TIR"};map2.put("SSO-600-SSO-AM",payl2_AM);
         String[] payl2_600DD = {""};map2.put("SSO-600-SSO-DD",payl2_600DD);
@@ -241,7 +239,7 @@ public class ArchitectureGenerator {
         man_archs.add(new Architecture(map2,1));
         
         //Reference architecture #3
-        HashMap<String,String[]> map3 = new HashMap<String,String[]>();
+        HashMap<String,String[]> map3 = new HashMap<>();
         String[] payl3_polar = {"CLAR_ERB"};map3.put("LEO-600-polar-NA",payl3_polar);
         String[] payl3_AM = {"HYSP_TIR","POSTEPS_IRS"};map3.put("SSO-600-SSO-AM",payl3_AM);
         String[] payl3_600DD = {""};map3.put("SSO-600-SSO-DD",payl3_600DD);
@@ -250,7 +248,7 @@ public class ArchitectureGenerator {
         man_archs.add(new Architecture(map3,1));
         
         //Reference architecture #4
-        HashMap<String,String[]> map4 = new HashMap<String,String[]>();
+        HashMap<String,String[]> map4 = new HashMap<>();
         String[] payl4_polar = {"CLAR_ERB","CNES_KaRIN"};map4.put("LEO-600-polar-NA",payl4_polar);
         String[] payl4_AM = {"HYSP_TIR","POSTEPS_IRS"};map4.put("SSO-600-SSO-AM",payl4_AM);
         String[] payl4_600DD = {"DESD_LID"};map4.put("SSO-600-SSO-DD",payl4_600DD);
@@ -259,7 +257,7 @@ public class ArchitectureGenerator {
         man_archs.add(new Architecture(map4,1));
         
         //Reference architecture #5
-        HashMap<String,String[]> map5 = new HashMap<String,String[]>();
+        HashMap<String,String[]> map5 = new HashMap<>();
         String[] payl5_polar = {"CLAR_ERB","CNES_KaRIN","ACE_POL","ACE_ORCA"};map5.put("LEO-600-polar-NA",payl5_polar);
         String[] payl5_AM = {"HYSP_TIR","POSTEPS_IRS","ACE_LID"};map5.put("SSO-600-SSO-AM",payl5_AM);
         String[] payl5_600DD = {"DESD_LID"};map5.put("SSO-600-SSO-DD",payl5_600DD);
@@ -276,10 +274,10 @@ public class ArchitectureGenerator {
             for (int j = 0;j < Params.ninstr;j++) {
                 mat[i][j] = rnd.nextBoolean();
             }
-
         }
         return new Architecture(mat,Params.nsats[rnd.nextInt(Params.nsats.length)]);
     }
+
     public Architecture getTestArch() { // SMAP 2 SSO orbits, 2 sats per orbit
         //Architecture arch = new Architecture("0011000000111110000000000",1);
         //Architecture arch = new Architecture("000000000000000000000000000000000000000000000000000000010001",1);
@@ -296,6 +294,7 @@ public class ArchitectureGenerator {
         arch.setEval_mode("DEBUG");
         return arch;//{"SMAP_RAD","SMAP_MWR","CMIS","VIIRS","BIOMASS"};{"600polar","600AM","600DD","800AM","800PM"};
     }
+
     public Architecture getTestArch2() {
         //String[] payl = {"GACM_VIS"};
         //Architecture arch = new Architecture(payl,"LEO-600-polar-NA");//LEO-600-polar-NA
@@ -339,27 +338,25 @@ public class ArchitectureGenerator {
      //   arch.setEval_mode("DEBUG");
         return arch;
     }
-        
-        
+
     public Architecture defineNewArch(String booleanString){
         return new Architecture(booleanString, 1);        
     }        
-        
-    
-    public Architecture defineNewArch(ArrayList<String> input_arch){
-        
-        HashMap<String,String[]> map5 = new HashMap<String,String[]>();
+
+    public Architecture defineNewArch(ArrayList<String> input_arch) {
+        HashMap<String,String[]> map5 = new HashMap<>();
         String[] instrument_list = Params.instrument_list;
         String[] orbit_list = Params.orbit_list;
         String relabeled_instrument_list = "ABCDEFGHIJKL";
-        for(int j=0;j<input_arch.size();j++){
+        for (int j = 0; j < input_arch.size(); j++){
             String payloads = input_arch.get(j);
             String[] instruments = new String[payloads.length()];
-            for(int i=0;i<payloads.length();i++){
+            for(int i = 0; i < payloads.length(); i++){
                 int index;
-                if(i==payloads.length()-1){
+                if (i == payloads.length() - 1) {
                     index = relabeled_instrument_list.indexOf(payloads.substring(i));
-                }else{
+                }
+                else {
                     index = relabeled_instrument_list.indexOf(payloads.substring(i,i+1));
                 }
                 instruments[i] = instrument_list[index];
@@ -375,18 +372,19 @@ public class ArchitectureGenerator {
     public Architecture getMaxArch() {
         boolean[][] mat = new boolean[Params.norb][Params.ninstr];
         for (int i = 0; i < Params.norb; i++) {
-            for (int j = 0;j < Params.ninstr;j++) {
+            for (int j = 0;j < Params.ninstr; j++) {
                 mat[i][j] = true;
             }
-
         }
         return new Architecture(mat,1);
     }
+
     public Architecture getMaxArch2() { // SMAP 2 SSO orbits, 2 sats per orbit
         Architecture arch = new Architecture("111111111111111111111111000000000000000000000000000000000000",1);
         arch.setEval_mode("DEBUG");
         return arch;//{"SMAP_RAD","SMAP_MWR","CMIS","VIIRS","BIOMASS"};{"600polar","600AM","600DD","800AM","800PM"};
     }
+
     public Architecture getMinArch() {
         boolean[][] mat = new boolean[Params.norb][Params.ninstr];
         for (int i = 0; i < Params.norb; i++) {
@@ -397,23 +395,23 @@ public class ArchitectureGenerator {
         }
         return new Architecture(mat,1);
     }
+
     public Architecture getUserEnteredArch() { // This architecture has a science score of 0.02
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         
         HashMap<String,String[]> mapping= new HashMap<String,String[]>();
-        for (String orb:Params.orbit_list) {    
+        for (String orb: Params.orbit_list) {
             try {
                 boolean valid = false;
                 String input = "";
-                while(!valid) {
+                while (!valid) {
                     System.out.println("New payload in " + orb + "? ");
                     input = bufferedReader.readLine();
                     String[] instruments = input.split(" ");
-                    ArrayList<String> validInstruments = new ArrayList<String>();
+                    ArrayList<String> validInstruments = new ArrayList<>();
                     validInstruments.addAll(Arrays.asList(Params.instrument_list));
                     valid = true;
-                    for (int i = 0;i<instruments.length;i++) {
-                        String instr= instruments[i];
+                    for (String instr: instruments) {
                         if(instr.equalsIgnoreCase("")) {
                             valid = true;
                             break;
@@ -425,23 +423,25 @@ public class ArchitectureGenerator {
                     }
                 }    
                 mapping.put(orb,input.split(" "));
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 System.out.println("EXC in getUserEnteredArch" + e.getMessage() + " " + e.getClass());
                 e.printStackTrace();
                 return null;
             }           
         }
-        System.out.println("Num sats per orbit? " );
-        try{
+        System.out.println("Num sats per orbit? ");
+        try {
             String tmp = bufferedReader.readLine();
             return new Architecture(mapping,Integer.parseInt(tmp));
-        }catch(Exception e){
+        }
+        catch (Exception e) {
             System.out.println("EXC in getUserEnteredArch" + e.getMessage() + " " + e.getClass());
             e.printStackTrace();
             return null;
         }
-        
     }
+
     public void setPopulation(ArrayList<Architecture> population) {
         this.population = population;
     }

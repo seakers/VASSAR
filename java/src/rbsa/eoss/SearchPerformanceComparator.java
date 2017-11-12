@@ -15,6 +15,7 @@ import java.util.Date;
 import rbsa.eoss.local.Params;
 
 public class SearchPerformanceComparator implements Serializable {
+    private Params params;
     private ArrayList<SearchPerformance> perf_array;
     private ArrayList<Double> avg_pareto_distances;
     private ArrayList<Double> max_sciences;
@@ -27,6 +28,7 @@ public class SearchPerformanceComparator implements Serializable {
     private String stamp;
     
     public SearchPerformanceComparator(ArrayList<SearchPerformance> perf_array) {
+        params = Params.getInstance();
         this.perf_array = perf_array;
         computeAvgParetoDistance();
         computeLowesCostMaxScienceArch();
@@ -34,9 +36,10 @@ public class SearchPerformanceComparator implements Serializable {
         name = "perfs";
         SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd--HH-mm-ss" );
         stamp = dateFormat.format( new Date() );
-        file_path = Params.path_save_results + "\\" + name + "_" + stamp + ".rs";
+        file_path = params.path_save_results + "\\" + name + "_" + stamp + ".rs";
     }
     public SearchPerformanceComparator(String name, ArrayList<SearchPerformance> perf_array) {
+        params = Params.getInstance();
         this.perf_array = perf_array;
         computeAvgParetoDistance();
         computeLowesCostMaxScienceArch();
@@ -44,16 +47,17 @@ public class SearchPerformanceComparator implements Serializable {
         this.name = "perfs_" + name;
         SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd--HH-mm-ss" );
         stamp = dateFormat.format( new Date() );
-        file_path = Params.path_save_results + "\\" + this.name + "_" + stamp + ".rs";
+        file_path = params.path_save_results + "\\" + this.name + "_" + stamp + ".rs";
     }
     public SearchPerformanceComparator(String name, String stamp, ArrayList<SearchPerformance> perf_array) {
+        params = Params.getInstance();
         this.perf_array = perf_array;
         computeAvgParetoDistance();
         computeLowesCostMaxScienceArch();
         computeHistories();
         this.name = name;
         this.stamp = stamp;
-        file_path = Params.path_save_results + "\\" + name + "_" + stamp + ".rs";
+        file_path = params.path_save_results + "\\" + name + "_" + stamp + ".rs";
     }
 
     public String getStamp() {

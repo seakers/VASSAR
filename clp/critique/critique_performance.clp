@@ -8,7 +8,7 @@
     (DATABASE::Instrument (Name ?instr) (Illumination Passive))
     =>
     (call ?*p* addElement (new java.lang.String 
-        (str-cat "Instrument " ?instr " should not be in orbit " ?o ))))
+        (str-cat "Instrument " ?instr " should not be in orbit " ?o "." ))))
 
 (defrule CRITIQUE-PERFORMANCE::atmospheric-chemistry-instrument-in-AM-orbit
     "Atmosperic chemistry instruments should not be in AM orbits"
@@ -17,7 +17,7 @@
     (or (test (neq (str-index "chemistry" ?i) FALSE)) (test (neq (str-index "pollut" ?i) FALSE)))
     =>
     (call ?*p* addElement (new java.lang.String
-        (str-cat "Instrument " ?instr " should not be in orbit " ?o ))))
+        (str-cat "Instrument " ?instr " should not be in orbit " ?o "." ))))
 
 (defrule CRITIQUE-PERFORMANCE::side-looking-instrument-in-less-400-km-orbit
     "Off-nadir instruments should not be in < 400 km orbits"
@@ -25,7 +25,7 @@
     (DATABASE::Instrument (Name ?instr) (Geometry slant))
     =>
     (call ?*p* addElement (new java.lang.String
-        (str-cat "Instrument " ?instr " should not be in orbit " ?o ))))
+        (str-cat "Instrument " ?instr " should not be in orbit " ?o "." ))))
 
 ; Interfering instrument pairs
 
@@ -37,7 +37,7 @@
     (DATABASE::Instrument (Name ?ins2) (Intent "Laser altimeters") (spectral-bands $?sr))
     =>
     (call ?*p* addElement (new java.lang.String
-        (str-cat "Instruments "  ?ins1 " and " ?ins2 " should not be together"))))
+        (str-cat "Instruments "  ?ins1 " and " ?ins2 " should not be together."))))
 
 ; Total number of instruments
 
@@ -45,7 +45,7 @@
     (CRITIQUE-PERFORMANCE-PARAM::total-num-of-instruments (value ?v&:(> ?v 14)))
     =>
     (call ?*p* addElement (new java.lang.String
-        (str-cat "There are too many instruments in this design: "?v))))
+        (str-cat "There are too many instruments in this design: "?v "."))))
 
 ; Instrument Duty Cycle
 
@@ -53,17 +53,17 @@
     (MANIFEST::Mission (Name ?miss) (datarate-duty-cycle# ?dc&:(< ?dc 1.0)))
     =>
     (call ?*p* addElement (new java.lang.String
-        (str-cat "Cumulative spacecraft data rate in oribt " ?miss " is too high (" (format nil "%2.2f" ?dc) "). Try removing an instrument"))))
+        (str-cat "Cumulative spacecraft data rate in orbit " ?miss " is too high: " (format nil "%2.2f" ?dc) ". Try removing an instrument."))))
 
 (defrule CRITIQUE-PERFORMANCE::resource-limitations-power
     "Technology to provide more than 10kW is currently expensive"
     (MANIFEST::Mission (Name ?miss) (power-duty-cycle# ?dc&:(< ?dc 1.0)))
     =>
     (call ?*p* addElement (new java.lang.String
-        (str-cat "Cumulative spacecraft power in orbit " ?miss " is  too high (" (format nil "%2.2f" ?dc) "). Try removing an instrument"))))
+        (str-cat "Cumulative spacecraft power in orbit " ?miss " is too high: " (format nil "%2.2f" ?dc) ". Try removing an instrument."))))
 
 ;(defrule CRITIQUE-PERFORMANCE::fairness-check
 ;    (CRITIQUE-PERFORMANCE-PARAM::fairness (flag 1) (value ?v)(stake-holder1 ?sh1) (stake-holder2 ?sh2))
 ;    =>
 ;    (call ?*p* addElement (new java.lang.String
-;        (str-cat "Satisfaction value for stakeholder " ?sh1 " is larger than " ?sh2 " (" (format nil "%2.2f" ?v) ")"))))
+;        (str-cat "Satisfaction value for stakeholder " ?sh1 " is larger than " ?sh2 ": " (format nil "%2.2f" ?v) "."))))

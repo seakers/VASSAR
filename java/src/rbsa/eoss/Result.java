@@ -13,13 +13,14 @@ import jess.*;
 import rbsa.eoss.local.Params;
 import java.util.TreeMap;
 public class Result implements java.io.Serializable {
+    private Params params;
     private double science;
     private double cost;
     private double norm_science;
     private double norm_cost;
-    private ArrayList subobjective_scores;
-    private ArrayList objective_scores;
-    private ArrayList panel_scores;
+    private ArrayList<ArrayList<ArrayList<Double>>> subobjective_scores;
+    private ArrayList<ArrayList<Double>> objective_scores;
+    private ArrayList<Double> panel_scores;
     private FuzzyValue fuzzy_science;
     private FuzzyValue fuzzy_cost;
     private Architecture arch;
@@ -38,10 +39,15 @@ public class Result implements java.io.Serializable {
 
     
     //Constructors
-    public Result () {
-        
+    public Result() {
+        params = Params.getInstance();
     }
-    public Result(Architecture arch, double science, double cost, ArrayList subobjective_scores, ArrayList objective_scores, ArrayList panel_scores, TreeMap<String,Double> subobjective_scores2) {
+
+    public Result(Architecture arch, double science, double cost,
+                  ArrayList<ArrayList<ArrayList<Double>>> subobjective_scores,
+                  ArrayList<ArrayList<Double>> objective_scores, ArrayList<Double> panel_scores,
+                  TreeMap<String,Double> subobjective_scores2) {
+        params = Params.getInstance();
         this.science = science;
         this.cost = cost;
         this.subobjective_scores = subobjective_scores;
@@ -55,13 +61,18 @@ public class Result implements java.io.Serializable {
         paretoRanking = -1;
         crowdingDistance = 0.0;
         utility = -1.0;
-        this.norm_science = (science - Params.min_science)/(Params.max_science-Params.min_science);
-        this.norm_cost = (cost - Params.min_cost)/(Params.max_cost-Params.min_cost);
+        this.norm_science = (science - params.min_science)/(params.max_science-params.min_science);
+        this.norm_cost = (cost - params.min_cost)/(params.max_cost-params.min_cost);
         taskType = "Fast";
         this.fuzzy_science = null;
         this.fuzzy_cost = null;
     }
-    public Result(Architecture arch, double science, double cost, FuzzyValue fs, FuzzyValue fc, ArrayList subobjective_scores, ArrayList objective_scores, ArrayList panel_scores, TreeMap<String,Double> subobjective_scores2) {
+
+    public Result(Architecture arch, double science, double cost, FuzzyValue fs, FuzzyValue fc,
+                  ArrayList<ArrayList<ArrayList<Double>>> subobjective_scores,
+                  ArrayList<ArrayList<Double>> objective_scores, ArrayList<Double> panel_scores,
+                  TreeMap<String, Double> subobjective_scores2) {
+        params = Params.getInstance();
         this.science = science;
         this.cost = cost;
         this.subobjective_scores = subobjective_scores;
@@ -75,13 +86,14 @@ public class Result implements java.io.Serializable {
         paretoRanking = -1;
         crowdingDistance = 0.0;
         utility = -1.0;
-        this.norm_science = (science - Params.min_science)/(Params.max_science-Params.min_science);
-        this.norm_cost = (cost - Params.min_cost)/(Params.max_cost-Params.min_cost);
+        this.norm_science = (science - params.min_science)/(params.max_science-params.min_science);
+        this.norm_cost = (cost - params.min_cost)/(params.max_cost-params.min_cost);
         taskType = "Fast";
         this.fuzzy_science = fs;
         this.fuzzy_cost = fc;
     }
     public Result(Architecture arch, double science, double cost) {
+        params = Params.getInstance();
         this.science = science;
         this.cost = cost;
         this.subobjective_scores = null;
@@ -95,13 +107,14 @@ public class Result implements java.io.Serializable {
         paretoRanking = -1;
         crowdingDistance = 0.0;
         utility = -1.0;
-        this.norm_science = (science - Params.min_science)/(Params.max_science-Params.min_science);
-        this.norm_cost = (cost - Params.min_cost)/(Params.max_cost-Params.min_cost);
+        this.norm_science = (science - params.min_science)/(params.max_science-params.min_science);
+        this.norm_cost = (cost - params.min_cost)/(params.max_cost-params.min_cost);
         taskType = "Fast";
         this.fuzzy_science = null;
         this.fuzzy_cost = null;
     }
     public Result(Architecture arch, double science, double cost, FuzzyValue fs, FuzzyValue fc) {
+        params = Params.getInstance();
         this.science = science;
         this.cost = cost;
         this.subobjective_scores = null;
@@ -115,13 +128,14 @@ public class Result implements java.io.Serializable {
         paretoRanking = -1;
         crowdingDistance = 0.0;
         utility = -1.0;
-        this.norm_science = (science - Params.min_science)/(Params.max_science-Params.min_science);
-        this.norm_cost = (cost - Params.min_cost)/(Params.max_cost-Params.min_cost);
+        this.norm_science = (science - params.min_science)/(params.max_science-params.min_science);
+        this.norm_cost = (cost - params.min_cost)/(params.max_cost-params.min_cost);
         taskType = "Fast";
         this.fuzzy_science = fs;
         this.fuzzy_cost = fc;
     }
     public Result(Architecture arch, double science, double cost, int pr) {
+        params = Params.getInstance();
         this.science = science;
         this.cost = cost;
         this.subobjective_scores = null;
@@ -135,13 +149,14 @@ public class Result implements java.io.Serializable {
         paretoRanking = pr;
         crowdingDistance = 0.0;
         utility = -1.0;
-        this.norm_science = (science - Params.min_science)/(Params.max_science-Params.min_science);
-        this.norm_cost = (cost - Params.min_cost)/(Params.max_cost-Params.min_cost);
+        this.norm_science = (science - params.min_science)/(params.max_science-params.min_science);
+        this.norm_cost = (cost - params.min_cost)/(params.max_cost-params.min_cost);
         taskType = "Fast";
         this.fuzzy_science = null;
         this.fuzzy_cost = null;
     }
     public Result(Architecture arch, double science, double cost, FuzzyValue fs, FuzzyValue fc, int pr) {
+        params = Params.getInstance();
         this.science = science;
         this.cost = cost;
         this.subobjective_scores = null;
@@ -155,8 +170,8 @@ public class Result implements java.io.Serializable {
         paretoRanking = pr;
         crowdingDistance = 0.0;
         utility = -1.0;
-        this.norm_science = (science - Params.min_science)/(Params.max_science-Params.min_science);
-        this.norm_cost = (cost - Params.min_cost)/(Params.max_cost-Params.min_cost);
+        this.norm_science = (science - params.min_science)/(params.max_science-params.min_science);
+        this.norm_cost = (cost - params.min_cost)/(params.max_cost-params.min_cost);
         taskType = "Fast";
         this.fuzzy_science = fs;
         this.fuzzy_cost = fc;
@@ -197,7 +212,7 @@ public class Result implements java.io.Serializable {
         return science;
     }
     public void setScience(double science) {
-        this.norm_science = (science - Params.min_science)/(Params.max_science-Params.min_science);
+        this.norm_science = (science - params.min_science)/(params.max_science-params.min_science);
         this.science = science;
     }
     public double getCost() {
@@ -205,7 +220,7 @@ public class Result implements java.io.Serializable {
     }
     public void setCost(double cost) {
         this.cost = cost;
-        this.norm_cost = (cost - Params.min_cost)/(Params.max_cost-Params.min_cost);
+        this.norm_cost = (cost - params.min_cost)/(params.max_cost-params.min_cost);
     }
     public void setParetoRanking(int paretoRanking) {
         this.paretoRanking = paretoRanking;
@@ -219,16 +234,16 @@ public class Result implements java.io.Serializable {
     public double getUtility() {
         return utility;
     }
-    public ArrayList getSubobjective_scores() {
+    public ArrayList<ArrayList<ArrayList<Double>>> getSubobjective_scores() {
         return subobjective_scores;
     }
-    public void setSubobjective_scores(ArrayList subobjective_scores) {
+    public void setSubobjective_scores(ArrayList<ArrayList<ArrayList<Double>>> subobjective_scores) {
         this.subobjective_scores = subobjective_scores;
     }
-    public ArrayList getObjective_scores() {
+    public ArrayList<ArrayList<Double>> getObjective_scores() {
         return objective_scores;
     }
-    public void setObjective_scores(ArrayList objective_scores) {
+    public void setObjective_scores(ArrayList<ArrayList<Double>> objective_scores) {
         this.objective_scores = objective_scores;
     }
     public TreeMap<String, Double> getSubobjective_scores2() {
@@ -237,10 +252,10 @@ public class Result implements java.io.Serializable {
     public void setSubobjective_scores2(TreeMap<String, Double> subobjective_scores2) {
         this.subobjective_scores2 = subobjective_scores2;
     }
-    public ArrayList getPanel_scores() {
+    public ArrayList<Double> getPanel_scores() {
         return panel_scores;
     }
-    public void setPanel_scores(ArrayList panel_scores) {
+    public void setPanel_scores(ArrayList<Double> panel_scores) {
         this.panel_scores = panel_scores;
     }
     public double getNorm_science() {
@@ -318,6 +333,7 @@ public class Result implements java.io.Serializable {
             return -1;
         else return 0;
     }
+
     public static ArrayList dotSum(ArrayList a, ArrayList b) throws Exception {
         int n = a.size();
         int n2 = b.size();
@@ -331,33 +347,37 @@ public class Result implements java.io.Serializable {
         }
         return c;
     }
-    public static double SumDollar(ArrayList a) {
-        int n = a.size();
+
+    public static double SumDollar(ArrayList<Double> a) {
         double res = 0.0;
-        for (int i = 0;i<n;i++) {
-            res = res +  (Double) a.get(i) ;
+        for (Double num: a) {
+            res += num;
         }
         return res;
     }
-    public static ArrayList dotMult(ArrayList a, ArrayList b) throws Exception {
-        int n = a.size();
+
+    public static ArrayList<Double> dotMult(ArrayList<Double> a, ArrayList<Double> b) throws Exception {
+        int n1 = a.size();
         int n2 = b.size();
-        if (n!=n2) {
-            throw new Exception ("dotSum: Arrays of different sizes");
+        if (n1 != n2) {
+            throw new Exception("dotSum: Arrays of different sizes");
         }
-        ArrayList c = new ArrayList(n);
-        for (int i = 0;i<n;i++) {
-            Double t = (Double) a.get(i) * (Double) b.get(i);
+        ArrayList<Double> c = new ArrayList<>(n1);
+        for (int i = 0; i < n1; i++) {
+            Double t = a.get(i) * b.get(i);
             c.add(t);
         }
         return c;
     }
-    public static double sumProduct(ArrayList a, ArrayList b) throws Exception {
-        return SumDollar(dotMult(a,b));
+
+    public static double sumProduct(ArrayList<Double> a, ArrayList<Double> b) throws Exception {
+        return SumDollar(dotMult(a, b));
     }
+
     public double distance(Result other) {
         return Math.sqrt(Math.pow(norm_science-other.getNorm_science(),2) + Math.pow(norm_cost-other.getNorm_cost(),2));
     }
+
     @Override
     public String toString() {
         String fs;

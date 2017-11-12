@@ -12,67 +12,61 @@ import rbsa.eoss.local.Params;
 import jess.*;
 import jxl.*;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Hashtable;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 import java.util.regex.*;
 import org.apache.commons.lang3.StringUtils;
 
 public class JessInitializer {
         
     private static JessInitializer instance = null;
+
+    private Params params;
     
-    private JessInitializer() 
-    {
-        
+    private JessInitializer() {
+        params = Params.getInstance();
     }
     
-    public static JessInitializer getInstance()
-    {
-        if( instance == null ) 
-        {
+    public static JessInitializer getInstance() {
+        if(instance == null) {
             instance = new JessInitializer();
         }
         return instance;
     }
     
-    public void initializeJess( Rete r , QueryBuilder qb, MatlabFunctions m)
-    {
+    public void initializeJess(Rete r, QueryBuilder qb, MatlabFunctions m) {
         try {
             // Create global variable path
-            String tmp = Params.path.replaceAll("\\\\", "\\\\\\\\");
-            r.eval( "(defglobal ?*app_path* = \"" + tmp + "\")" );
+            String tmp = params.path.replaceAll("\\\\", "\\\\\\\\");
+            r.eval("(defglobal ?*app_path* = \"" + tmp + "\")");
             r.eval("(import rbsa.eoss.*)");
             r.eval("(import java.util.*)");
             r.eval("(import jess.*)");
             r.eval("(defglobal ?*rulesMap* = (new java.util.HashMap))");
             r.eval("(set-reset-globals nil)");
-            Params.nof = 1;
-            Params.nor = 1;
+            params.nof = 1;
+            params.nor = 1;
 
             // Load modules
-            loadModules( r );
+            loadModules(r);
 
             // Load templates
-            Workbook templates_xls = Workbook.getWorkbook( new File( Params.template_definition_xls ) );
-            loadTemplates( r, templates_xls, Params.template_definition_clp);
+            Workbook templates_xls = Workbook.getWorkbook(new File(params.template_definition_xls));
+            loadTemplates(r, templates_xls, params.template_definition_clp);
 
             // Load functions
-            loadFunctions(r,Params.functions_clp);  
+            loadFunctions(r, params.functions_clp);
             
             // Load mission analysis database
-            Workbook mission_analysis_xls = Workbook.getWorkbook( new File( Params.mission_analysis_database_xls ) );
-            loadOrderedDeffacts(r,mission_analysis_xls, "Walker", "Walker-revisit-time-facts","DATABASE::Revisit-time-of");
-            loadOrderedDeffacts(r,mission_analysis_xls, "Power", "orbit-information-facts", "DATABASE::Orbit");
+            Workbook mission_analysis_xls = Workbook.getWorkbook(new File(params.mission_analysis_database_xls));
+            loadOrderedDeffacts(r, mission_analysis_xls, "Walker", "Walker-revisit-time-facts","DATABASE::Revisit-time-of");
+            loadOrderedDeffacts(r, mission_analysis_xls, "Power", "orbit-information-facts", "DATABASE::Orbit");
 
             //Load launch vehicle database
-            loadOrderedDeffacts(r,mission_analysis_xls, "Launch Vehicles", "DATABASE::launch-vehicle-information-facts", "DATABASE::Launch-vehicle");
+            loadOrderedDeffacts(r, mission_analysis_xls, "Launch Vehicles", "DATABASE::launch-vehicle-information-facts", "DATABASE::Launch-vehicle");
             r.reset();
             ArrayList<Fact> facts = qb.makeQuery("DATABASE::Launch-vehicle");
             
-            for (int i = 0;i<facts.size();i++) {
+            for (int i = 0; i < facts.size(); i++) {
                 Fact lv = facts.get(i);
                 String id = lv.getSlotValue("id").stringValue(r.getGlobalContext());
                 double cost = lv.getSlotValue("cost").floatValue(r.getGlobalContext());
@@ -97,99 +91,99 @@ public class JessInitializer {
                 m.addLaunchVehicletoDB(id, lvh);
             }
              // Load instrument database
-            Workbook instrument_xls = Workbook.getWorkbook( new File( Params.capability_rules_xls ) );
+            Workbook instrument_xls = Workbook.getWorkbook(new File(params.capability_rules_xls));
             loadUnorderedDeffacts(r,instrument_xls, "CHARACTERISTICS", "instrument-database-facts","DATABASE::Instrument");
 
             //Load attribute inheritance rules
-            loadAttributeInheritanceRules(r, templates_xls, "Attribute Inheritance", Params.attribute_inheritance_clp);
+            loadAttributeInheritanceRules(r, templates_xls, "Attribute Inheritance", params.attribute_inheritance_clp);
             
             //Load orbit rules;
-            loadOrbitRules(r, Params.orbit_rules_clp);
+            loadOrbitRules(r, params.orbit_rules_clp);
 
             //Load mass budget rules;
-            loadMassBudgetRules(r, Params.mass_budget_rules_clp);
-            loadMassBudgetRules(r, Params.subsystem_mass_budget_rules_clp);
-            loadMassBudgetRules(r, Params.deltaV_budget_rules_clp);
+            loadMassBudgetRules(r, params.mass_budget_rules_clp);
+            loadMassBudgetRules(r, params.subsystem_mass_budget_rules_clp);
+            loadMassBudgetRules(r, params.deltaV_budget_rules_clp);
 
             //Load eps design rules;
-            loadSpacecraftDesignRules(r, Params.eps_design_rules_clp);
-            loadSpacecraftDesignRules(r, Params.adcs_design_rules_clp);
-            loadSpacecraftDesignRules(r, Params.propulsion_design_rules_clp);
+            loadSpacecraftDesignRules(r, params.eps_design_rules_clp);
+            loadSpacecraftDesignRules(r, params.adcs_design_rules_clp);
+            loadSpacecraftDesignRules(r, params.propulsion_design_rules_clp);
             
             //Load cost estimation rules;
-            loadCostEstimationRules(r, new String[]{Params.fuzzy_cost_estimation_rules_clp});
+            loadCostEstimationRules(r, new String[]{params.fuzzy_cost_estimation_rules_clp});
 
             //Load launch vehicle selection rules
-            loadLaunchVehicleSelectionRules(r,Params.launch_vehicle_selection_rules_clp);
+            loadLaunchVehicleSelectionRules(r,params.launch_vehicle_selection_rules_clp);
             
             //Load fuzzy attribute rules
             loadFuzzyAttributeRules(r, templates_xls, "Fuzzy Attributes", "REQUIREMENTS::Measurement");
 
             //Load requirement rules
-            Workbook requirements_xls = Workbook.getWorkbook( new File( Params.requirement_satisfaction_xls ) );
-            if (Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) {
+            Workbook requirements_xls = Workbook.getWorkbook( new File( params.requirement_satisfaction_xls ) );
+            if (params.req_mode.equalsIgnoreCase("FUZZY-CASES")) {
                 loadFuzzyRequirementRules(r, requirements_xls, "Requirement rules");
-            } else if (Params.req_mode.equalsIgnoreCase("CRISP-CASES")) {
+            } else if (params.req_mode.equalsIgnoreCase("CRISP-CASES")) {
                 loadRequirementRules(r, requirements_xls, "Requirement rules");
-            } else if (Params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) {
+            } else if (params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) {
                 loadRequirementRulesAttribs(r, requirements_xls, "Attributes", m);
-            } else if (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")) {
+            } else if (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")) {
                 loadFuzzyRequirementRulesAttribs(r, requirements_xls, "Attributes", m);
             }
 
             //Load capability rules
-            loadCapabilityRules(r,instrument_xls,Params.capability_rules_clp);
+            loadCapabilityRules(r,instrument_xls,params.capability_rules_clp);
 
             //Load synergy rules
-            loadSynergyRules(r,Params.synergy_rules_clp);
+            loadSynergyRules(r,params.synergy_rules_clp);
             
             // Load assimilation rules
-            loadAssimilationRules(r,Params.assimilation_rules_clp);
+            loadAssimilationRules(r,params.assimilation_rules_clp);
             
             //Ad-hoc rules
             r.eval("(deftemplate DATABASE::list-of-instruments (multislot list) (slot factHistory))");
             r.eval("(deffacts DATABASE::list-of-instruments (DATABASE::list-of-instruments " +
-                    "(list (create$ SMAP_RAD SMAP_MWR CMIS VIIRS BIOMASS)) (factHistory "+ Params.nof +")))");
-            Params.nof++;
-            if(!Params.adhoc_rules_clp.isEmpty()) {
+                    "(list (create$ SMAP_RAD SMAP_MWR CMIS VIIRS BIOMASS)) (factHistory "+ params.nof +")))");
+            params.nof++;
+            if(!params.adhoc_rules_clp.isEmpty()) {
                 System.out.println("WARNING: Loading ad-hoc rules");
-                r.batch(Params.adhoc_rules_clp);
+                r.batch(params.adhoc_rules_clp);
             }
 
             //Load down-selection rules
-            loadDownSelectionRules(r,Params.down_selection_rules_clp);
+            loadDownSelectionRules(r,params.down_selection_rules_clp);
 
             //Load search rules
             r.eval("(deffacts DATABASE::add-improve-orbit-list-of-improve-heuristics " +
-                    "(SEARCH-HEURISTICS::improve-heuristic (id improveOrbit) (factHistory " + Params.nof + ")" +
+                    "(SEARCH-HEURISTICS::improve-heuristic (id improveOrbit) (factHistory " + params.nof + ")" +
                     "))");
-            Params.nof++;
+            params.nof++;
 
-            loadSearchRules(r,Params.search_heuristic_rules_clp);
+            loadSearchRules(r,params.search_heuristic_rules_clp);
 
             
             // Load explanation rules
-            loadExplanationRules(r, Params.explanation_rules_clp);
+            loadExplanationRules(r, params.explanation_rules_clp);
 
             //Load aggregation rules
-            Workbook aggregation_xls = Workbook.getWorkbook( new File( Params.aggregation_xls ) );
+            Workbook aggregation_xls = Workbook.getWorkbook( new File( params.aggregation_xls ) );
 
-            loadAggregationRules(r, aggregation_xls, "Aggregation rules", new String[]{Params.aggregation_rules_clp,Params.fuzzy_aggregation_rules_clp});
+            loadAggregationRules(r, aggregation_xls, "Aggregation rules", new String[]{params.aggregation_rules_clp,params.fuzzy_aggregation_rules_clp});
 
             // Load Critiquer rules
 
-     //       loadCritiquerRules(r, Params.critique_cost_clp);
-     //       loadCritiquerRules(r, Params.critique_performance_clp);
-     //       loadCritiquerRules(r, Params.critique_performance_precalculation_clp);
-     //       loadCritiquerRules(r, Params.critique_cost_precalculation_clp);       
+     //       loadCritiquerRules(r, params.critique_cost_clp);
+     //       loadCritiquerRules(r, params.critique_performance_clp);
+     //       loadCritiquerRules(r, params.critique_performance_precalculation_clp);
+     //       loadCritiquerRules(r, params.critique_cost_precalculation_clp);
             
             ///////////////////////////////////////////////////////////////////////////// 
 
             Iterator ruleIter = r.listDefrules();
             Iterator ruleIterCheck = r.listDefrules();
-            Params.rules_defrule_map = new HashMap<>();
-            Params.rules_NametoID_Map = new HashMap<>();
-            Params.rules_IDtoName_map = new HashMap<>();
+            params.rules_defrule_map = new HashMap<>();
+            params.rules_NametoID_Map = new HashMap<>();
+            params.rules_IDtoName_map = new HashMap<>();
 
             Defrule targetRule = new Defrule("","",r);
             int cnt = 0;
@@ -202,9 +196,9 @@ public class JessInitializer {
                     cnt++;
                     Defrule currentRule = ((Defrule) ruleIter.next());
                     String ruleName = currentRule.getName();
-                    Params.rules_defrule_map.put(ruleName,currentRule);
-                    Params.rules_NametoID_Map.put(ruleName, cnt);
-                    Params.rules_IDtoName_map.put(cnt,ruleName);
+                    params.rules_defrule_map.put(ruleName,currentRule);
+                    params.rules_NametoID_Map.put(ruleName, cnt);
+                    params.rules_IDtoName_map.put(cnt,ruleName);
                     String tmpString = "(?*rulesMap* put " + ruleName + " " + cnt + ")";
                     r.eval(tmpString);
                 }
@@ -237,7 +231,7 @@ public class JessInitializer {
     private void loadModules( Rete r )
     {
         try {
-            r.batch( Params.module_definition_clp );
+            r.batch( params.module_definition_clp );
         } catch (Exception e) {
             System.out.println( "EXC in loadModules " +e.getMessage() );
         }
@@ -273,7 +267,7 @@ public class JessInitializer {
             HashMap keys_to_attribs = new HashMap();
             HashMap attribs_to_types = new HashMap();
             HashMap attribSet = new HashMap();
-            Params.parameter_list = new ArrayList<String>();
+            params.parameter_list = new ArrayList<String>();
             Sheet meas = xls.getSheet("Measurement");    
             String call = "(deftemplate REQUIREMENTS::Measurement ";
             int nslots = meas.getRows();
@@ -299,7 +293,7 @@ public class JessInitializer {
                     attrib.acceptedValues = accepted_values;
                     attribSet.put(name, attrib);
                     if(name.equalsIgnoreCase("Parameter")) {
-                        Params.parameter_list.addAll(accepted_values.keySet());
+                        params.parameter_list.addAll(accepted_values.keySet());
                     }
                 } else{
                     EOAttribute attrib = AttributeBuilder.make(type,name,"N/A");
@@ -520,8 +514,8 @@ public class JessInitializer {
                         call = call.concat( " (" + slot_names[j] + " " + slot_value + ") ");
                     }
                 }
-                call = call.concat("(factHistory F" + Params.nof + ")");
-                Params.nof++;
+                call = call.concat("(factHistory F" + params.nof + ")");
+                params.nof++;
                 call = call.concat(") ");
             }
             call = call.concat(")");
@@ -565,8 +559,8 @@ public class JessInitializer {
                     
                     call = call.concat( " (" + slot_name + " " + slot_value + ") ");
                 }
-                call = call.concat("(factHistory F" + Params.nof + ")");
-                Params.nof++;
+                call = call.concat("(factHistory F" + params.nof + ")");
+                params.nof++;
                 call = call.concat(") ");
             }
             call = call.concat(")");
@@ -627,12 +621,12 @@ public class JessInitializer {
             System.out.println( "EXC in loadAttributeInheritanceRules " +e.getMessage() );
         }
      }
-     private void loadFuzzyAttributeRules(Rete r, Workbook xls, String sheet, String template) {
-         try {
-             Sheet meas = xls.getSheet(sheet);
-             
+    private void loadFuzzyAttributeRules(Rete r, Workbook xls, String sheet, String template) {
+        try {
+            Sheet meas = xls.getSheet(sheet);
+
             int nrules = meas.getRows();
-           
+
             for (int i = 1;i<nrules;i++) {
                 Cell[] row = meas.getRow(i);
                 String att = row[0].getContents();
@@ -649,36 +643,37 @@ public class JessInitializer {
                 for (int j = 1;j<=num_values;j++) {
                     fuzzy_values[j-1] = row[4*j].getContents();
                     call_values = call_values + fuzzy_values[j-1] + " ";
-                    mins[j-1] = row[1+4*j].getContents();
+                    mins[j-1] = Double.toString(((NumberCell)row[1+4*j]).getValue());
                     call_mins = call_mins + mins[j-1] +   " ";
-                    means[j-1] = row[2+4*j].getContents();
-                    maxs[j-1] = row[3+4*j].getContents();
+                    means[j-1] = Double.toString(((NumberCell)row[2+4*j]).getValue());
+                    maxs[j-1] = Double.toString(((NumberCell)row[3+4*j]).getValue());
                     call_maxs = call_maxs + maxs[j-1] + " ";
                 }
                 call_values = call_values + ")";
                 call_mins = call_mins + ")";
                 call_maxs = call_maxs + ")";
-                
 
                 String call = "(defrule FUZZY::numerical-to-fuzzy-" + att + " ";
                 String ruleName = "FUZZY::numerical-to-fuzzy-" + att;
                 if (param.equalsIgnoreCase("all")) {
                     call = call + "?m <- (" + template + " (" + att + "# ?num&~nil) (" + att + " nil) (factHistory ?fh)) => " ;
                     call = call + "(bind ?value (numerical-to-fuzzy ?num " + call_values + " " + call_mins + " " + call_maxs + " )) (modify ?m (" + att  + " ?value)"
-                            + "(factHistory (str-cat \"{R\" (?*rulesMap* get "+ruleName+") \" \" ?fh \"}\"))"
-                            + ")) ";
-                } else {
+                        + "(factHistory (str-cat \"{R\" (?*rulesMap* get "+ruleName+") \" \" ?fh \"}\"))"
+                        + ")) ";
+                }
+                else {
                     String att2 = att.substring(0, att.length()-1);
                     call = call + "?m <- (" + template + " (Parameter \"" + param + "\") (" + att2 + "# ?num&~nil) (" + att + " nil) (factHistory ?fh)) => " ;
                     call = call + "(bind ?value (numerical-to-fuzzy ?num " + call_values + " " + call_mins + " " + call_maxs + " )) (modify ?m (" + att  + " ?value)"
-                            + "(factHistory (str-cat \"{R\" (?*rulesMap* get "+ruleName+") \" \" ?fh \"}\"))"
-                            + ")) ";
+                        + "(factHistory (str-cat \"{R\" (?*rulesMap* get "+ruleName+") \" \" ?fh \"}\"))"
+                        + ")) ";
                 }
 
-                r.eval(call);     
-            }          
-         }catch (Exception e) {
-            System.out.println( "EXC in loadAttributeInheritanceRules " +e.getMessage() );
+                r.eval(call);
+            }
+        }
+        catch (Exception e) {
+            System.out.println("EXC in loadAttributeInheritanceRules " +e.getMessage());
         }
      }
      
@@ -696,7 +691,7 @@ public class JessInitializer {
                 Cell[] row = meas.getRow(i);
                 String obj = row[0].getContents();
                 String explan = row[1].getContents();
-                Params.subobj_measurement_params.put(obj, explan);
+                params.subobj_measurement_params.put(obj, explan);
                 if(!obj.equalsIgnoreCase(current_obj)) {
                     nobj++;
                     nsubobj = 0;
@@ -718,40 +713,40 @@ public class JessInitializer {
                 
                 String tmp = "?*subobj-" + subobj + "*";
                 
-                if (Params.measurements_to_subobjectives.containsKey(param)) {
-                    ArrayList list = (ArrayList) Params.measurements_to_subobjectives.get(param);
+                if (params.measurements_to_subobjectives.containsKey(param)) {
+                    ArrayList list = (ArrayList) params.measurements_to_subobjectives.get(param);
                     if(!list.contains(tmp)) {
                         list.add(tmp);
-                        Params.measurements_to_subobjectives.put(param,list);
+                        params.measurements_to_subobjectives.put(param,list);
                     }   
                 } else {
                     ArrayList list = new ArrayList();
                     list.add(tmp);
-                    Params.measurements_to_subobjectives.put(param,list);
+                    params.measurements_to_subobjectives.put(param,list);
                 }
                 
-                if (Params.measurements_to_objectives.containsKey(param)) {
-                    ArrayList list = (ArrayList) Params.measurements_to_objectives.get(param);
+                if (params.measurements_to_objectives.containsKey(param)) {
+                    ArrayList list = (ArrayList) params.measurements_to_objectives.get(param);
                     if(!list.contains(obj)) {
                         list.add(obj);
-                        Params.measurements_to_objectives.put(param,list);
+                        params.measurements_to_objectives.put(param,list);
                     }   
                 } else {
                     ArrayList list = new ArrayList();
                     list.add(obj);
-                    Params.measurements_to_objectives.put(param,list);
+                    params.measurements_to_objectives.put(param,list);
                 }
                 String pan = obj.substring(0,2);
-                if (Params.measurements_to_panels.containsKey(param)) {
-                    ArrayList list = (ArrayList) Params.measurements_to_panels.get(param);
+                if (params.measurements_to_panels.containsKey(param)) {
+                    ArrayList list = (ArrayList) params.measurements_to_panels.get(param);
                     if(!list.contains(pan)) {
                         list.add(pan);
-                        Params.measurements_to_panels.put(param,list);
+                        params.measurements_to_panels.put(param,list);
                     }   
                 } else {
                     ArrayList list = new ArrayList();
                     list.add(pan);
-                    Params.measurements_to_panels.put(param,list);
+                    params.measurements_to_panels.put(param,list);
                 }
                 String ruleName = "REQUIREMENTS::subobjective-" + subobj + "-" + type + " " + desc;
                 String call = "(defrule REQUIREMENTS::subobjective-" + subobj + "-" + type + " " + desc + " ?mea <- (REQUIREMENTS::Measurement (Parameter " + param + ") "; 
@@ -814,9 +809,9 @@ public class JessInitializer {
                 r.eval(call);     
                 r.eval("(defglobal ?*num-soundings-per-day* = 0)");
             }
-            Params.subobjectives_to_measurements = getInverseHashMap(Params.measurements_to_subobjectives);
-            Params.objectives_to_measurements = getInverseHashMap(Params.measurements_to_objectives);
-            Params.panels_to_measurements = getInverseHashMap(Params.measurements_to_panels);
+            params.subobjectives_to_measurements = getInverseHashMap(params.measurements_to_subobjectives);
+            params.objectives_to_measurements = getInverseHashMap(params.measurements_to_objectives);
+            params.panels_to_measurements = getInverseHashMap(params.measurements_to_panels);
          }catch (Exception e) {
             System.out.println( "EXC in loadRequirementRules " +e.getMessage() );
         }
@@ -838,12 +833,12 @@ public class JessInitializer {
              String current_param = "";
              String ruleName = "";
              HashMap<String,ArrayList<String>> subobj_tests = null;
-             Params.requirement_rules = new HashMap();
+             params.requirement_rules = new HashMap();
              for (int i =1;i<nlines;i++) {
                  Cell[] row = meas.getRow(i);
                  String subobj = row[0].getContents();
                  param = row[1].getContents();
-                 Params.subobj_measurement_params.put(subobj, param);
+                 params.subobj_measurement_params.put(subobj, param);
                  
                  
                  ArrayList<String> attrib_test = new ArrayList();
@@ -855,15 +850,15 @@ public class JessInitializer {
                         String parent = tokens[0];
                         String index = tokens[1];
                         call2 = call2 + " (AGGREGATION::SUBOBJECTIVE (satisfaction 0.0) (id " + current_subobj + ") (index " + index + ") (parent " + parent + ") (reasons (create$ " + StringUtils.repeat("N-A ",nattrib) + " ))"
-                                + "(factHistory F" + Params.nof + ")) ";
-                        Params.nof++;
+                                + "(factHistory F" + params.nof + ")) ";
+                        params.nof++;
                         String rhs0 = ") => (bind ?reason \"\") (bind ?new-reasons (create$ "  + StringUtils.repeat("N-A ",nattrib) + "))";
                         req_rule = lhs + rhs0 + rhs + rhs2 + ")) (assert (AGGREGATION::SUBOBJECTIVE (id " + current_subobj + ") (attributes " + attribs + ") (index " + index + ") (parent " + parent + " ) (attrib-scores ?list) (satisfaction (*$ ?list)) (reasons ?new-reasons) (satisfied-by ?whom) (reason ?reason )"
                                 + "(factHistory (str-cat \"{R\" (?*rulesMap* get "+ruleName+") \" A\" (call ?m getFactId) \"}\"))"
                                 + "))";
                         req_rule = req_rule + ")";
-                        Params.requirement_rules.put(current_subobj,subobj_tests);
-                        Params.subobjectives_to_measurements.put(current_subobj, current_param);
+                        params.requirement_rules.put(current_subobj,subobj_tests);
+                        params.subobjectives_to_measurements.put(current_subobj, current_param);
                         r.eval(req_rule);
                         
                         //start next requirement rule
@@ -914,8 +909,8 @@ public class JessInitializer {
             String parent = tokens[0];
             String index = tokens[1];
             call2 = call2 + " (AGGREGATION::SUBOBJECTIVE (satisfaction 0.0) (id " + current_subobj + ") (index " + index + ") (parent " + parent + ") (reasons (create$ " + StringUtils.repeat("N-A ",nattrib) + " ))"
-                    + "(factHistory F" + Params.nof + ")) ";
-            Params.nof++;
+                    + "(factHistory F" + params.nof + ")) ";
+            params.nof++;
             String rhs0 = ") => (bind ?reason \"\") (bind ?new-reasons (create$ "  + StringUtils.repeat("N-A ",nattrib) + "))";
             req_rule = lhs + rhs0 + rhs + rhs2 + ")) (assert (AGGREGATION::SUBOBJECTIVE (id " + current_subobj + ") (attributes " + attribs + ") (index " + index + ") (parent " + parent + " ) (attrib-scores ?list) (satisfaction (*$ ?list)) (reasons ?new-reasons) (satisfied-by ?whom) (reason ?reason )"
                     + "(factHistory (str-cat \"{R\" (?*rulesMap* get "+ruleName+") \" A\" (call ?m getFactId) \"}\"))"
@@ -923,8 +918,8 @@ public class JessInitializer {
             req_rule = req_rule + ")";
 
             r.eval(req_rule);
-            Params.requirement_rules.put(current_subobj,subobj_tests);
-            Params.subobjectives_to_measurements.put(current_subobj, current_param);            
+            params.requirement_rules.put(current_subobj,subobj_tests);
+            params.subobjectives_to_measurements.put(current_subobj, current_param);
             call2= call2 + ")";
             r.eval(call2);
          }catch (Exception e) {
@@ -949,12 +944,12 @@ public class JessInitializer {
              String current_param = "";
              String ruleName = "";
              HashMap<String,ArrayList<String>> subobj_tests = null;
-             Params.requirement_rules = new HashMap();
+             params.requirement_rules = new HashMap();
              for (int i =1;i<nlines;i++) {
                  Cell[] row = meas.getRow(i);
                  String subobj = row[0].getContents();
                  param = row[1].getContents();
-                 Params.subobj_measurement_params.put(subobj, param);
+                 params.subobj_measurement_params.put(subobj, param);
                  
                  
                  ArrayList<String> attrib_test = new ArrayList();
@@ -966,8 +961,8 @@ public class JessInitializer {
                         String parent = tokens[0];
                         String index = tokens[1];
                         call2 = call2 + " (AGGREGATION::SUBOBJECTIVE (satisfaction 0.0) (fuzzy-value (new FuzzyValue \"Value\" 0.0 0.0 0.0 \"utils\" (MatlabFunctions getValue_inv_hashmap))) (id " + current_subobj + ") (index " + index + ") (parent " + parent + ") (reasons (create$ " + StringUtils.repeat("N-A ",nattrib) + " ))"
-                                + "(factHistory F" + Params.nof + ")) ";
-                        Params.nof++;
+                                + "(factHistory F" + params.nof + ")) ";
+                        params.nof++;
                         String rhs0 = ") => (bind ?reason \"\") (bind ?new-reasons (create$ "  + StringUtils.repeat("N-A ",nattrib + 2) + "))";
                         req_rule = lhs + rhs0 + rhs + rhs2 + " ?dc ?pc)) (assert (AGGREGATION::SUBOBJECTIVE (id " + current_subobj + ") (attributes " + attribs + " data-rate-duty-cycle# power-duty-cycle#) (index " + index + ") (parent " + parent + " ) "
                                 + "(attrib-scores ?list) (satisfaction (*$ ?list)) (fuzzy-value (new FuzzyValue \"Value\" (call "
@@ -977,8 +972,8 @@ public class JessInitializer {
                                 + "(factHistory (str-cat \"{R\" (?*rulesMap* get "+ruleName+") \" A\" (call ?m getFactId) \"}\"))"
                                 + "))";
                         req_rule = req_rule + ")";
-                        Params.requirement_rules.put(current_subobj,subobj_tests);
-                        Params.subobjectives_to_measurements.put(current_subobj, current_param);
+                        params.requirement_rules.put(current_subobj,subobj_tests);
+                        params.subobjectives_to_measurements.put(current_subobj, current_param);
                         r.eval(req_rule);
                         
                         //start next requirement rule
@@ -1032,8 +1027,8 @@ public class JessInitializer {
                     + "(new FuzzyValue \"Value\" 0.0 0.0 0.0 \"utils\" (MatlabFunctions getValue_inv_hashmap)))"
                     + " (id " + current_subobj + ") (index " + index + ") (parent " + parent + ") "
                     + "(reasons (create$ " + StringUtils.repeat("N-A ",nattrib + 2) + " ))"
-                    + "(factHistory F" + Params.nof + ")) ";
-            Params.nof++;
+                    + "(factHistory F" + params.nof + ")) ";
+            params.nof++;
             String rhs0 = ") => (bind ?reason \"\") (bind ?new-reasons (create$ "  + StringUtils.repeat("N-A ",nattrib) + "))";
             req_rule = lhs + rhs0 + rhs + rhs2 + " ?dc ?pc)) (assert (AGGREGATION::SUBOBJECTIVE (id " + current_subobj + ") (attributes " + attribs + " data-rate-duty-cycle# power-duty-cycle#) (index " + index + ") (parent " + parent + " ) "
                                 + "(attrib-scores ?list) (satisfaction (*$ ?list)) (fuzzy-value (new FuzzyValue \"Value\" (call "
@@ -1043,8 +1038,8 @@ public class JessInitializer {
             req_rule = req_rule + ")";
 
             r.eval(req_rule);
-            Params.requirement_rules.put(current_subobj,subobj_tests);
-            Params.subobjectives_to_measurements.put(current_subobj, current_param);            
+            params.requirement_rules.put(current_subobj,subobj_tests);
+            params.subobjectives_to_measurements.put(current_subobj, current_param);
             call2= call2 + ")";
             r.eval(call2);
          }catch (Exception e) {
@@ -1069,7 +1064,7 @@ public class JessInitializer {
                 Cell[] row = meas.getRow(i);
                 String obj = row[0].getContents();
                 String explan = row[1].getContents();
-                Params.subobj_measurement_params.put(obj, explan);
+                params.subobj_measurement_params.put(obj, explan);
                 if(!obj.equalsIgnoreCase(current_obj)) {
                     nobj++;
                     nsubobj = 0;
@@ -1091,40 +1086,40 @@ public class JessInitializer {
                 
                 String tmp = "?*subobj-" + subobj + "*";
                 
-                if (Params.measurements_to_subobjectives.containsKey(param)) {
-                    ArrayList list = (ArrayList) Params.measurements_to_subobjectives.get(param);
+                if (params.measurements_to_subobjectives.containsKey(param)) {
+                    ArrayList list = (ArrayList) params.measurements_to_subobjectives.get(param);
                     if(!list.contains(tmp)) {
                         list.add(tmp);
-                        Params.measurements_to_subobjectives.put(param,list);
+                        params.measurements_to_subobjectives.put(param,list);
                     }   
                 } else {
                     ArrayList list = new ArrayList();
                     list.add(tmp);
-                    Params.measurements_to_subobjectives.put(param,list);
+                    params.measurements_to_subobjectives.put(param,list);
                 }
                 
-                if (Params.measurements_to_objectives.containsKey(param)) {
-                    ArrayList list = (ArrayList) Params.measurements_to_objectives.get(param);
+                if (params.measurements_to_objectives.containsKey(param)) {
+                    ArrayList list = (ArrayList) params.measurements_to_objectives.get(param);
                     if(!list.contains(obj)) {
                         list.add(obj);
-                        Params.measurements_to_objectives.put(param,list);
+                        params.measurements_to_objectives.put(param,list);
                     }   
                 } else {
                     ArrayList list = new ArrayList();
                     list.add(obj);
-                    Params.measurements_to_objectives.put(param,list);
+                    params.measurements_to_objectives.put(param,list);
                 }
                 String pan = obj.substring(0,2);
-                if (Params.measurements_to_panels.containsKey(param)) {
-                    ArrayList list = (ArrayList) Params.measurements_to_panels.get(param);
+                if (params.measurements_to_panels.containsKey(param)) {
+                    ArrayList list = (ArrayList) params.measurements_to_panels.get(param);
                     if(!list.contains(pan)) {
                         list.add(pan);
-                        Params.measurements_to_panels.put(param,list);
+                        params.measurements_to_panels.put(param,list);
                     }   
                 } else {
                     ArrayList list = new ArrayList();
                     list.add(pan);
-                    Params.measurements_to_panels.put(param,list);
+                    params.measurements_to_panels.put(param,list);
                 }
                 
                 String call = "(defrule FUZZY-REQUIREMENTS::subobjective-" + subobj + "-" + type + " " + desc + " ?mea <- (REQUIREMENTS::Measurement (Parameter " + param + ")  "; 
@@ -1191,8 +1186,8 @@ public class JessInitializer {
                 
                 call2 = call2 + " (AGGREGATION::SUBOBJECTIVE (satisfaction 0.0) (fuzzy-value (new FuzzyValue \"Value\" 0.0 0.0 0.0 \"utils\" (matlabf get_value_inv_hashmap))) (id " + subobj + ") (index " + 
                         the_index + ") (parent " + the_parent + " )"
-                        + "(factHistory F" + Params.nof + ")) ";
-                Params.nof++;
+                        + "(factHistory F" + params.nof + ")) ";
+                params.nof++;
                 call = call + "(assert (AGGREGATION::SUBOBJECTIVE (id " + subobj + ") (index " + the_index + " ) (parent " + the_parent + 
                         " ) (fuzzy-value (new FuzzyValue \"Value\" (call (new FuzzyValue \"Value\" (new Interval \"interval\" " + value + 
                         " " + value + ") \"utils\" (matlabf get_value_hashmap)) getFuzzy_val) \"utils\" (matlabf get_value_inv_hashmap))) (satisfaction " + value + ")  (satisfied-by ?who)"
@@ -1204,9 +1199,9 @@ public class JessInitializer {
                 r.eval(call);     
                 r.eval("(defglobal ?*num-soundings-per-day* = 0)");
             }
-            Params.subobjectives_to_measurements = getInverseHashMap(Params.measurements_to_subobjectives);
-            Params.objectives_to_measurements = getInverseHashMap(Params.measurements_to_objectives);
-            Params.panels_to_measurements = getInverseHashMap(Params.measurements_to_panels);
+            params.subobjectives_to_measurements = getInverseHashMap(params.measurements_to_subobjectives);
+            params.objectives_to_measurements = getInverseHashMap(params.measurements_to_objectives);
+            params.panels_to_measurements = getInverseHashMap(params.measurements_to_panels);
          }catch (Exception e) {
             System.out.println( "EXC in loadRequirementRules " +e.getMessage() );
         }
@@ -1214,7 +1209,7 @@ public class JessInitializer {
      private void loadCapabilityRules(Rete r, Workbook xls, String clp) {
          try {
              r.batch(clp);
-             for (String instrument:Params.instrument_list) {
+             for (String instrument:params.instrument_list) {
                  Sheet sh = xls.getSheet(instrument);
                  int nmeasurements = sh.getRows();
                  ArrayList meas = new ArrayList();
@@ -1252,7 +1247,7 @@ public class JessInitializer {
                     String att = tokens2[0];//Parameter
                     String val = tokens2[1];//"x.x.x Soil moisture"
                     meas.add(val);
-                    ArrayList list_subobjs = (ArrayList) Params.measurements_to_subobjectives.get(val);
+                    ArrayList list_subobjs = (ArrayList) params.measurements_to_subobjectives.get(val);
                     if (list_subobjs != null) {
                         Iterator list_subobjs2 = list_subobjs.iterator();
                         while (list_subobjs2.hasNext()) {
@@ -1299,15 +1294,15 @@ public class JessInitializer {
                         + "))";                
                 
                 r.eval(call2);
-                Params.instruments_to_measurements.put(instrument,meas);
-                Params.instruments_to_subobjectives.put(instrument,subobj);
-                Params.instruments_to_objectives.put(instrument,obj);
-                Params.instruments_to_panels.put(instrument,pan);
+                params.instruments_to_measurements.put(instrument,meas);
+                params.instruments_to_subobjectives.put(instrument,subobj);
+                params.instruments_to_objectives.put(instrument,obj);
+                params.instruments_to_panels.put(instrument,pan);
              }       
-             Params.measurements_to_instruments = getInverseHashMap(Params.instruments_to_measurements);
-             Params.subobjectives_to_instruments = getInverseHashMap(Params.instruments_to_measurements);
-             Params.objectives_to_instruments = getInverseHashMap(Params.instruments_to_objectives);
-             Params.panels_to_instruments = getInverseHashMap(Params.instruments_to_panels);
+             params.measurements_to_instruments = getInverseHashMap(params.instruments_to_measurements);
+             params.subobjectives_to_instruments = getInverseHashMap(params.instruments_to_measurements);
+             params.objectives_to_instruments = getInverseHashMap(params.instruments_to_objectives);
+             params.panels_to_instruments = getInverseHashMap(params.instruments_to_panels);
          }catch (Exception e) {
             System.out.println( "EXC in loadCapabilityRules " +e.getMessage() );
         }
@@ -1340,7 +1335,7 @@ public class JessInitializer {
      private void loadSynergyRules(Rete r, String clp) {
          try {
             r.batch(clp);
-            Iterator it = Params.measurements_to_subobjectives.entrySet().iterator();
+            Iterator it = params.measurements_to_subobjectives.entrySet().iterator();
             while(it.hasNext())  {
                 Map.Entry<String,ArrayList> es = (Map.Entry<String,ArrayList>) it.next();
                 String meas = (String) es.getKey();
@@ -1361,31 +1356,32 @@ public class JessInitializer {
              System.out.println( "EXC in loadSynergyRules " +e.getMessage() );
          }     
      }
-     private void loadAggregationRules (Rete r, Workbook xls, String sheet, String[] clps) {
+     private void loadAggregationRules(Rete r, Workbook xls, String sheet, String[] clps) {
          try {
-             for (String clp:clps)
-                r.batch(clp);
+             for (String clp: clps) {
+                 r.batch(clp);
+             }
              Sheet meas = xls.getSheet(sheet);
              
              //Stakeholders or panels
              Cell[] col = meas.getColumn(1);
-             Params.npanels = col.length-3;
+             params.npanels = col.length - 3;
              String call = "(deffacts AGGREGATION::init-aggregation-facts ";
-             Params.panel_names = new ArrayList(Params.npanels);
-             Params.panel_weights = new ArrayList(Params.npanels);
-             Params.obj_weights = new ArrayList(Params.npanels);
-             Params.subobj_weights = new ArrayList(Params.npanels);
-             Params.num_objectives_per_panel = new ArrayList(Params.npanels);
-             Params.subobj_weights_map = new HashMap();
-             for(int i = 0;i<Params.npanels;i++) {
-                 Params.panel_names.add(meas.getCell(1, i+2).getContents());
-                 //Params.panel_weights.add(Double.parseDouble(meas.getCell(3, i+2).getContents()));
+             params.panel_names = new ArrayList<>(params.npanels);
+             params.panel_weights = new ArrayList<>(params.npanels);
+             params.obj_names = new ArrayList<>(params.npanels);
+             params.obj_weights = new ArrayList<>(params.npanels);
+             params.subobj_weights = new ArrayList<>(params.npanels);
+             params.num_objectives_per_panel = new ArrayList<>(params.npanels);
+             params.subobj_weights_map = new HashMap<>();
+             for (int i = 0; i < params.npanels; i++) {
+                 params.panel_names.add(meas.getCell(1, i+2).getContents());
                  NumberCell nc = (NumberCell)meas.getCell(3, i+2);
-                 Params.panel_weights.add(nc.getValue());
+                 params.panel_weights.add(nc.getValue());
              }
-             call = call  + " (AGGREGATION::VALUE (sh-scores (repeat$ -1.0 " + Params.npanels + ")) (sh-fuzzy-scores (repeat$ -1.0 " + Params.npanels + ")) (weights " + javaArrayList2JessList(Params.panel_weights) + ")"
-                     + "(factHistory F" + Params.nof + "))";
-             Params.nof++;
+             call = call.concat(" (AGGREGATION::VALUE (sh-scores (repeat$ -1.0 " + params.npanels + ")) (sh-fuzzy-scores (repeat$ -1.0 " + params.npanels + ")) (weights " + javaArrayList2JessList(params.panel_weights) + ")"
+                     + "(factHistory F" + params.nof + "))");
+             params.nof++;
              
              // Objectives
              Cell[] obj_w = meas.getColumn(8);
@@ -1393,84 +1389,82 @@ public class JessInitializer {
              Cell[] obj_d = meas.getColumn(7);
              int i = 3;
              int p = 0;
-             //ArrayList<String> obj_descriptions = new ArrayList<>();
+
              HashMap<String, String> obj_descriptions = new HashMap<>();
-             while(p<Params.npanels) {            
+             while (p < params.npanels) {
                  Boolean new_panel = false;
                  ArrayList<Double> obj_weights_p = new ArrayList<>();
-                 while(!new_panel) {             
-                     //Double weight = Double.parseDouble(obj_w[i].getContents());
+                 ArrayList<String> obj_names_p = new ArrayList<>();
+                 while (!new_panel) {
                      NumberCell nc2 = (NumberCell) obj_w[i];
                      obj_weights_p.add(nc2.getValue());
                      String obj = obj_n[i].getContents();
-                     obj_descriptions.put(obj,obj_d[i].getContents());
+                     obj_descriptions.put(obj, obj_d[i].getContents());
                      new_panel = obj_d[i+1].getContents().equalsIgnoreCase("");
+                     obj_names_p.add(obj);
                      i++;
-                     
                  }
-                 Params.obj_weights.add(obj_weights_p);
-                 Params.num_objectives_per_panel.add(obj_weights_p.size());
+                 params.obj_weights.add(obj_weights_p);
+                 params.obj_names.add(obj_names_p);
+                 params.num_objectives_per_panel.add(obj_weights_p.size());
                  
-                 call = call + " (AGGREGATION::STAKEHOLDER (id " + Params.panel_names.get(p) + " ) (index " + (p + 1) + " ) (obj-fuzzy-scores (repeat$ -1.0 " +  obj_weights_p.size() + ")) (obj-scores (repeat$ -1.0 " + obj_weights_p.size() + ")) (weights " +  javaArrayList2JessList(obj_weights_p) + ")"
-                         + "(factHistory F" + Params.nof + ")) ";
-                 Params.nof++;
+                 call = call.concat(" (AGGREGATION::STAKEHOLDER (id " + params.panel_names.get(p) + " ) (index " + (p + 1) + " ) (obj-fuzzy-scores (repeat$ -1.0 " +  obj_weights_p.size() + ")) (obj-scores (repeat$ -1.0 " + obj_weights_p.size() + ")) (weights " +  javaArrayList2JessList(obj_weights_p) + ")"
+                         + "(factHistory F" + params.nof + ")) ");
+                 params.nof++;
                  p++;
-                 i = i + 4;
+                 i += 4;
              }
-             Params.objective_descriptions = obj_descriptions;
+             params.objective_descriptions = obj_descriptions;
+
              //Subobjectives
-             
-            
              p = 0;
-             Params.subobjectives = new ArrayList();
-             HashMap<String,String> subobjDes = new HashMap<>();
-             while(p<Params.npanels) {  
+             params.subobjectives = new ArrayList<>();
+             HashMap<String, String> subobjDes = new HashMap<>();
+             while (p < params.npanels) {
                  Cell[] subobj_w = meas.getColumn(13+p*5);
                  Cell[] subobj_n = meas.getColumn(11+p*5);
                  Cell[] subobj_d = meas.getColumn(12+p*5);
-                 //Cell[] subobj_d = meas.getColumn(12*p*5);
-                 ArrayList<ArrayList> subobj_weights_p = new ArrayList<ArrayList>();
-                 ArrayList subobj_p = new ArrayList(Params.num_objectives_per_panel.get(p));
+                 ArrayList<ArrayList<Double>> subobj_weights_p = new ArrayList<>();
+                 ArrayList<ArrayList<String>> subobj_p = new ArrayList<>(params.num_objectives_per_panel.get(p));
                  i = 4;
                  int o = 0;
-                 while(o<Params.num_objectives_per_panel.get(p)) {
+                 while (o < params.num_objectives_per_panel.get(p)) {
                      Boolean new_obj = false;
-                     ArrayList<Double> subobj_weights_o = new ArrayList<Double>();
-                     ArrayList subobj_o = new ArrayList();
+                     ArrayList<Double> subobj_weights_o = new ArrayList<>();
+                     ArrayList<String> subobj_o = new ArrayList<>();
                      int so = 1;
-                     while(!new_obj) {             
-                         //Double weight = Double.parseDouble(subobj_w[i].getContents());
+                     while (!new_obj) {
                          NumberCell nc3 = (NumberCell) subobj_w[i];
                          double weight = nc3.getValue();
                          subobj_weights_o.add(weight);
-                         String subobj_name = Params.panel_names.get(p) + (o+1) + "-" + so;
-//                         System.out.println(subobj_name + ": " + subobj_d[i].getContents());
+                         String subobj_name = params.panel_names.get(p) + (o + 1) + "-" + so;
                          subobjDes.put(subobj_name, subobj_d[i].getContents());
-                         Params.subobj_weights_map.put(subobj_name,weight);
+                         params.subobj_weights_map.put(subobj_name, weight);
                          subobj_o.add(subobj_name);
-                         i++;so++;
-                         if (i>= subobj_n.length) {
+                         i++;
+                         so++;
+                         if (i >= subobj_n.length) {
                              new_obj = true;
-                         } else {
+                         }
+                         else {
                              String subobj = subobj_n[i].getContents();
                              new_obj = subobj.equalsIgnoreCase("");
                          }
-                         
                      }
                      subobj_weights_p.add(subobj_weights_o);
                      subobj_p.add(subobj_o);
-                     call = call + " (AGGREGATION::OBJECTIVE (id " + Params.panel_names.get(p) + (o + 1) + " ) (parent " + Params.panel_names.get(p) + ") (index " + (o + 1)+ " ) (subobj-fuzzy-scores (repeat$ -1.0 " +  subobj_weights_o.size() + ")) (subobj-scores (repeat$ -1.0 " + subobj_weights_o.size() + ")) (weights " +  javaArrayList2JessList(subobj_weights_o) + ")"
-                             + "(factHistory F" + Params.nof + ")) ";
-                     Params.nof++;
+                     call = call.concat(" (AGGREGATION::OBJECTIVE (id " + params.panel_names.get(p) + (o + 1) + " ) (parent " + params.panel_names.get(p) + ") (index " + (o + 1)+ " ) (subobj-fuzzy-scores (repeat$ -1.0 " +  subobj_weights_o.size() + ")) (subobj-scores (repeat$ -1.0 " + subobj_weights_o.size() + ")) (weights " +  javaArrayList2JessList(subobj_weights_o) + ")"
+                             + "(factHistory F" + params.nof + ")) ");
+                     params.nof++;
                      o++;
-                     i = i + 4;
+                     i += 4;
                  }
                  p++;
-                 Params.subobj_weights.add(subobj_weights_p);
-                 Params.subobjectives.add(subobj_p);
+                 params.subobj_weights.add(subobj_weights_p);
+                 params.subobjectives.add(subobj_p);
              }
-             Params.subobj_descriptions = subobjDes;
-             call = call + ")";//close deffacts
+             params.subobj_descriptions = subobjDes;
+             call = call.concat(")");//close deffacts
              r.eval(call);         
          } catch (Exception e) {
             System.out.println( "EXC in loadAggregationRules " +e.getMessage() );

@@ -40,6 +40,7 @@ import org.bson.Document;
 public class GenericTask implements Callable {
     protected Architecture arch;
     protected Resource res;
+    protected Params params;
     private String type;
     private boolean debug;
     private boolean saveRete = false;
@@ -47,8 +48,8 @@ public class GenericTask implements Callable {
 //    DBManagement dbm;
 
     
-    public GenericTask ( Architecture arch , String type)
-    {
+    public GenericTask(Architecture arch, String type) {
+        params = Params.getInstance();
         this.arch = arch;
         this.type = type;
         //if (type.equalsIgnoreCase("Slow") || arch.getEval_mode().equalsIgnoreCase("DEBUG"))
@@ -57,27 +58,21 @@ public class GenericTask implements Callable {
         else
             debug = false;
     }
-    public GenericTask ( Architecture arch , String type, boolean saveRete)
-    {
+
+    public GenericTask(Architecture arch, String type, boolean saveRete) {
+        params = Params.getInstance();
         this.saveRete = saveRete;
         this.arch = arch;
         this.type = type;
-        //if (type.equalsIgnoreCase("Slow") || arch.getEval_mode().equalsIgnoreCase("DEBUG"))
-        if (arch.getEval_mode().equalsIgnoreCase("DEBUG")) 
-            debug = true;
-        else
-            debug = false;
+        debug = arch.getEval_mode().equalsIgnoreCase("DEBUG");
     }
-    public GenericTask ( Architecture arch , String type, int archID)
-    {
+
+    public GenericTask(Architecture arch, String type, int archID) {
+        params = Params.getInstance();
         this.archID = archID;
         this.arch = arch;
         this.type = type;
-        //if (type.equalsIgnoreCase("Slow") || arch.getEval_mode().equalsIgnoreCase("DEBUG"))
-        if (arch.getEval_mode().equalsIgnoreCase("DEBUG")) 
-            debug = true;
-        else
-            debug = false;
+        debug = arch.getEval_mode().equalsIgnoreCase("DEBUG");
     }    
    
     public void getResource() {
@@ -88,6 +83,7 @@ public class GenericTask implements Callable {
         ArchitectureEvaluator.getInstance().getResourcePool().freeResource( res );
         res = null;
     }
+
     @Override
     public Result call()
     {   //System.out.println("Evaluating Arch " + arch.toBitString() + " nsats = " + arch.getNsats() + " ... " );
@@ -104,7 +100,7 @@ public class GenericTask implements Callable {
         MatlabFunctions m = res.getM();
         Result resu = new Result();
 //        dbm = DBManagement.getInstance();
-        try{
+        try {
             if (type.equalsIgnoreCase("Fast")) {
                 resu = evaluatePerformanceFast(r, arch,qb, m);
                 r.eval("(reset)");
@@ -180,7 +176,7 @@ public class GenericTask implements Callable {
                 String orbit = Params.orbit_list[i];
                 if (subset.length>0) {
                     String key = arch.getNsats() + " x " + orbit + "@" + m.StringArraytoStringWithSpaces(subset);
-                    ArrayList<Fact> measurements = (ArrayList<Fact>) Params.capabilities.get(key);
+                    ArrayList<Fact> measurements = (ArrayList<Fact>) params.capabilities.get(key);
                     for(int j = 0;j<measurements.size();j++) {
                         Fact tmp = (Fact) measurements.get(j).clone();
                         r.assertString(tmp.toString());
@@ -189,7 +185,7 @@ public class GenericTask implements Callable {
             }
             
             //Revisit times
-            Iterator parameters = Params.parameter_list.iterator();
+            Iterator parameters = params.parameter_list.iterator();
             while (parameters.hasNext()) {
                 String param = "\"" + (String)parameters.next() + "\"";
                 Value v = r.eval("(update-fovs " + param + " (create$ " + m.StringArraytoStringWithSpaces(Params.orbit_list) + "))");
@@ -202,7 +198,7 @@ public class GenericTask implements Callable {
                     }
                     String key = arch.getNsats() + " x " + m.StringArraytoStringWith(fovs,"  ");
                                         
-                    HashMap therevtimes = (HashMap) Params.revtimes.get(key); //key: 'Global' or 'US', value Double
+                    HashMap therevtimes = (HashMap) params.revtimes.get(key); //key: 'Global' or 'US', value Double
                     String call = "(assert (ASSIMILATION2::UPDATE-REV-TIME (parameter " +  param + ") (avg-revisit-time-global# " + therevtimes.get("Global") + ") "
                             + "(avg-revisit-time-US# " + therevtimes.get("US") + ")))";
                     r.eval(call);
@@ -225,21 +221,21 @@ public class GenericTask implements Callable {
             r.setFocus( "SYNERGIES-ACROSS-ORBITS" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.setFocus( "FUZZY-REQUIREMENTS" );
             else
                 r.setFocus( "REQUIREMENTS" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.setFocus( "FUZZY-AGGREGATION" );
             else
                 r.setFocus( "AGGREGATION" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES"))) 
+            if ((params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 result = aggregate_performance_score_facts(r, m, qb);
-             else if ((Params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-CASES")))
+             else if ((params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-CASES")))
                 result = aggregate_performance_score(r);
             
 
@@ -253,70 +249,110 @@ public class GenericTask implements Callable {
     }
     
     private Result aggregate_performance_score_facts(Rete r, MatlabFunctions m, QueryBuilder qb) {
-       ArrayList subobj_scores = new ArrayList();
-       ArrayList obj_scores = new ArrayList();
-       ArrayList panel_scores = new ArrayList();
-       double science = 0.0;
-       double cost = 0.0;
-       FuzzyValue fuzzy_science = null;
-       FuzzyValue fuzzy_cost = null;
-       TreeMap<String,ArrayList<Fact>> explanations = new TreeMap<String,ArrayList<Fact>>();
-       TreeMap<String,Double> tm = new TreeMap<String,Double>();
-       try {
-           ArrayList<Fact> vals = qb.makeQuery("AGGREGATION::VALUE");
-           Fact val = vals.get(0);
-           science = val.getSlotValue("satisfaction").floatValue(r.getGlobalContext());
-           if (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES") || Params.req_mode.equalsIgnoreCase("FUZZY-CASES"))
-               fuzzy_science = (FuzzyValue)val.getSlotValue("fuzzy-value").javaObjectValue(r.getGlobalContext());
-           panel_scores = m.JessList2ArrayList(val.getSlotValue("sh-scores").listValue(r.getGlobalContext()),r);
-           
-           ArrayList<Fact> subobj_facts = qb.makeQuery("AGGREGATION::SUBOBJECTIVE");
-           for (int n = 0;n<subobj_facts.size();n++) {
-               Fact f = subobj_facts.get(n);
-               String subobj = f.getSlotValue("id").stringValue(r.getGlobalContext());
-               Double subobj_score = f.getSlotValue("satisfaction").floatValue(r.getGlobalContext());
-               Double current_subobj_score = tm.get(subobj);
-               if(current_subobj_score != null && subobj_score > current_subobj_score || current_subobj_score == null)
-                   tm.put(subobj, subobj_score);
-               explanations.put(subobj, qb.makeQuery("AGGREGATION::SUBOBJECTIVE (id " + subobj + ")"));   
-           }
-           
-           for (Iterator<String> name = tm.keySet().iterator();name.hasNext();) {
-               subobj_scores.add(tm.get(name.next()));
-           }
-       }catch(Exception e) {
-                System.out.println(e.getMessage() + " " + e.getClass() + " " + e.getStackTrace());
-                e.printStackTrace();
-            }
-       Result theresult = new Result(arch, science, cost, fuzzy_science, fuzzy_cost, subobj_scores, obj_scores, panel_scores,tm);
-       if(debug) {
-           theresult.setCapabilities(qb.makeQuery("REQUIREMENTS::Measurement"));
-           theresult.setExplanations(explanations);
-       }
-       
-       return theresult;
-   }
-        
-    private Result aggregate_performance_score(Rete r) {
-        ArrayList subobj_scores = new ArrayList();
-        ArrayList obj_scores = new ArrayList();
-        ArrayList panel_scores = new ArrayList();
+        ArrayList<ArrayList<ArrayList<Double>>> subobj_scores = new ArrayList<>();
+        ArrayList<ArrayList<Double>> obj_scores = new ArrayList<>();
+        ArrayList<Double> panel_scores = new ArrayList<>();
         double science = 0.0;
         double cost = 0.0;
-        //Subobjective scores
-        for (int p = 0;p<Params.npanels;p++) {
-            int nob = Params.num_objectives_per_panel.get(p);
-            ArrayList subobj_scores_p = new ArrayList(nob);
-            for (int o=0;o<nob;o++) {
-                ArrayList subobj_p = (ArrayList)Params.subobjectives.get(p);
-                ArrayList subobj_o = (ArrayList)subobj_p.get(o);
-                int nsubob = subobj_o.size();
-                ArrayList subobj_scores_o = new ArrayList(nsubob);
-                for (int so = 0;so<nsubob;so++) {
-                    String var_name = "?*subobj-" + subobj_o.get(so) + "*";
+        FuzzyValue fuzzy_science = null;
+        FuzzyValue fuzzy_cost = null;
+        TreeMap<String, ArrayList<Fact>> explanations = new TreeMap<>();
+        TreeMap<String, Double> subobj_scores_map = new TreeMap<>();
+        try {
+            // General and panel scores
+            ArrayList<Fact> vals = qb.makeQuery("AGGREGATION::VALUE");
+            Fact val = vals.get(0);
+            science = val.getSlotValue("satisfaction").floatValue(r.getGlobalContext());
+            if (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES") || params.req_mode.equalsIgnoreCase("FUZZY-CASES")) {
+                fuzzy_science = (FuzzyValue)val.getSlotValue("fuzzy-value").javaObjectValue(r.getGlobalContext());
+            }
+            for (String str_val: m.JessList2ArrayList(val.getSlotValue("sh-scores").listValue(r.getGlobalContext()), r)) {
+                panel_scores.add(Double.parseDouble(str_val));
+            }
+
+            ArrayList<Fact> subobj_facts = qb.makeQuery("AGGREGATION::SUBOBJECTIVE");
+            for (Fact f: subobj_facts) {
+                String subobj = f.getSlotValue("id").stringValue(r.getGlobalContext());
+                Double subobj_score = f.getSlotValue("satisfaction").floatValue(r.getGlobalContext());
+                Double current_subobj_score = subobj_scores_map.get(subobj);
+                if(current_subobj_score != null && subobj_score > current_subobj_score || current_subobj_score == null) {
+                    subobj_scores_map.put(subobj, subobj_score);
+                }
+                explanations.put(subobj, qb.makeQuery("AGGREGATION::SUBOBJECTIVE (id " + subobj + ")"));
+            }
+
+            //Subobjective scores
+            for (int p = 0; p < params.npanels; p++) {
+                int nob = params.num_objectives_per_panel.get(p);
+                ArrayList<ArrayList<Double>> subobj_scores_p = new ArrayList<>(nob);
+                for (int o = 0; o < nob; o++) {
+                    ArrayList<ArrayList<String>> subobj_p = params.subobjectives.get(p);
+                    ArrayList<String> subobj_o = subobj_p.get(o);
+                    int nsubob = subobj_o.size();
+                    ArrayList<Double> subobj_scores_o = new ArrayList<>(nsubob);
+                    for (String subobj : subobj_o) {
+                        subobj_scores_o.add(subobj_scores_map.get(subobj));
+                    }
+                    subobj_scores_p.add(subobj_scores_o);
+                }
+                subobj_scores.add(subobj_scores_p);
+            }
+
+            //Objective scores
+            for (int p = 0; p < params.npanels; p++) {
+                int nob = params.num_objectives_per_panel.get(p);
+                ArrayList<Double> obj_scores_p = new ArrayList<>(nob);
+                for (int o = 0; o < nob; o++) {
+                    ArrayList<ArrayList<Double>> subobj_weights_p = params.subobj_weights.get(p);
+                    ArrayList<Double> subobj_weights_o = subobj_weights_p.get(o);
+                    ArrayList<ArrayList<Double>> subobj_scores_p = subobj_scores.get(p);
+                    ArrayList<Double> subobj_scores_o = subobj_scores_p.get(o);
                     try {
-                    subobj_scores_o.add(r.eval(var_name).floatValue(r.getGlobalContext()));
-                    }catch(Exception e) {
+                        obj_scores_p.add(Result.sumProduct(subobj_weights_o, subobj_scores_o));
+                    }
+                    catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                obj_scores.add(obj_scores_p);
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage() + " " + e.getClass() + " " + e.getStackTrace());
+            e.printStackTrace();
+        }
+        Result theresult = new Result(arch, science, cost, fuzzy_science, fuzzy_cost, subobj_scores, obj_scores,
+                panel_scores, subobj_scores_map);
+        if (debug) {
+           theresult.setCapabilities(qb.makeQuery("REQUIREMENTS::Measurement"));
+           theresult.setExplanations(explanations);
+        }
+
+        return theresult;
+    }
+        
+    private Result aggregate_performance_score(Rete r) {
+        ArrayList<ArrayList<ArrayList<Double>>> subobj_scores = new ArrayList<>();
+        ArrayList<ArrayList<Double>> obj_scores = new ArrayList<>();
+        ArrayList<Double> panel_scores = new ArrayList<>();
+        double science = 0.0;
+        double cost = 0.0;
+
+        //Subobjective scores
+        for (int p = 0; p < params.npanels; p++) {
+            int nob = params.num_objectives_per_panel.get(p);
+            ArrayList<ArrayList<Double>> subobj_scores_p = new ArrayList<>(nob);
+            for (int o = 0; o < nob; o++) {
+                ArrayList<ArrayList<String>> subobj_p = params.subobjectives.get(p);
+                ArrayList<String> subobj_o = subobj_p.get(o);
+                int nsubob = subobj_o.size();
+                ArrayList<Double> subobj_scores_o = new ArrayList<>(nsubob);
+                for (String subobj : subobj_o) {
+                    String var_name = "?*subobj-" + subobj + "*";
+                    try {
+                        subobj_scores_o.add(r.eval(var_name).floatValue(r.getGlobalContext()));
+                    }
+                    catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                 }
@@ -326,43 +362,46 @@ public class GenericTask implements Callable {
         }
         
         //Objective scores
-        for (int p = 0;p<Params.npanels;p++) {
-            int nob = Params.num_objectives_per_panel.get(p);
-            ArrayList obj_scores_p = new ArrayList(nob);
-            for (int o=0;o<nob;o++) {
-                ArrayList subobj_weights_p = (ArrayList) Params.subobj_weights.get(p);
-                ArrayList subobj_weights_o = (ArrayList)subobj_weights_p.get(o);
-                ArrayList subobj_scores_p = (ArrayList) subobj_scores.get(p);
-                ArrayList subobj_scores_o = (ArrayList)subobj_scores_p.get(o);
+        for (int p = 0; p < params.npanels; p++) {
+            int nob = params.num_objectives_per_panel.get(p);
+            ArrayList<Double> obj_scores_p = new ArrayList<>(nob);
+            for (int o = 0; o < nob; o++) {
+                ArrayList<ArrayList<Double>> subobj_weights_p = params.subobj_weights.get(p);
+                ArrayList<Double> subobj_weights_o = subobj_weights_p.get(o);
+                ArrayList<ArrayList<Double>> subobj_scores_p = subobj_scores.get(p);
+                ArrayList<Double> subobj_scores_o = subobj_scores_p.get(o);
                 try {
-                    obj_scores_p.add(Result.sumProduct(subobj_weights_o,subobj_scores_o));
-                }catch(Exception e) {
-                System.out.println(e.getMessage());
-            }
+                    obj_scores_p.add(Result.sumProduct(subobj_weights_o, subobj_scores_o));
+                }
+                catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
             obj_scores.add(obj_scores_p);
         }
+
         //Stakeholder and final score
-        for (int p = 0;p<Params.npanels;p++) {
+        for (int p = 0; p < params.npanels; p++) {
             try {
-                panel_scores.add(Result.sumProduct((ArrayList)Params.obj_weights.get(p),(ArrayList)obj_scores.get(p)));
-            }catch(Exception e) {
+                panel_scores.add(Result.sumProduct(params.obj_weights.get(p), obj_scores.get(p)));
+            }
+            catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-        try{
-            science = Result.sumProduct(Params.panel_weights,panel_scores);
-        }catch(Exception e) {
+
+        try {
+            science = Result.sumProduct(params.panel_weights, panel_scores);
+        }
+        catch (Exception e) {
                 System.out.println(e.getMessage());
-            }
-        Result theresult = new Result(arch, science, cost, subobj_scores, obj_scores, panel_scores,null);
-        return theresult;
+        }
+
+        return new Result(arch, science, cost, subobj_scores, obj_scores, panel_scores,null);
     }
     
     protected void evaluateCost(Rete r, Architecture arch, Result res, QueryBuilder qb, MatlabFunctions m) {
         try {
-            
-            
             long t0 = System.currentTimeMillis();
 
             r.setFocus("MANIFEST0");
@@ -384,7 +423,7 @@ public class GenericTask implements Callable {
             r.eval("(focus LV-SELECTION3)");
             r.eval("(run)");
 
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.eval("(focus FUZZY-COST-ESTIMATION)");
             else
             r.eval("(focus COST-ESTIMATION)");
@@ -396,7 +435,7 @@ public class GenericTask implements Callable {
             ArrayList<Fact> missions = qb.makeQuery("MANIFEST::Mission");
             for (int i = 0;i<missions.size();i++)  {
                 cost = cost + missions.get(i).getSlotValue("lifecycle-cost#").floatValue(r.getGlobalContext());
-                if (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES") || Params.req_mode.equalsIgnoreCase("FUZZY-CASES"))
+                if (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES") || params.req_mode.equalsIgnoreCase("FUZZY-CASES"))
                     fzcost = fzcost.add((FuzzyValue)missions.get(i).getSlotValue("lifecycle-cost").javaObjectValue(r.getGlobalContext()));
             }
 
@@ -408,9 +447,9 @@ public class GenericTask implements Callable {
 
             ///////////////////////////////////////////////////////////////////
 //            long t0 = System.currentTimeMillis();
-//            r.batch(Params.critique_cost_initialize_facts_clp);
-//            r.batch(Params.critique_cost_clp);
-//            r.batch(Params.critique_cost_precalculation_clp);
+//            r.batch(params.critique_cost_initialize_facts_clp);
+//            r.batch(params.critique_cost_clp);
+//            r.batch(params.critique_cost_precalculation_clp);
 //            
 //            r.setFocus("CRITIQUE-COST-PRECALCULATION1");
 //            r.run();
@@ -529,16 +568,16 @@ public class GenericTask implements Callable {
                      }        
                  }
                  call = call + "(instruments " + payload + ") (lifetime 5) (launch-date 2015) (select-orbit no) " + orb.toJessSlots() + ""
-                         + "(factHistory F" + Params.nof + ")))";
-                 Params.nof++;
+                         + "(factHistory F" + params.nof + ")))";
+                 params.nof++;
 
                  
                  call = call + "(assert (SYNERGIES::cross-registered-instruments " +
                 " (instruments " + payload + 
                 ") (degree-of-cross-registration spacecraft) " +
                 " (platform " + orbit +  " )"
-                         + "(factHistory F" + Params.nof + ")))";
-                 Params.nof++;
+                         + "(factHistory F" + params.nof + ")))";
+                 params.nof++;
                  r.eval(call);  
                 }
          }       
@@ -563,14 +602,14 @@ public class GenericTask implements Callable {
                             String instr = Params.instrument_list[i];
                             String call = "(assert (MANIFEST::Mission (Name " + orbit + "-" + instr + ") ";
                             call = call + "(instruments " + instr + ")  (lifetime 5)  (launch-date 2015) (select-orbit no) " + orb.toJessSlots() + ""
-                                    + "(factHistory " + Params.nof + ")))";
-                            Params.nof++;
+                                    + "(factHistory " + params.nof + ")))";
+                            params.nof++;
                             call = call + "(assert (SYNERGIES::cross-registered-instruments " +
                            " (instruments " + instr  + ") " +
                            " (degree-of-cross-registration spacecraft) " +
                            " (platform " + orbit +  " )"
-                                    + "(factHistory F" + Params.nof + ")))";
-                            Params.nof++;
+                                    + "(factHistory F" + params.nof + ")))";
+                            params.nof++;
                             r.eval(call);  
                         }     
                     }
@@ -584,21 +623,21 @@ public class GenericTask implements Callable {
                 //base mission (N instruments)
                 String call = "(assert (MANIFEST::Mission (Name " + orbit + "_base) ";
                 call = call + "(instruments " + StringUtils.join(base, " ") + ") (lifetime 2) (launch-date 2015) (select-orbit no) " + orb.toJessSlots() + ""
-                        + "(factHistory " + Params.nof + ")))";
-                Params.nof++;
+                        + "(factHistory " + params.nof + ")))";
+                params.nof++;
                 call = call + "(assert (SYNERGIES::cross-registered-instruments " +
                " (instruments " + StringUtils.join(base, " ")  + ") " +
                " (degree-of-cross-registration spacecraft) " +
                " (platform " + orbit +  " )"
-                        + "(factHistory F" + Params.nof + ")))";
-                Params.nof++;
+                        + "(factHistory F" + params.nof + ")))";
+                params.nof++;
                 r.eval(call);  
 
                 //add mission (1 instrument)
                 String call2 = "(assert (MANIFEST::Mission (Name " + orbit + "_added) ";
                 call2 = call2 + "(instruments " + StringUtils.join(add, " ") + ") (lifetime 2) (launch-date 2015) (select-orbit no) " + orb.toJessSlots() + ""
-                        + "(factHistory " + Params.nof + ")))";
-                Params.nof++;
+                        + "(factHistory " + params.nof + ")))";
+                params.nof++;
                 r.eval(call2);
              }
         } catch (Exception e) {
@@ -628,7 +667,7 @@ public class GenericTask implements Callable {
             r.run();
             
             //Revisit times
-            Iterator parameters = Params.measurements_to_instruments.keySet().iterator();
+            Iterator parameters = params.measurements_to_instruments.keySet().iterator();
             while (parameters.hasNext()) {
                 String param = (String)parameters.next();
                 Value v = r.eval("(update-fovs " + param + " (create$ " + m.StringArraytoStringWithSpaces(Params.orbit_list) + "))");
@@ -640,11 +679,11 @@ public class GenericTask implements Callable {
                         fovs[i] = String.valueOf(tmp);
                     }
                     String key = arch.getNsats() + " x " + m.StringArraytoStringWith(fovs,"  ");
-                    HashMap therevtimes = (HashMap) Params.revtimes.get(key); //key: 'Global' or 'US', value Double
+                    HashMap therevtimes = (HashMap) params.revtimes.get(key); //key: 'Global' or 'US', value Double
                     String call = "(assert (ASSIMILATION2::UPDATE-REV-TIME (parameter " +  param + ") (avg-revisit-time-global# " + therevtimes.get("Global") + ") "
                             + "(avg-revisit-time-US# " + therevtimes.get("US") + ")"
-                            + "(factHistory " + Params.nof + ")))";
-                    Params.nof++;
+                            + "(factHistory " + params.nof + ")))";
+                    params.nof++;
                     r.eval(call);
                 } 
                 
@@ -658,21 +697,21 @@ public class GenericTask implements Callable {
             r.setFocus( "FUZZY" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.setFocus( "FUZZY-REQUIREMENTS" );
             else
                 r.setFocus( "REQUIREMENTS" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.setFocus( "FUZZY-AGGREGATION" );
             else
                 r.setFocus( "AGGREGATION" );
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES"))) {
+            if ((params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES"))) {
                 result = aggregate_performance_score_facts(r, m, qb);
-            } else if ((Params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-CASES"))){
+            } else if ((params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-CASES"))){
                 result = aggregate_performance_score(r);
             }
             
@@ -688,11 +727,11 @@ public class GenericTask implements Callable {
     protected Result evaluatePerformance(Rete r, Architecture arch, QueryBuilder qb, MatlabFunctions m) {
         Result result = new Result();
         try {            
+
             long t0 = System.currentTimeMillis();
-             
-            
+
             r.reset();
-            assertMissions(r,arch,m);           
+            assertMissions(r, arch, m);
             
             r.eval("(bind ?*science-multiplier* 1.0)");
             r.eval("(defadvice before (create$ >= <= < >) (foreach ?xxx $?argv (if (eq ?xxx nil) then (return FALSE))))");
@@ -703,10 +742,10 @@ public class GenericTask implements Callable {
             r.setFocus("MANIFEST0");
             r.run();            
             
-            r.setFocus( "MANIFEST" );
+            r.setFocus("MANIFEST");
             r.run();
 
-            r.setFocus( "CAPABILITIES" );
+            r.setFocus("CAPABILITIES");
             r.run();
             
             r.setFocus("CAPABILITIES-REMOVE-OVERLAPS");
@@ -721,7 +760,7 @@ public class GenericTask implements Callable {
             r.setFocus("CAPABILITIES-UPDATE");
             r.run();
             
-            r.setFocus( "SYNERGIES" );
+            r.setFocus("SYNERGIES");
             r.run();
 
 
@@ -741,7 +780,8 @@ public class GenericTask implements Callable {
             }
 
             int javaAssertedFactID = 1;
-            Iterator parameters = Params.measurements_to_instruments.keySet().iterator();
+            Iterator parameters = params.measurements_to_instruments.keySet().iterator();
+
             while (parameters.hasNext()) {
                 String param = (String)parameters.next();
                 Value v = r.eval("(update-fovs " + param + " (create$ " + m.StringArraytoStringWithSpaces(Params.orbit_list) + "))");
@@ -749,7 +789,7 @@ public class GenericTask implements Callable {
                     ValueVector thefovs = v.listValue(r.getGlobalContext());           
                     String[] fovs = new String[thefovs.size()];
 
-                    for (int i = 0;i<thefovs.size();i++) {
+                    for (int i = 0; i < thefovs.size(); i++) {
                         int tmp = thefovs.get(i).intValue(r.getGlobalContext());
                         fovs[i] = String.valueOf(tmp);
                     }
@@ -770,9 +810,8 @@ public class GenericTask implements Callable {
                     }
                     
                     String key = arch.getNsats() + " x " + m.StringArraytoStringWith(fovs,"  ");                    
-                    HashMap therevtimes = (HashMap) Params.revtimes.get(key); //key: 'Global' or 'US', value Double
-                    String call = "(assert (ASSIMILATION2::UPDATE-REV-TIME (parameter " +  param + ") "
-                            + "(avg-revisit-time-global# " + therevtimes.get("Global") + ") "
+                    HashMap therevtimes = (HashMap) params.revtimes.get(key); //key: 'Global' or 'US', value Double
+                    String call = "(assert (ASSIMILATION2::UPDATE-REV-TIME (parameter " +  param + ") (avg-revisit-time-global# " + therevtimes.get("Global") + ") "
                             + "(avg-revisit-time-US# " + therevtimes.get("US") + ")"
                             + "(factHistory J" + javaAssertedFactID + ")))";
                     javaAssertedFactID++;
@@ -780,39 +819,38 @@ public class GenericTask implements Callable {
                 } 
             }
 
-            r.setFocus( "ASSIMILATION2" );
+            r.setFocus("ASSIMILATION2");
             r.run();
 
-            r.setFocus( "ASSIMILATION" );
+            r.setFocus("ASSIMILATION");
             r.run();
 
-            r.setFocus( "FUZZY" );
+            r.setFocus("FUZZY");
             r.run();
 
-            r.setFocus( "SYNERGIES" );
+            r.setFocus("SYNERGIES");
             r.run();
 
-            r.setFocus( "SYNERGIES-ACROSS-ORBITS" );
+            r.setFocus("SYNERGIES-ACROSS-ORBITS");
             r.run();
 
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
-                r.setFocus( "FUZZY-REQUIREMENTS" );
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+                r.setFocus("FUZZY-REQUIREMENTS");
             else
-                r.setFocus( "REQUIREMENTS" );
+                r.setFocus("REQUIREMENTS");
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
-                r.setFocus( "FUZZY-AGGREGATION" );
+            if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
+                r.setFocus("FUZZY-AGGREGATION");
             else
-                r.setFocus( "AGGREGATION" );
+                r.setFocus("AGGREGATION");
             r.run();
             
-            if ((Params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES"))) {
+            if ((params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES"))) {
                 result = aggregate_performance_score_facts(r, m, qb);
-            } else if ((Params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (Params.req_mode.equalsIgnoreCase("FUZZY-CASES"))){
+            } else if ((params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-CASES"))){
                 result = aggregate_performance_score(r);
             }
-            
 
 
             if (arch.getEval_mode().equalsIgnoreCase("DEBUG")) {
@@ -827,7 +865,5 @@ public class GenericTask implements Callable {
         }
         return result;
     }
-
-    
 }
 
