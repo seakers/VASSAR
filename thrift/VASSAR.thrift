@@ -61,6 +61,8 @@ service VASSARInterface{
    
    BinaryInputArchitecture eval(1:list<bool> inputs),
    
+   list<BinaryInputArchitecture> runLocalSearch(1:list<bool> inputs),
+   
    list<string> getOrbitList(),
    
    list<string> getInstrumentList(),

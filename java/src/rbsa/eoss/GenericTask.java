@@ -687,9 +687,7 @@ public class GenericTask implements Callable {
    
     protected Result evaluatePerformance(Rete r, Architecture arch, QueryBuilder qb, MatlabFunctions m) {
         Result result = new Result();
-        try {
-
-            
+        try {            
             long t0 = System.currentTimeMillis();
              
             
@@ -718,7 +716,10 @@ public class GenericTask implements Callable {
             r.run();
   
             r.setFocus("CAPABILITIES-GENERATE");
-            r.run();            
+            r.run();         
+            
+            r.setFocus("CAPABILITIES-UPDATE");
+            r.run();
             
             r.setFocus( "SYNERGIES" );
             r.run();
@@ -726,8 +727,20 @@ public class GenericTask implements Callable {
 
             //Revisit times
             
+            // Check if all of the orbits in the original formulation are used
+            boolean[] orbits_used = new boolean[5];
+            String[] list = {"LEO-600-polar-NA","SSO-600-SSO-AM","SSO-600-SSO-DD","SSO-800-SSO-DD","SSO-800-SSO-PM"};
+            for(int i=0;i<list.length;i++){
+                orbits_used[i]=false;
+                for(String orb:Params.orbit_list){
+                    if(list[i].equalsIgnoreCase(orb)){
+                        orbits_used[i]=true;
+                        break;
+                    }
+                }
+            }
+
             int javaAssertedFactID = 1;
-            
             Iterator parameters = Params.measurements_to_instruments.keySet().iterator();
             while (parameters.hasNext()) {
                 String param = (String)parameters.next();
@@ -735,21 +748,37 @@ public class GenericTask implements Callable {
                 if (RU.getTypeName(v.type()).equalsIgnoreCase("LIST")) {
                     ValueVector thefovs = v.listValue(r.getGlobalContext());           
                     String[] fovs = new String[thefovs.size()];
+
                     for (int i = 0;i<thefovs.size();i++) {
                         int tmp = thefovs.get(i).intValue(r.getGlobalContext());
                         fovs[i] = String.valueOf(tmp);
                     }
-                    String key = arch.getNsats() + " x " + m.StringArraytoStringWith(fovs,"  ");
                     
+                    // Re-assign fovs based on the original orbit formulation
+                    if(thefovs.size()<5){
+                        String[] new_fovs = new String[5];
+                        int cnt=0;
+                        for(int i=0;i<5;i++){
+                            if(orbits_used[i]){
+                                new_fovs[i]=fovs[cnt];
+                                cnt++;
+                            }else{
+                                new_fovs[i]="-1";
+                            }
+                        }
+                        fovs = new_fovs;
+                    }
+                    
+                    String key = arch.getNsats() + " x " + m.StringArraytoStringWith(fovs,"  ");                    
                     HashMap therevtimes = (HashMap) Params.revtimes.get(key); //key: 'Global' or 'US', value Double
-                    String call = "(assert (ASSIMILATION2::UPDATE-REV-TIME (parameter " +  param + ") (avg-revisit-time-global# " + therevtimes.get("Global") + ") "
+                    String call = "(assert (ASSIMILATION2::UPDATE-REV-TIME (parameter " +  param + ") "
+                            + "(avg-revisit-time-global# " + therevtimes.get("Global") + ") "
                             + "(avg-revisit-time-US# " + therevtimes.get("US") + ")"
                             + "(factHistory J" + javaAssertedFactID + ")))";
                     javaAssertedFactID++;
                     r.eval(call);
                 } 
             }
-            
 
             r.setFocus( "ASSIMILATION2" );
             r.run();
@@ -785,79 +814,7 @@ public class GenericTask implements Callable {
             }
             
 
-            //////////////////////////////////////////////////////////////
-/*
-            r.eval("(printout t \'begin\' crlf)");            
-            
-            designSpacecraft(r,arch,qb,m);
-            
-            long t0 = System.currentTimeMillis();
 
-            r.batch(Params.critique_performance_initialize_facts_clp);
-            r.batch(Params.critique_performance_clp);
-            r.batch(Params.critique_performance_precalculation_clp);
-
-            r.setFocus("CRITIQUE-PERFORMANCE-PRECALCULATION1");
-            r.run();
-            r.setFocus("CRITIQUE-PERFORMANCE-PRECALCULATION2");
-            r.run();
-            r.setFocus("CRITIQUE-PERFORMANCE-PRECALCULATION3"); 
-            r.run();
-            r.setFocus("CRITIQUE-PERFORMANCE");
-            r.run();
-            
-            long t1 = System.currentTimeMillis();
-            System.out.println( "Critique-Performance pattern matching done in: " + String.valueOf(t1-t0) + " msec");
-            
-            */
-            // Implementation of WHY question about scores
-           // r.eval("(facts MANIFEST)");
-          //  r.eval("(facts AGGREGATION)");
-          //  r.eval("(facts REQUIREMENTS)");
-
-//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-//            
-//            double value = qb.makeQuery("AGGREGATION::VALUE").get(0).getSlotValue("satisfaction").floatValue(r.getGlobalContext());
-//            System.out.println("Total score of the current architecture: " + value);
-//             
-//            String input;
-//            DialogueHistory dh = new DialogueHistory(r,qb);
-//            while(true){
-//                
-//                input = bufferedReader.readLine();
-//                String[] inputWords = input.split(" ");
-//                if (inputWords[0].equalsIgnoreCase("why")) {
-//                    String IDinQuestion = "";
-//                    if (inputWords.length == 2){
-//                        IDinQuestion = inputWords[1];
-//                    } 
-//                    dh.newWhyQuestion(IDinQuestion);    
-//                }
-//                else if(inputWords[0].equalsIgnoreCase("how")){
-//                    dh.newHowQuestion(inputWords[1]);
-//                }
-//                else if(input.equalsIgnoreCase("up")){
-//                    dh.getHigherLevel();
-//                }
-//                else if(input.equalsIgnoreCase("end")){
-//                    break;
-//                }
-//                else if ((input.split("::").length==2)&&(input.split(" ").length == 1)){
-//                    dh.queryFact(input);
-//                }
-//                else if ((input.startsWith("R"))&&(input.split(" ").length == 1)){
-//                    dh.queryRule(Integer.parseInt(input.substring(1)));
-//                }
-//                else if(input.equalsIgnoreCase("history")){
-//                    dh.printDialogueHistory();
-//                }
-//            }
-
-
-//            dbm.encodeData(archID,"science",r,qb);
-            
-
-            //////////////////////////////////////////////////////////////
             if (arch.getEval_mode().equalsIgnoreCase("DEBUG")) {
                 ArrayList<Fact> partials = qb.makeQuery("REASONING::partially-satisfied");
                 ArrayList<Fact> fulls = qb.makeQuery("REASONING::fully-satisfied");

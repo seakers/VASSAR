@@ -27,6 +27,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('  void ping()')
     print('  string initJess()')
     print('  BinaryInputArchitecture eval( inputs)')
+    print('   runLocalSearch( inputs)')
     print('   getOrbitList()')
     print('   getInstrumentList()')
     print('   getCritique( inputs)')
@@ -126,6 +127,12 @@ elif cmd == 'eval':
         print('eval requires 1 args')
         sys.exit(1)
     pp.pprint(client.eval(eval(args[0]),))
+
+elif cmd == 'runLocalSearch':
+    if len(args) != 1:
+        print('runLocalSearch requires 1 args')
+        sys.exit(1)
+    pp.pprint(client.runLocalSearch(eval(args[0]),))
 
 elif cmd == 'getOrbitList':
     if len(args) != 0:

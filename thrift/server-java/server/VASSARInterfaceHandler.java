@@ -28,15 +28,15 @@ import rbsa.eoss.CritiqueGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javaInterface.BinaryInputArchitecture;
 import javaInterface.VASSARInterface;
-import org.apache.thrift.TException;
+
 
 // Generated code
 //import shared.*;
 
-import java.util.HashMap;
 import rbsa.eoss.local.Params;
 
 public class VASSARInterfaceHandler implements VASSARInterface.Iface {
@@ -122,8 +122,8 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
         return critique;
     }
     
-    
-    public List<BinaryInputArchitecture> localSearch(List<Boolean> boolList){
+    @Override
+    public List<BinaryInputArchitecture> runLocalSearch(List<Boolean> boolList){
         
         initJess();
         
@@ -133,11 +133,13 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
             else bitString = bitString + "0";
         }
         
+        ArrayList<String> samples = randomLocalChange(bitString, 4);
+        
         List<BinaryInputArchitecture> out = new ArrayList<>();
         
-        for(int i=0;i<10;i++){
+        for(String sample:samples){
             // Generate a new architecture
-            Architecture architecture = AG.defineNewArch(bitString);
+            Architecture architecture = AG.defineNewArch(sample);
 
             // Evaluate the architecture
             Result result = AE.evaluateArchitecture(architecture,"Slow");
@@ -148,12 +150,51 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
             List<Double> outputs = new ArrayList<>();
             outputs.add(science);
             outputs.add(cost);  
-            BinaryInputArchitecture arch = new BinaryInputArchitecture(0,boolList,outputs);
+            
+            System.out.println("bitString: "+ sample +", Science: " + science + ", Cost: " + cost);
+            
+            BinaryInputArchitecture arch = new BinaryInputArchitecture(0,bitString2BoolArray(sample),outputs);
             out.add(arch);
         }
         
         return out;
     }    
+    
+    
+    public ArrayList<String> randomLocalChange(String bitString, int n){
+        
+        Random rand = new Random();
+        
+        int numVars = Params.orbit_list.length * Params.instrument_list.length;
+        
+        ArrayList<String> out = new ArrayList<>();
+        
+        for(int i=0;i<n;i++){
+            int  k = rand.nextInt(numVars);
+            
+            StringBuilder tempBitString = new StringBuilder(bitString);
+            if(bitString.charAt(k)=='1'){
+                tempBitString.setCharAt(k, '0');
+            }else{
+                tempBitString.setCharAt(k, '1');
+            }
+            out.add(tempBitString.toString());
+        }  
+        return out;
+    }
+    
+    
+    public List<Boolean> bitString2BoolArray(String bitString){
+        List<Boolean> out = new ArrayList<>();
+        for(int i=0;i<bitString.length();i++){
+            if(bitString.charAt(i)=='1'){
+                out.add(true);
+            }else{
+                out.add(false);
+            }
+        }
+        return out;
+    }
     
     
     
