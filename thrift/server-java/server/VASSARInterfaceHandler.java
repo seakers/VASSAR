@@ -52,7 +52,7 @@ public class VASSARInterfaceHandler implements VASSARInterface.Iface {
       System.out.println("ping()");
     }
   
-    private String initJess() {
+    public String initJess() {
         if(jessInitialized) {
             return "Jess already initialized";
         }
