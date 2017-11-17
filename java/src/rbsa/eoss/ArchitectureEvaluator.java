@@ -6,8 +6,8 @@ package rbsa.eoss;
 
 
 import rbsa.eoss.local.Params;
+
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
@@ -16,10 +16,6 @@ import java.util.Stack;
 import org.paukov.combinatorics.*;
 import java.util.Iterator;
 import jess.*;
-import rbsa.eoss.GenericTask;
-import java.util.TreeMap;
-import java.util.Map;
-import java.util.List;
 import java.util.Arrays;
 import java.util.Collections;
 

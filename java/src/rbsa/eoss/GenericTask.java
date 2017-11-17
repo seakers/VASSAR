@@ -740,28 +740,92 @@ public class GenericTask implements Callable {
             //r.eval("(watch rules)");
             
             r.setFocus("MANIFEST0");
-            r.run();            
+            r.run();
+
+            if (params.inUnitTest) {
+                System.out.println("Facts after MANIFEST0:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
             
             r.setFocus("MANIFEST");
             r.run();
 
+            if (params.inUnitTest) {
+                System.out.println("Facts after MANIFEST:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
+
             r.setFocus("CAPABILITIES");
             r.run();
+
+            if (params.inUnitTest) {
+                System.out.println("Facts after CAPABILITIES:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
             
             r.setFocus("CAPABILITIES-REMOVE-OVERLAPS");
             r.run();
 
+            if (params.inUnitTest) {
+                System.out.println("Facts after CAPABILITIES-REMOVE-OVERLAPS:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
+
             r.setFocus("CAPABILITIES-CROSS-REGISTER");
             r.run();
-  
+
+            if (params.inUnitTest) {
+                System.out.println("Facts after CAPABILITIES-CROSS-REGISTER:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
+
             r.setFocus("CAPABILITIES-GENERATE");
-            r.run();         
+            r.run();
+
+            if (params.inUnitTest) {
+                System.out.println("Facts after CAPABILITIES-GENERATE:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
             
             r.setFocus("CAPABILITIES-UPDATE");
             r.run();
+
+            if (params.inUnitTest) {
+                System.out.println("Facts after CAPABILITIES-UPDATE:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
             
             r.setFocus("SYNERGIES");
             r.run();
+
+            if (params.inUnitTest) {
+                System.out.println("Facts after SYNERGIES:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
 
 
             //Revisit times
@@ -822,36 +886,91 @@ public class GenericTask implements Callable {
             r.setFocus("ASSIMILATION2");
             r.run();
 
+            if (params.inUnitTest) {
+                System.out.println("Facts after ASSIMILATION2:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
+
             r.setFocus("ASSIMILATION");
             r.run();
+
+            if (params.inUnitTest) {
+                System.out.println("Facts after ASSIMILATION:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
 
             r.setFocus("FUZZY");
             r.run();
 
+            if (params.inUnitTest) {
+                System.out.println("Facts after FUZZY:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
+
             r.setFocus("SYNERGIES");
             r.run();
 
+            if (params.inUnitTest) {
+                System.out.println("Facts after SYNERGIES:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
+
             r.setFocus("SYNERGIES-ACROSS-ORBITS");
             r.run();
+
+            if (params.inUnitTest) {
+                System.out.println("Facts after SYNERGIES-ACROSS-ORBITS:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
 
             if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.setFocus("FUZZY-REQUIREMENTS");
             else
                 r.setFocus("REQUIREMENTS");
             r.run();
+
+            if (params.inUnitTest) {
+                System.out.println("Facts after FUZZY-REQUIREMENTS:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
             
             if ((params.req_mode.equalsIgnoreCase("FUZZY-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES")))
                 r.setFocus("FUZZY-AGGREGATION");
             else
                 r.setFocus("AGGREGATION");
             r.run();
+
+            if (params.inUnitTest) {
+                System.out.println("Facts after AGGREGATION:");
+                Iterator<Fact> itf = r.listFacts();
+                while (itf.hasNext()){
+                    System.out.println(itf.next());
+                }
+            }
             
             if ((params.req_mode.equalsIgnoreCase("CRISP-ATTRIBUTES")) || (params.req_mode.equalsIgnoreCase("FUZZY-ATTRIBUTES"))) {
                 result = aggregate_performance_score_facts(r, m, qb);
             } else if ((params.req_mode.equalsIgnoreCase("CRISP-CASES")) || (params.req_mode.equalsIgnoreCase("FUZZY-CASES"))){
                 result = aggregate_performance_score(r);
             }
-
 
             if (arch.getEval_mode().equalsIgnoreCase("DEBUG")) {
                 ArrayList<Fact> partials = qb.makeQuery("REASONING::partially-satisfied");

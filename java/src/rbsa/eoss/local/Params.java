@@ -164,6 +164,8 @@ public class Params {
     public String dsm_dat_file;
     public String scores_dat_file;
 
+    public Boolean inUnitTest = false;
+
     static {
         // Metrics for utility and pareto calculations
         pareto_metrics.add("lifecycle_cost");
